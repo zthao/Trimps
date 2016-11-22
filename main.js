@@ -155,18 +155,18 @@ function save(exportThis, fromManual) {
 	try{
 		localStorage.setItem("trimpSave1",saveString);
 		if (localStorage.getItem("trimpSave1") == saveString){
-			message("Game Saved!", "Notices");
+			message("已保存！", "Notices");
 		}
 		else {
-			message("For some reason, your game is not saving. Make sure you export and back up your save!", "Notices");
+			message("由于某些原因，您的游戏没有被保存。请导出并备份您的存档！", "Notices");
 		}
 	}
 	catch(e){ 
 		if(e.name == "NS_ERROR_FILE_CORRUPTED") {
-        message("Sorry, it looks like your browser storage has been corrupted. Please clear your storage by going to Tools -> Clear Recent History -> Cookies and set time range to 'Everything'. This will remove the corrupted browser storage across all sites.", "Notices");
+        message("抱歉，您的浏览器存储空间已损坏。 请清除您的储存空间，方法是前往[工具] - > [清除最近的记录] - > [Cookie]，然后将时间范围设为[所有]。 这将删除所有网站上损坏的浏览器存储。", "Notices");
 		}
 		else
-		message("For some reason, your game is not saving. Make sure you export and back up your save!", "Notices"); 
+		message("由于某些原因，您的游戏没有被保存。请导出并备份您的存档！", "Notices"); 
 		}
 		
 	if (game.options.menu.usePlayFab.enabled == 1 && playFabId){
@@ -190,7 +190,7 @@ function load(saveString, autoLoad, fromPf) {
         savegame = JSON.parse(LZString.decompressFromBase64(((fromImport) ? document.getElementById("importBox").value.replace(/(\r\n|\n|\r|\s)/gm,"") : saveString)));
         tooltip('hide');
 		if (!savegame) {
-			message("It looks like your import code isn't working properly. Please make sure that your export code is saved in a text file compatible with all of the characters. If you believe this code should be working, you can Email it to Trimpsgame@gmail.com and I will do my best to restore it for you!", "Notices");
+			message("您的导入代码似乎无法正常工作。 请确保您的导出代码保存在与所有字符兼容的文本文件中。U77会将一些字符过滤为星号*，请不要将存档保存在评论中。 如果你认为这个代码应该工作，你可以发电子邮件到Trimpsgame@gmail.com，我会尽我所能为您恢复它！", "Notices");
 			return false;
 		}
 		else if (fromImport){
@@ -204,28 +204,28 @@ function load(saveString, autoLoad, fromPf) {
 			unparsedSave = localStorage.getItem("trimpSave1");
 		}
 		catch (e) {
-			message("Your browser is preventing Trimps from accessing localStorage, and you will not be able to save or load your progress. Please check your browser settings to ensure that 3rd party cookies are not disabled, and that you're not using any addons that might interrupt storage! <br/><br/> AutoSave has been disabled to prevent damage to your save. If you previously had a save file, it should still be waiting for you once you fix your browser settings.", "Notices");
+			message("您的浏览器阻止Trimps访问localStorage，您将无法保存或加载进度。 请检查您的浏览器设置，以确保第三方Cookie不会被禁用，并且您没有使用任何可能阻止存储的插件！ <br/> <br/>已停用「自动储存」功能，以防止您的储存损坏。 如果您以前有一个保存文件，当您修复您的浏览器设置后，它应该仍然可用。", "Notices");
 			game.options.menu.autoSave.enabled = 0;
 			game.options.menu.autoSave.onToggle();
 			return false;
 		}
         if (unparsedSave !== null) savegame = JSON.parse(LZString.decompressFromBase64(unparsedSave));
 		else {
-			tooltip("Welcome", null, "update");
+			tooltip("欢迎", null, "update");
 			return false;
 		}
     }
 	if (typeof savegame === 'undefined' || savegame === null || typeof savegame.global === 'undefined') {
-		tooltip("Welcome", null, "update");
+		tooltip("欢迎", null, "update");
 		return false;
 	}
 	oldVersion = savegame.global.version;
 	if (savegame.global.isBeta && !game.global.isBeta){
-		message("You can't import a save from the beta version to this version!", "Notices");
+		message("您无法将测试版本的存档导入此版本！", "Notices");
 		return false;
 	}
 	if (oldVersion > game.global.version) {
-		message("Your save file is from a newer version of Trimps (v" + oldVersion + ") than what your computer is running (v" + game.global.version + "). Refresh or restart your browser!", "Notices");
+		message("您的保存文件来自Trimps（v" + oldVersion + "）的老版本，而不是您的计算机正在运行的版本（v" + game.global.version + "）。 刷新或重新启动浏览器！", "Notices");
 		return false;
 	}
 	resetGame();
@@ -236,11 +236,11 @@ function load(saveString, autoLoad, fromPf) {
 			activateKongBonus(savegame.global.world);
 			return false;
 		}
-        message("I'm so terribly sorry, but your previous save game (version " + savegame.global.version + ") does not work in the new version. This should be the last reset!", "Notices");
+        message("我非常抱歉，但你以前的保存游戏（版本"+ savegame.global.version +"）不能在新版本中工作。 这应该是最后一次重置！", "Notices");
         return false;
     } 
 	else if (game.global.isBeta) {
-		message("Note: You are playing on the beta/dev version. You will be unable to export your save from this version to the live version, and this server may go down or change without warning. Thank you for helping test!", "Notices");
+		message("注意：你使用beta / dev版本。 您将无法将保存从此版本导出到实时版本，并且此服务器可能会在没有警告的情况下关闭或更改。 谢谢您帮助测试！", "Notices");
 		savegame.global.isBeta = true;
 	}
 	savegame.global.version = game.global.version;
@@ -371,11 +371,11 @@ function load(saveString, autoLoad, fromPf) {
 	if (oldVersion < 2.3){
 		if (game.global.highestLevelCleared >= 80) game.global.prisonClear++;
 		if (game.global.world >= 70) {
-			message("Welcome to 2.3! Since you are currently past zone 70, you have automatically unlocked the new Challenge - 'Trapper' and the new Job - 'Geneticist'", "Notices");
+			message("欢迎来到2.3！ 由于你目前通过70区，你已经自动解锁了新的挑战 - “陷阱”和新的工作 - “遗传学家”", "Notices");
 			unlockJob("Geneticist");
 		}
 		else if (game.global.highestLevelCleared >= 69){
-			message("Welcome to 2.3! Since you have previously cleared up to at least zone 70, you have unlocked the new Challenge - 'Trapper'!", "Notices");
+			message("欢迎来到2.3！ 由于你之前已经清除了至少70区，你解锁了新的挑战 - “陷阱”！", "Notices");
 		}
 	}
 	if (oldVersion < 2.7){
@@ -421,7 +421,7 @@ function load(saveString, autoLoad, fromPf) {
 	}
 	if (oldVersion < 2.9){
 		if (game.options.menu.showFullBreed.enabled == 2) game.options.menu.showFullBreed.enabled = 1;
-		if (game.global.totalPortals >= 5) message("Heavy use of the portal has created a chance for the Void to seep in to your world. Be alert.", "Story", null, "voidMessage");
+		if (game.global.totalPortals >= 5) message("大量使用传送门创造了一个机会让Void渗入你的世界。 注意。", "Story", null, "voidMessage");
 	}
 	if (oldVersion < 3){
 		game.global.heirloomSeed = getRandomIntSeeded(game.global.voidSeed, 0, 1000000);
@@ -497,7 +497,7 @@ function load(saveString, autoLoad, fromPf) {
 			if (typeof savegame.talents.foreman2 !== 'undefined' && savegame.talents.foreman2.purchased) game.global.autoCraftModifier -= 3750;
 			game.global.essence += game.global.spentEssence;
 			game.global.spentEssence = 0;
-			message("Due to a rework of the current Masteries, all of your spent Dark Essence has been refunded for free! Don't forget to repurchase your Masteries!", "Notices");
+			message("由于当前Masteries的返工，您的所有你的黑暗精华已免费退还！ 不要忘记回购你的Masteries！", "Notices");
 			updateTalentNumbers();
 		}
 		game.global.messages.Loot.magma = true;
@@ -561,7 +561,7 @@ function load(saveString, autoLoad, fromPf) {
 	if (game.jobs.Explorer.locked === 0) fadeIn("fragmentsPs", 10);
 	if (game.buildings.Tribute.locked === 0) fadeIn("gemsPs", 10);
     if (game.global.autoCraftModifier > 0)
-        document.getElementById("foremenCount").innerHTML = (game.global.autoCraftModifier * 4) + " Foremen";
+        document.getElementById("foremenCount").innerHTML = (game.global.autoCraftModifier * 4) + " 工头";
     if (game.global.fighting) startFight();
 	if (!game.options.menu.pauseGame.enabled) checkOfflineProgress(noOfflineTooltip);
 	else document.getElementById("portalTimer").className = "timerPaused";
@@ -625,7 +625,7 @@ function load(saveString, autoLoad, fromPf) {
 	if (oldVersion < 2){
 		if (game.global.world == 59){
 			game.global.gridArray[99].name = "Improbability";
-			message("Your Scientists have detected an anomaly at the end of this zone. Exercise caution.", "Notices");
+			message("您的科学家在此区域结束时检测到异常。 小心操作。", "Notices");
 		}
 		else if (game.global.world == 60 && game.global.lastClearedCell <= 10){
 			planetBreaker();
@@ -633,10 +633,10 @@ function load(saveString, autoLoad, fromPf) {
 			nextWorld();
 		}
 		else if (game.global.world >= 60){
-			message("There is a new anomaly at 59, but you are too far past to reach it. You will have to use your portal to see the changes it brings. It looks like you have access to a new challenge, however!", "Notices");		
+			message("在第59区处有一个新的异常，但你过去不能到达它。 您将必须使用您的传送门来查看它带来的更改。 看起来你有机会接触到新的挑战！", "Notices");		
 		}
 		else {
-			message("Your scientists have detected an anomaly at the end of Zone 59. They warn you to be careful if you intend to approach it.", "Notices");
+			message("你的科学家在第59区结束时检测到异常。他们警告你，如果你打算接近它，要小心。", "Notices");
 		}
 	}
 	document.getElementById("tab5Text").innerHTML = "+" + prettify(game.global.lastCustomAmt);
@@ -772,17 +772,17 @@ function portalClicked() {
 	else bgColor = "green";
 	swapClass("portalMk", "portalMk" + (game.global.sLevel + 1), document.getElementById("portalWrapper"));
 	fadeIn("portalWrapper", 10);
-	var titleText = "Time Portal";
+	var titleText = "时间传送门";
 	if (game.global.sLevel >= 1) titleText += " Mk. " + romanNumeral(game.global.sLevel + 1);
 	document.getElementById("portalTitle").innerHTML = titleText;
-	document.getElementById("portalStory").innerHTML = "Well, you did it. You followed your instincts through this strange world, made your way through the Dimension of Anger, and obtained this portal. But why? Maybe there will be answers through this portal... Your scientists tell you they can overclock it to bring more memories and items back, but they'll need helium to cool it.";
+	document.getElementById("portalStory").innerHTML = "好吧，你做到了。 你随你的直觉通过了这个奇怪的世界，使你的方式通过了愤怒的维度(Dimension of Anger)，并获得这个传送门。 但为什么？ 也许通过这个传送门会有答案...你的科学家告诉你，他们可以超频它将更多的回忆和项目带回来，但他们将需要氦来冷却它。";
 	document.getElementById("portalHelium").innerHTML = '<span id="portalHeliumOwned">' + prettify(game.resources.helium.owned + game.global.heliumLeftover) + '</span> Helium';
 	document.getElementById("totalHeliumEarned").innerHTML = prettify(game.global.totalHeliumEarned);
 	document.getElementById("totalPortals").innerHTML = game.global.totalPortals;
 	document.getElementById("activatePortalBtn").style.display = "inline-block";
-	document.getElementById("activatePortalBtn").innerHTML = "Activate Portal";
+	document.getElementById("activatePortalBtn").innerHTML = "激活传送门";
 		if (game.global.canRespecPerks) {
-		document.getElementById("respecPortalBtn").innerHTML = "Respec";
+		document.getElementById("respecPortalBtn").innerHTML = "关闭(Respec)";
 		document.getElementById("respecPortalBtn").style.display = "inline-block";
 	}
 	displayChallenges();
@@ -797,8 +797,8 @@ function displayChallenges() {
 	var challengeCount = 0;
 	game.global.selectedChallenge = "";
 	var challengesHere = document.getElementById("challengesHere");
-	document.getElementById("specificChallengeDescription").innerHTML = "<br/><br/><br/>Click a challenge below to learn more about and/or run it!";
-	var challengeHTML = '<div class="noselect pointer challengeThing thing" id="challenge0" onclick="selectChallenge(0)"><span class="thingName">None</span></div>';
+	document.getElementById("specificChallengeDescription").innerHTML = "<br/><br/><br/>点击下面的一个挑战，了解更多！";
+	var challengeHTML = '<div class="noselect pointer challengeThing thing" id="challenge0" onclick="selectChallenge(0)"><span class="thingName">无</span></div>';
 	var firstFail = false;
 	var extraClass = "";
 	for (var what in game.challenges){
@@ -846,8 +846,8 @@ function displayChallenges() {
 		else if (what == "Decay") done = game.global.decayDone;
 		else if (what == "Frugal") done = game.global.frugalDone;
 		else if (what == "Slow") done = game.global.slowDone;
-		done = (done) ? "finishedChallenge" : "";
-		if (thisFail) done = "nextChallenge";
+		done = (done) ? "挑战完成" : "";
+		if (thisFail) done = "下一个挑战";
 		if (!name) name = what;
 		challengeHTML += '<div class="noselect pointer challengeThing thing ' + done + '" id="challenge' + what + '" onclick="selectChallenge(\'' + what + '\')"><span class="thingName">' + name + '</span></div>';
 	}
@@ -864,14 +864,14 @@ function selectChallenge(what) {
 	var addChallenge = document.getElementById("addChallenge");
 	if (what === 0){
 		game.global.selectedChallenge = "";
-		document.getElementById("specificChallengeDescription").innerHTML = "<br/><br/><br/>Click a challenge below to learn more about and/or run it!";
+		document.getElementById("specificChallengeDescription").innerHTML = "<br/><br/><br/>点击下面的一个挑战，了解更多和/或运行它！";
 		document.getElementById("flagMustRestart").style.display = "none";
 		if (addChallenge !== null) addChallenge.innerHTML = "";
 		return;
 	}
 	if (!game.challenges[what].filter()){
 		var unlockString = (typeof game.challenges[what].unlockString === 'function') ? game.challenges[what].unlockString() : game.challenges[what].unlockString;
-		document.getElementById("specificChallengeDescription").innerHTML = "You will unlock this challenge once you " + unlockString;
+		document.getElementById("specificChallengeDescription").innerHTML = "一旦你 " + unlockString + "，你将解锁这个挑战";
 		game.global.selectedChallenge = "";
 		document.getElementById("flagMustRestart").style.display = "none";
 		if (addChallenge !== null) addChallenge.innerHTML = "";
@@ -881,10 +881,10 @@ function selectChallenge(what) {
 
 	var desc = game.challenges[what].description;
 	desc += "<b>";
-	if (game.portal[game.challenges[what].unlocks]) desc += (game.portal[game.challenges[what].unlocks].locked) ? " You will also earn a new Perk!" : " You will not earn a new perk.";
+	if (game.portal[game.challenges[what].unlocks]) desc += (game.portal[game.challenges[what].unlocks].locked) ? " 你也会赚到一个新的Perk！" : " 你不会赚一个新的perk。";
 	else if (what == "Scientist") {
 		var sciLev = getScientistLevel();
-		if (sciLev == game.global.sLevel) desc += " You have already completed this challenge!";
+		if (sciLev == game.global.sLevel) desc += " 你已经完成了这个挑战！";
 		desc = desc.replace("_", getScientistInfo(sciLev));
 		desc = desc.replace("*", getScientistInfo(sciLev, true));
 	}
@@ -893,7 +893,7 @@ function selectChallenge(what) {
 	game.global.selectedChallenge = what;
 	document.getElementById("flagMustRestart").style.display = (what == "Scientist") ? "inline" : "none";
 	
-	if (addChallenge !== null) addChallenge.innerHTML = "You have the <b>" + what + " Challenge</b> active.";
+	if (addChallenge !== null) addChallenge.innerHTML = "你有 <b>" + what + " 挑战</b> 已激活。";
 	
 	if (what == "Daily") updateDailyClock();
 }
@@ -910,16 +910,16 @@ function getScientistLevel() {
 function getScientistInfo(number, reward){
 	switch (number){
 		case 1: {
-			return (reward) ? "start with 5000 Science, 100 Food, 100 Wood, 10 Traps, and 1 Foreman" : 11500;
+			return (reward) ? "拥有5000科学，100食物，100木材，10陷阱和1工头后解锁" : 11500;
 		}
 		case 2: {
-			return (reward) ? "start with 5 Barns, 5 Sheds, 5 Forges, and T2 Equipment unlocked" : 8000;
+			return (reward) ? "拥有5 Barns，5 Sheds，5 Forges和T2设备解锁后解锁" : 8000;
 		}
 		case 3: {
 			return (reward) ? "start with full Trimps and 200% player efficiency" : 1500;
 		}
 		case 4: {
-			return (reward) ? "earn two levels of each prestige upgrade per map, unlock AutoPrestiges, and your Warpstations will build instantly, skipping the queue" : 70;
+			return (reward) ? "每个地图获得两个级别的每个声望升级，解锁AutoPrestiges，您的Warpstations将立即建立，跳过队列" : 70;
 		}
 		case 5: {
 			return (reward) ? "permanently increase all helium found by 0.5% to the power of your current zone number. You'll also start with 1000% player efficiency and 50 Barns, Sheds, and Forges" : 1500;
@@ -932,10 +932,10 @@ function confirmAbandonChallenge(){
 		tooltip("Finish Daily", null, 'update');
 		return;
 	}
-	var text = "Are you sure you want to abandon this challenge?";
-	if (game.global.challengeActive == 'Scientist') text += " <b>Abandoning this challenge will cause the portal to become unstable and start you from the beginning of this run. (You'll keep your permanent rewards like helium and perks)</b>"; 
+	var text = "你确定要放弃这个挑战？";
+	if (game.global.challengeActive == 'Scientist') text += " <b>放弃这个挑战会导致传送门变得不稳定，并从这次运行开始。 （你会保持你的永久奖励像氦和津贴）Abandoning this challenge will cause the portal to become unstable and start you from the beginning of this run. (You'll keep your permanent rewards like helium and perks)</b>"; 
 	tooltip('confirm', null, 'update', text, 'abandonChallenge()', 'Abandon Challenge');
-	if (game.global.challengeActive == "Scientist") document.getElementById("confirmTipCost").innerHTML += '<div class="btn btn-success" onclick="abandonChallenge(true); cancelTooltip()">Restart Challenge</div>';
+	if (game.global.challengeActive == "Scientist") document.getElementById("confirmTipCost").innerHTML += '<div class="btn btn-success" onclick="abandonChallenge(true); cancelTooltip()">重新开始挑战</div>';
 }
 
 function abandonChallenge(restart){
@@ -950,7 +950,7 @@ function abandonChallenge(restart){
 		resetGame(true);
 	}
 	if (challengeName != "Daily")
-		message("Your challenge has been abandoned.", "Notices");
+		message("您的挑战已被放弃。", "Notices");
 }
 
 function formatDailySeedDate(){
@@ -981,7 +981,7 @@ function viewPortalUpgrades() {
 		challengeText += (game.global.challengeActive == "Daily") ? formatDailySeedDate() + " " + game.global.challengeActive + " challenge active. " + description : game.global.challengeActive + " challenge active. \"" + description + "\"";
 	}
 	else
-		challengeText = "You don't have an active challenge.";
+		challengeText = "你没有正在进行的挑战。";
 	document.getElementById("viewChallengeText").innerHTML = challengeText;
 	document.getElementById("wrapper").style.display = "none";
 	swapClass("portalMk", "portalMkPreview", document.getElementById("portalWrapper"));
@@ -991,7 +991,7 @@ function viewPortalUpgrades() {
 	document.getElementById("portalStory").innerHTML = "These are all of your perks! You can reset them once per run.";
 	document.getElementById("totalHeliumEarned").innerHTML = prettify(game.global.totalHeliumEarned);
 	document.getElementById("totalPortals").innerHTML = game.global.totalPortals;
-	document.getElementById("cancelPortalBtn").innerHTML = "Cancel";
+	document.getElementById("cancelPortalBtn").innerHTML = "取消";
 	document.getElementById("activatePortalBtn").style.display = "none";
 	if (game.global.canRespecPerks) {
 		document.getElementById("respecPortalBtn").innerHTML = "Respec";
@@ -1211,27 +1211,27 @@ function checkOfflineProgress(noTip){
 		}
 		if (amt > 0){
 			resource.owned += amt;
-			textString = prettify(amt) + " " + resName + ", ";
+			textString = prettify(amt) + " " + ((resource.nameCN) ? resource.nameCN : resName) + "，";
 			textArray.push(textString);
 			if (resName == "gems") game.stats.gemsCollected.value += amt;
 		}
 	}
 	if (textArray.length === 0) return;
-	textString = "While you were away, your Trimps were able to produce ";
+	textString = "当你离开时，你的脆皮生产了";
 	for (var y = 0; y < textArray.length; y++){
 		textString += textArray[y];
-		if (y == textArray.length -2) textString += "and ";
+		if (y == textArray.length -2) textString += "和";
 	}
-	textString = textString.slice(0, -2);
+	textString = textString.slice(0, -1);
 	if (storageBought.length) {
 		textString += " <b>after buying</b> ";
 		for (var z = 0; z < storageBought.length; z++){
 			textString += storageBought[z];
-			if (z == storageBought.length - 2) textString += "and ";
+			if (z == storageBought.length - 2) textString += "和";
 		}
-		textString = textString.slice(0, -2);
+		textString = textString.slice(0, -1);
 	}
-	textString += ".";
+	textString += "。";
 	if (!noTip) tooltip("Trustworthy Trimps", null, "update", textString);
 }
 
@@ -1243,8 +1243,8 @@ function respecPerks(){
 	numTab(1, true);
 	game.resources.helium.respecMax = (game.global.viewingUpgrades) ? game.global.heliumLeftover : game.global.heliumLeftover + game.resources.helium.owned;
 	document.getElementById("portalHeliumOwned").innerHTML = prettify(game.resources.helium.respecMax);
-	document.getElementById("respecPortalBtn").style.display = "none";
-	document.getElementById("portalStory").innerHTML = "You can only respec once per run. Clicking cancel will not consume this use.";
+	document.getElementById("respecPortalBtn").style.display = "没有";
+	document.getElementById("portalStory").innerHTML = "You can only respec once per run. 单击取消不会计算此次使用。";
 	document.getElementById("portalTitle").innerHTML = "Respec Perks";
 	document.getElementById("ptabRemove").style.display = "table-cell";
 	document.getElementById("clearPerksBtn").style.display = "inline-block";
@@ -1794,10 +1794,10 @@ function fireMode(noChange) {
     var elem = document.getElementById("fireBtn");
     if (game.global.firing) {
         elem.className = elem.className.replace("fireBtnNotFiring", "fireBtnFiring");
-        elem.innerHTML = "Firing";
+        elem.innerHTML = "解雇中";
     } else {
         elem.className = elem.className.replace("fireBtnFiring", "fireBtnNotFiring");
-        elem.innerHTML = "Fire";
+        elem.innerHTML = "解雇";
     }
     if (!noChange) tooltip("Fire Trimps", null, "update");
 }
@@ -1838,17 +1838,17 @@ function setGatherTextAs(what, on) {
     var trimpTrapText = '(<span id="trimpTrapText">' + prettify(game.buildings.Trap.owned) + '</span>)';
     switch (what) {
     case "food":
-        return (on) ? "Gathering" : "Gather";
+        return (on) ? "收集中" : "收集";
     case "wood":
-        return (on) ? "Chopping" : "Chop";
+        return (on) ? "砍伐中" : "砍伐";
     case "metal":
-        return (on) ? "Mining" : "Mine";
+        return (on) ? "开采中" : "开采";
     case "science":
-        return (on) ? "Researching" : "Research";
+        return (on) ? "研究中" : "研究";
     case "buildings":
-        return (on) ? "Building" : "Build";
+        return (on) ? "建造中" : "建造";
     case "trimps":
-        return (on) ? ("Trapping " + trimpTrapText) : ("Check Traps " + trimpTrapText);
+        return (on) ? ("查看陷阱中 " + trimpTrapText) : ("查看陷阱 " + trimpTrapText);
     }
 }
 
@@ -1940,12 +1940,12 @@ function calculateTimeToMax(resource, perSec, toNumber, fromGather) {
 	if (!isFinite(years)) return "Long Time";
 	if (toFill < 60) {
 		if (toFill < 1 && fromGather) return "";
-		return Math.floor(seconds) + " Secs";
+		return Math.floor(seconds) + " 秒";
 	}
-	if (toFill < 3600) return minutes + " Mins " + seconds + " Secs";
-	if (toFill < 86400) return hours + " Hours " + minutes + " Mins";
-	if (toFill < 31536000) return days + " Days " + hours + " Hours";
-	return prettify(years) + " Years " + days + " Days";
+	if (toFill < 3600) return minutes + " 分 " + seconds + " 秒";
+	if (toFill < 86400) return hours + " 时 " + minutes + " 分";
+	if (toFill < 31536000) return days + " 天 " + hours + " 时";
+	return prettify(years) + " 年 " + days + " 天";
 }
 
 function checkTriggers(force) {
@@ -2041,7 +2041,7 @@ function canAffordBuilding(what, take, buildCostString, isEquipment, updatingLab
 				percent = (game.resources[costItem].owned > 0) ? prettify(((price / game.resources[costItem].owned) * 100).toFixed(1)) : 0;
 				percent = "(" + percent + "%)";
 			}
-			costString += '<span class="' + color + '">' + costItem + ':&nbsp;' + prettify(price) + '&nbsp;' + percent + '</span>, ';
+			costString += '<span class="' + color + '">' + ((game.resources[costItem].nameCN) ? game.resources[costItem].nameCN : costItem) + ':&nbsp;' + prettify(price) + '&nbsp;' + percent + '</span>, ';
 		}
 		if (take) game.resources[costItem].owned -= price;
 	}
@@ -2145,7 +2145,7 @@ function craftBuildings(makeUp) {
         
 		var timeLeft = (game.global.timeLeftOnCraft / modifier).toFixed(1);
 		if (timeLeft < 0.1) timeLeft = 0.1;
-        if (timeRemaining) timeRemaining.innerHTML = " - " + timeLeft + " Seconds";
+        if (timeRemaining) timeRemaining.innerHTML = " - " + timeLeft + " 秒";
 		if (game.options.menu.queueAnimation.enabled) buildingsBar.style.opacity = percent;
 		else buildingsBar.style.opacity = "0";
         if (game.global.timeLeftOnCraft > 0) return;
@@ -2199,7 +2199,7 @@ function setNewCraftItem() {
 	var elem = document.getElementById("queueItemsHere").firstChild;
 	var timeLeft = (game.global.timeLeftOnCraft / (game.global.autoCraftModifier + getPlayerModifier())).toFixed(1);
 	
-	if (elem && !document.getElementById("queueTimeRemaining")) elem.innerHTML += "<span id='queueTimeRemaining'> - " + timeLeft + " Seconds</span><div id='animationDiv'></div>";
+	if (elem && !document.getElementById("queueTimeRemaining")) elem.innerHTML += "<span id='queueTimeRemaining'> - " + timeLeft + " 秒</span><div id='animationDiv'></div>";
 	if (elem && timeLeft <= 0.1) {timeLeft = 0.1; if (game.options.menu.queueAnimation.enabled) document.getElementById("animationDiv").style.opacity = '1'}
 }
 
@@ -2350,7 +2350,7 @@ function getTooltipJobText(what, toBuy) {
 	var fullText = "";
     for (var item in job.cost) {
         var color = (checkJobItem(what, false, item, false, toBuy)) ? "green" : "red";
-        fullText += '<span class="' + color + '">' + item + ':&nbsp;' + checkJobItem(what, false, item, true, toBuy) + '</span>, ';
+        fullText += '<span class="' + color + '">' + ((game.resources[item].nameCN) ? game.resources[item].nameCN : item) + ':&nbsp;' + checkJobItem(what, false, item, true, toBuy) + '</span>, ';
     }
     fullText = fullText.slice(0, -2);
     return fullText;
@@ -2553,10 +2553,10 @@ function breed() {
 		}
 	}
 	timeRemaining = (game.options.menu.showFullBreed.enabled > 0) ? timeRemaining.toFixed(1) : Math.ceil(timeRemaining);
-	timeRemaining += " Secs";	
+	timeRemaining += " 秒";	
 		//Display full breed time if desired
 	if (game.options.menu.showFullBreed.enabled){		
-		fullBreed = totalTime.toFixed(1) + " Secs";
+		fullBreed = totalTime.toFixed(1) + " 秒";
 		timeRemaining += " / " + fullBreed;
 	}
 	
@@ -3260,7 +3260,7 @@ function renameHeirloom(cancel, fromPopup){
 		return;
 	}
 	if (!inputText){
-		containerElem.innerHTML = "<input maxlength='25' id='heirloomNameInput' value='" + heirloom.name + "'/> <span onclick='renameHeirloom()' class='renameHeirloomBtn'>Save</span><span class='renameHeirloomBtn' onclick='renameHeirloom(true)'>Cancel</span>";
+		containerElem.innerHTML = "<input maxlength='25' id='heirloomNameInput' value='" + heirloom.name + "'/> <span onclick='renameHeirloom()' class='renameHeirloomBtn'>Save</span><span class='renameHeirloomBtn' onclick='renameHeirloom(true)'>取消</span>";
 		titleElem.innerHTML = "";
 		return;
 	}
@@ -4856,7 +4856,7 @@ function pauseFight(updateOnly) {
 	var elem = document.getElementById("pauseFight");
 	elem.className = "";
 	elem.className = "btn fightBtn " + color;
-	elem.innerHTML = (!game.global.pauseFight) ? "AutoFight On" : "AutoFight Off";
+	elem.innerHTML = (!game.global.pauseFight) ? "自动战斗开启" : "自动战斗关闭";
 }
 
 function recycleBelow(confirmed){
@@ -5104,7 +5104,7 @@ function setNonMapBox(){
 	var mapBonus = document.getElementById("mapBonus");
 	if (game.global.mapBonus > 0) mapBonus.innerHTML = prettify(game.global.mapBonus * 20) + "% Map Bonus";
 	else mapBonus.innerHTML = "";
-	document.getElementById("worldName").innerHTML = (game.global.spireActive) ? "Spire" : "Zone";
+	document.getElementById("worldName").innerHTML = (game.global.spireActive) ? "尖塔" : "区域";
 }
 
 
@@ -5316,7 +5316,7 @@ function startFight() {
 		badName += ' <span class="badge badBadge" onmouseover="tooltip(\'Pierce\', \'customText\', event, \'' + prettify(getPierceAmt() * 100) + '% of the damage from this Bad Guy pierces through block\')" onmouseout="tooltip(\'hide\')"><span class="glyphicon glyphicon-tint"></span></span>';
 	}
 	if (game.global.challengeActive == "Slow" || ((game.badGuys[cell.name].fast || cell.mutation == "Corruption") && game.global.challengeActive != "Coordinate" && game.global.challengeActive != "Nom"))
-		badName += ' <span class="badge badBadge" onmouseover="tooltip(\'Fast\', \'customText\', event, \'This Bad Guy is fast and attacks first\')" onmouseout="tooltip(\'hide\')"><span class="glyphicon glyphicon-forward"></span></span>';
+		badName += ' <span class="badge badBadge" onmouseover="tooltip(\'Fast\', \'customText\', event, \'这个坏蛋速度比你快，它优先攻击\')" onmouseout="tooltip(\'hide\')"><span class="glyphicon glyphicon-forward"></span></span>';
 	if ((game.global.challengeActive == "Electricity" || game.global.challengeActive == "Mapocalypse")){
 		badName += ' <span class="badge badBadge" onmouseover="tooltip(\'Electric\', \'customText\', event, \'This Bad Guy is electric and stacks a debuff on your Trimps\')" onmouseout="tooltip(\'hide\')"><span class="icomoon icon-power-cord"></span></span>';
 	}
@@ -6965,7 +6965,7 @@ function fight(makeUp) {
 		}
         var s = (game.resources.trimps.soldiers > 1) ? "s " : " ";
 		randomText = game.trimpDeathTexts[Math.floor(Math.random() * game.trimpDeathTexts.length)];
-        message(game.resources.trimps.soldiers + " Trimp" + s + "just " + randomText + ".", "Combat", null, null, 'trimp');
+        message(game.resources.trimps.soldiers + " 脆皮" + "已经" + randomText + "。", "Combat", null, null, 'trimp');
 		if (game.global.spireActive && !game.global.mapsActive) deadInSpire();
         game.global.fighting = false;
         game.resources.trimps.soldiers = 0;
@@ -6989,7 +6989,7 @@ function fight(makeUp) {
 		randomText = game.badGuyDeathTexts[Math.floor(Math.random() * game.badGuyDeathTexts.length)];
 		var firstChar = cell.name.charAt(0);
 		var aAn = (firstChar == "A" || firstChar == "E" || firstChar == "I" || firstChar == "O" || firstChar == "U") ? " an " : " a ";
-		var killedText = "You " + randomText + aAn + cell.name;
+		var killedText = "你" + randomText + aAn + cell.name;
 		if (game.global.challengeActive == "Coordinate") killedText += " group";
 		killedText += "!";
         if (!game.global.spireActive || cellNum != 99 || game.global.mapsActive) message(killedText, "Combat", null, null, 'enemy');
@@ -7349,7 +7349,7 @@ function manageLeadStacks(remove){
 	var determinedBuff = document.getElementById("determinedBuff");
 	if ((game.global.world % 2) == 1){	
 		if (determinedBuff == null) {
-			document.getElementById("goodGuyName").innerHTML += '&nbsp<span class="badge antiBadge" id="determinedBuff" onmouseover="tooltip(\'Determined\', \'customText\', event, \'Your Trimps are determined to succeed. They gain 50% attack and earn double resources from all sources.\')" onmouseout="tooltip(\'hide\')"><span class="icomoon icon-sun2"></span></span>';
+			document.getElementById("goodGuyName").innerHTML += '&nbsp<span class="badge antiBadge" id="determinedBuff" onmouseover="tooltip(\'Determined\', \'customText\', event, \'你的脆皮决定取得成功。 他们的攻击力提高50%，并获得双倍资源。\')" onmouseout="tooltip(\'hide\')"><span class="icomoon icon-sun2"></span></span>';
 			determinedBuff = document.getElementById("determinedBuff");
 		}
 		determinedBuff.style.display = "inline";
@@ -7663,14 +7663,14 @@ function showBones() {
 		}
 		else document.getElementById("buyHeirloomArea").style.display = "none";
 	}
-	updateImportButton("First, select an Imp", false);
+	updateImportButton("首先，选择1个外来物种", false);
 	if (game.unlocks.goldMaps) {
 		document.getElementById("mapsPurchaseBtn").style.backgroundColor = "grey";
-		document.getElementById("goldMapsDesc").innerHTML = "This bonus is active!";
+		document.getElementById("goldMapsDesc").innerHTML = "已激活！";
 	}
 	if (game.unlocks.quickTrimps) {
 		document.getElementById("trimpsPurchaseBtn").style.backgroundColor = "grey";
-		document.getElementById("quickTrimpsDesc").innerHTML = "This bonus is active!";
+		document.getElementById("quickTrimpsDesc").innerHTML = "已激活！";
 	}
 	document.getElementById("heliumGainedMisc").innerHTML = prettify(boostHe(true));
 	if (typeof kongregate === 'undefined') return;
@@ -7682,7 +7682,7 @@ function showBones() {
 
 function updateImportButton(text, enabled){
 	var elem = document.getElementById("importPurchaseBtn");
-	elem.innerHTML = text + " (50 bones)";
+	elem.innerHTML = text + " (50 骨头)";
 	swapClass('boneBtnState', 'boneBtnState' + ((enabled) ? 'On' : 'Off'), elem);
 }
 
@@ -7718,7 +7718,7 @@ function selectImp(name){
 	if (boneTemp.selectedImport) document.getElementById(boneTemp.selectedImport).className = "";
 	document.getElementById(name).className = "tealColor";
 	boneTemp.selectedImport = name;
-	updateImportButton("Buy " + name, true);
+	updateImportButton("购买 " + name, true);
 
 }
 
@@ -7962,7 +7962,7 @@ function purchaseImport(){
 	boneTemp.selectedImport = "";
 	updateImports(0);
 	boneTemp.bundle = [];
-	updateImportButton("First, select an Imp", false);
+	updateImportButton("首先，选择1个外来物种", false);
 	try{
 	if (typeof ga !== 'undefined') ga('send', 'event', 'MTX', "Import");
 		}
@@ -8031,7 +8031,7 @@ function successPurchaseFlavor(){
 }
 
 function updateBones() {
-	document.getElementById("bonesOwned").innerHTML = prettify(game.global.b) + " " + ((game.global.b == 1) ? "Bone" : "Bones");
+	document.getElementById("bonesOwned").innerHTML = prettify(game.global.b) + " 根骨头";// + ((game.global.b == 1) ? "Bone" : "Bones");
 	updateSkeleBtn();
 }
 
@@ -8116,9 +8116,9 @@ function kredPurchase(what) {
 function startBundling(){
 	document.getElementById("boneWrapper1").style.display = "none";
 	document.getElementById("boneWrapper2").style.display = "block";
-	document.getElementById("bundleTitle").innerHTML = "Select 4 Exotic Imports!";
+	document.getElementById("bundleTitle").innerHTML = "选择4个外来物种！";
 	var btn = document.getElementById("addBundleBtn");
-	btn.innerHTML = "First, Select 4 Imps";
+	btn.innerHTML = "首先，选择4个外来物种";
 	btn.style.backgroundColor = "grey";
 	boneTemp.bundle = [];
 	updateImports(1);
@@ -8139,7 +8139,7 @@ function onPurchaseResult(result) {
 		var tooltipText = "Your purchase of ";
 		tooltipText += (split[0] > 0) ? split[0] + " bones has completed successfully!" : "the Exotic Imp-Ort Bundle has completed successfully, and your new bad guys will start spawning in your next zone/map!";  
 		tooltipText += " Below is the export code for your save file. <b>Please copy, paste, and back this up to somewhere safe, just in case.</b> Thank you for your support!";
-		tooltip('Export', null, 'update', tooltipText);
+		tooltip('导出', null, 'update', tooltipText);
 		boneTemp.waitingFor = "";
 	}
 }
@@ -8549,7 +8549,7 @@ function getPlayFabLoginHTML(){
 		tipHtml[0] += "<div id='playFabLoginContainer' class='col-xs-6'><b id='playFabLoginTitle'>Login to PlayFab</b><br/><span id='playFabEmailHidden' style='display: none'>Your Email<br/><span id='emailNotice' style='font-size: 0.8em'>(For recovery, not required)<br/></span><input type='text' id='registerEmail' /></span><span id='usernameBox'>PlayFab Username<br/><input type='text' id='loginUserName' " + ((info) ? "value='" + info[0] + "'" : "") + "/></span><span id='playFabPasswordBox'><br/>Password <span style='font-size: 0.8em'>(6-30 Chars)</span><br/><input type='password' id='loginPassword'" + ((info) ? " value='" + info[1] + "'" : "") + "/></span><br/><div id='playFabConfirmPasswordHidden' style='display: none'>Confirm Password<br/><input type='password' id='confirmPassword' /><br/></div><span id='rememberInfoBox'>Remember Account Info<br/><input type='checkbox' id='rememberInfo' " + ((info) ? "checked='true'" : "") + "/><br/></span><div id='playFabLoginBtn' class='btn btn-sm btn-info' onclick='playFabLoginWithPlayFab()'>Login</div><div id='playFabRegisterBtn' class='btn btn-sm btn-info' style='display: none' onclick='playFabRegisterPlayFabUser()'>Register</div><span style='display: none' id='playFabRecoverBtns'><div class='btn btn-sm btn-info' onclick='playFabRecoverInfo(false)' style='display: none'>Get Username</div><div class='btn btn-sm btn-primary' onclick='playFabRecoverInfo(true)'>Send Password Reset Email</div></span><div id='playFabSwitchRegisterBtn' onclick='switchForm(true)' class='btn btn-sm btn-primary'>Register Playfab Account</div><div id='playFabSwitchRecoveryBtn' onclick='switchForm(false)' class='btn btn-sm btn-warning'>Recover Account Info</div></div>"
 	}
 	tipHtml[0] += "<div id='playFabLoginInfo' class='col-xs-6'><ul><li>While connected to PlayFab, every time you manually save and <b>once per 30 minutes when auto-saving</b>, your file will also be sent to PlayFab's servers.</li><li>Data will be cleared from PlayFab's servers after 3 months of inactivity, this is not a permanent save!</li></ul>"
-	tipHtml[1] = "<div class='btn btn-sm btn-danger' onclick='cancelTooltip()'>Cancel</div>";
+	tipHtml[1] = "<div class='btn btn-sm btn-danger' onclick='cancelTooltip()'>取消</div>";
 	return tipHtml;
 }
 
@@ -9000,7 +9000,7 @@ function updatePortalTimer(justGetTime) {
 		if (x != 3) timeString += ":";
 	}
 	if (justGetTime) return timeString;
-	if (game.options.menu.pauseGame.enabled) timeString = timeString + "&nbsp;(PAUSED)";
+	if (game.options.menu.pauseGame.enabled) timeString = timeString + "&nbsp;(暂停)";
 	else {
 		checkAchieve("totalGems");
 		if (trimpStatsDisplayed) displayAllStats();
