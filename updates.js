@@ -78,7 +78,7 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		}
 		else
 		tooltipText = textString;
-		costText += '<div class="maxCenter"><div id="confirmTooltipBtn" class="btn btn-info" onclick="' + attachFunction + '; cancelTooltip()">' + btnText + '</div><div class="btn btn-info" onclick="cancelTooltip()">Cancel</div></div>';
+		costText += '<div class="maxCenter"><div id="confirmTooltipBtn" class="btn btn-info" onclick="' + attachFunction + '; cancelTooltip()">' + btnText + '</div><div class="btn btn-info" onclick="cancelTooltip()">取消</div></div>';
 		game.global.lockTooltip = true;
 		elem.style.left = "33.75%";
 		elem.style.top = "25%";
@@ -88,7 +88,7 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		var reward = game.resources.helium.owned + game.stats.spentOnWorms.value;
 		if (reward > 0) reward = Math.floor(reward * value);
 		tooltipText = "Clicking <b>Finish</b> below will end your daily challenge and you will be unable to attempt it again. You will earn <b>" + prettify(reward) + " extra Helium!</b>";
-		costText = '<div class="maxCenter"><div id="confirmTooltipBtn" class="btn btn-info" onclick="abandonChallenge(); cancelTooltip()">Finish</div><div class="btn btn-danger" onclick="cancelTooltip()">Cancel</div></div>';
+		costText = '<div class="maxCenter"><div id="confirmTooltipBtn" class="btn btn-info" onclick="abandonChallenge(); cancelTooltip()">Finish</div><div class="btn btn-danger" onclick="cancelTooltip()">取消</div></div>';
 		game.global.lockTooltip = true;
 		elem.style.left = "33.75%";
 		elem.style.top = "25%";
@@ -125,16 +125,18 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		costText = "";
 	}
 	if (what == "Welcome"){
-		tooltipText = "Welcome to Trimps! This game saves using Local Storage in your browser. Clearing your cookies or browser settings will cause your save to disappear! Please make sure you regularly back up your save file by either using the 'Export' button in the bar below or the 'Online Saving' option under 'Settings'.<br/><br/><b>Chrome and Firefox are currently the only fully supported browsers.</b><br/><br/><b>Would you like to enable online saving before you start?</b>";
+		titleText="欢迎";
+		tooltipText = "欢迎来到Trimps！ 这个游戏在您的浏览器中使用本地存储。 清除Cookie或浏览器设置将导致保存消失！ 请确保您使用下方栏中的“导出”按钮或“设置”下的“在线保存”选项定期备份您的保存文件。<br/> <br/> <b> Chrome和Firefox目前 是唯一完全支持的浏览器。</ b> <br/> <br/> <b>您要在开始之前启用在线保存吗？</b>";
 		game.global.lockTooltip = true;
 		costText = "<div class='maxCenter'><div class='btn btn-info' id='confirmTooltipBtn' onclick='cancelTooltip(); toggleSetting(\"usePlayFab\");'>Enable Online Saving</div><div class='btn btn-danger' onclick='cancelTooltip()'>Don't Enable</div></div>";
 		elem.style.left = "33.75%";
 		elem.style.top = "25%";
 	}
 	if (what == "Trustworthy Trimps"){
+		titleText = "值得信赖的脆皮";
 		tooltipText = textString;
 		game.global.lockTooltip = true;
-		costText = "<div class='maxCenter'><div class='btn btn-info' id='confirmTooltipBtn' onclick='cancelTooltip()'>Sweet, thanks.</div></div>";
+		costText = "<div class='maxCenter'><div class='btn btn-info' id='confirmTooltipBtn' onclick='cancelTooltip()'>好的</div></div>";
 		elem.style.left = "33.75%";
 		elem.style.top = "25%";
 	}	
@@ -156,20 +158,22 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 	if (what == "Customize Targets"){
 		var steps = game.global.GeneticistassistSteps;
 		tooltipText = "<div id='GATargetError'></div><div>Customize the target thresholds for your Geneticistassist! Use a number between 0.5 and 60 seconds for all 3 boxes. Each box corresponds to a Geneticistassist toggle threshold.</div><div style='width: 100%'><input class='GACustomInput' id='target1' value='" + steps[1] + "'/><input class='GACustomInput' id='target2' value='" + steps[2] + "'/><input class='GACustomInput' id='target3' value='" + steps[3] + "'/><hr class='noBotMarg'/><div id='GADisableCheck'><input type='checkbox'" + ((game.options.menu.GeneticistassistTarget.disableOnUnlock) ? " checked='true'" : "") + "' id='disableOnUnlockCheck' /> Start disabled when unlocked each run</div></div>";
-		costText = "<div class='maxCenter'><div class='btn btn-info' id='confirmTooltipBtn' onclick='customizeGATargets();'>Confirm</div> <div class='btn btn-danger' onclick='cancelTooltip()'>Cancel</div>"
+		costText = "<div class='maxCenter'><div class='btn btn-info' id='confirmTooltipBtn' onclick='customizeGATargets();'>Confirm</div> <div class='btn btn-danger' onclick='cancelTooltip()'>取消</div>"
 		game.global.lockTooltip = true;
 		elem.style.left = "33.75%";
 		elem.style.top = "25%";
 		
 	}
 	if (what == "Message Config"){
-		tooltipText = "<div id='messageConfigMessage'>Here you can finely tune your message settings, to see only what you want from each category. Mouse over the name of a filter for more info.</div>";
+		titleText = "消息设置";
+		tooltipText = "<div id='messageConfigMessage'>在这里，您可以微调您的消息设置，只查看您想要的每个类别。 将鼠标悬停在过滤器的名称上以获取更多信息。</div>";
 		var msgs = game.global.messages;
-		var toCheck = ["Loot", "Unlocks", "Combat"];
+		var toCheck = ["Loot", "Unlocks", "Combat"];//"Loot", "Unlocks", "Combat"//"掉落", "解锁", "战斗"
+		var toCheckCN = ["掉落", "解锁", "战斗"];
 		tooltipText += "<div class='row'>";
 		for (var x = 0; x < toCheck.length; x++){
 			var name = toCheck[x];
-			tooltipText += "<div class='col-xs-4'><span class='messageConfigTitle'>" + toCheck[x] + "</span><br/>";
+			tooltipText += "<div class='col-xs-4'><span class='messageConfigTitle'>" + toCheckCN[x] + "</span><br/>";
 			for (var item in msgs[name]){
 				if (item == "essence" && game.global.highestLevelCleared <= 179) continue;
 				if (item == "magma" && game.global.highestLevelCleared <= 229) continue;
@@ -184,7 +188,7 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		elem.style.top = "25%";
 		elem.style.left = "25%";
 		swapClass('tooltipExtra', 'tooltipExtraLg', elem);
-		costText = "<div class='maxCenter'><div class='btn btn-info' id='confirmTooltipBtn' onclick='cancelTooltip();configMessages();'>Confirm</div> <div class='btn btn-danger' onclick='cancelTooltip()'>Cancel</div>"
+		costText = "<div class='maxCenter'><div class='btn btn-info' id='confirmTooltipBtn' onclick='cancelTooltip();configMessages();'>确定</div> <div class='btn btn-danger' onclick='cancelTooltip()'>取消</div>"
 	}
 	if (what == "The Improbability"){
 		tooltipText = "<span class='planetBreakMessage'>That shouldn't have happened. There should have been a Blimp there. Something is growing unstable.</span>";
@@ -255,14 +259,14 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 	}
 	if (what == "Exit Spire"){
 		tooltipText = "This will exit the spire, and you will be unable to re-enter until your next portal. Are you sure?";
-		costText = "<div class='maxCenter'><div class='btn btn-info' onclick='cancelTooltip(); endSpire()'>Exit Spire</div><div class='btn btn-danger' onclick='cancelTooltip()'>Cancel</div></div>";
+		costText = "<div class='maxCenter'><div class='btn btn-info' onclick='cancelTooltip(); endSpire()'>Exit Spire</div><div class='btn btn-danger' onclick='cancelTooltip()'>取消</div></div>";
 		game.global.lockTooltip = true;
 		elem.style.left = "33.75%";
 		elem.style.top = "25%";		
 	}
 	if (what == "Respec Talents"){
 		tooltipText = "This will return all Dark Essence that was spent on talents at the cost of 20 bones. Are you sure?";
-		costText = "<div class='maxCenter'><div id='confirmTooltipBtn' class='btn btn-info' onclick='cancelTooltip(); respecTalents(true)'>Respec</div><div class='btn btn-danger' onclick='cancelTooltip()'>Cancel</div></div>";
+		costText = "<div class='maxCenter'><div id='confirmTooltipBtn' class='btn btn-info' onclick='cancelTooltip(); respecTalents(true)'>Respec</div><div class='btn btn-danger' onclick='cancelTooltip()'>取消</div></div>";
 		game.global.lockTooltip = true;
 		elem.style.left = "33.75%";
 		elem.style.top = "25%";		
@@ -284,20 +288,23 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		//elem.style.top = "55%";
 	}
 	if (what == "Reset"){
-		tooltipText = "Are you sure you want to reset? This will really actually reset your game. You won't get anything cool. It will be gone. <b style='color: red'>This is not the soft-reset you're looking for. This will delete your save.</b>";
-		costText="<div class='maxCenter'><div class='btn btn-danger' onclick='resetGame();unlockTooltip();tooltip(\"hide\")'>Delete Save</div> <div class='btn btn-info' onclick='cancelTooltip()'>Cancel</div></div>";
+		titleText="重置";
+		tooltipText = "您确定要重置吗？ 这真的会重置你的游戏。 你不会得到任何东西。 它会消失。 <b style='color: red'>这不是你要找的软复位。 这将删除您的保存。</b>";
+		costText="<div class='maxCenter'><div class='btn btn-danger' onclick='resetGame();unlockTooltip();tooltip(\"hide\")'>删除存档</div> <div class='btn btn-info' onclick='cancelTooltip()'>取消</div></div>";
 		game.global.lockTooltip = true;
 		elem.style.left = "33.75%";
 		elem.style.top = "25%";
 	}
 	if (what == "Fight"){
-		tooltipText = "Send your poor Trimps to certain doom in the battlefield. You'll get cool stuff though, they'll understand.";
+		titleText = "战斗";
+		tooltipText = "将你你可怜的脆皮送到战场上面对它们的命运。 你会得到很酷的东西，它们会理解的。";
 		var soldiers = (game.portal.Coordinated.level) ? game.portal.Coordinated.currentSend : game.resources.trimps.maxSoldiers;
-		costText = (soldiers > 1) ? "s" : "";
-		costText = prettify(soldiers) + " Trimp" + costText;
+		//costText = (soldiers > 1) ? "s" : "";
+		costText = prettify(soldiers) + " 脆皮" + costText;
 	}
 	if (what == "AutoFight"){
-		tooltipText = "Allow the Trimps to start fighting on their own whenever their town gets overcrowded";
+		titleText = "自动战斗";
+		tooltipText = "允许脆皮在它们的城镇过度拥挤时自己开始战斗";
 		costText = "";
 	}
 	if (what == "New Achievements"){
@@ -319,8 +326,9 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		titleText = "<div id='generatorUpgradeTitle'>Upgrade Generator</div><div id='magmiteOwned'></div>";
 	}
 	if (what == "Queue"){
-		tooltipText = "This is a building in your queue, you'll need to click \"Build\" to build it. Clicking an item in the queue will cancel it for a full refund.";
+		tooltipText = "这是您队列中的建筑物，您需要单击“建造 ”来建造它。 点击队列中的某个项目将取消该项目以获得全额退款。";
 		costText = "";
+		titleText = "队列";
 	}
 	if (what == "Toxic" && isItIn != "dailyStack"){
 		tooltipText = "This bad guy is toxic. You will find " + (game.challenges.Toxicity.lootMult * game.challenges.Toxicity.stacks).toFixed(1) + "% more loot! Oh, also, this bad guy has 5x attack, 2x health, your Trimps will lose 5% health each time they attack, and the toxic air is causing your Trimps to breed " + (100 - (Math.pow(game.challenges.Toxicity.stackMult, game.challenges.Toxicity.stacks) * 100)).toFixed(2) + "% slower. These stacks will reset after clearing the zone.";
@@ -332,11 +340,12 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		costText = "";
 	}
 	if (what == "Custom"){
+		titleText="自定义"
 		customUp = (textString) ? 2 : 1;
-		tooltipText = "Type a number below to purchase a specific amount. You can also use shorthand such as 2e5 and 200k to select that large number, or fractions such as 1/2 and 50% to select that fraction of your available workspaces."
+		tooltipText = "请在下面输入数字以购买特定金额。 您还可以使用大数字的缩写（如2e5和200k）或分数（如1/2和50%）来选择可用的工作空间。"
 		if (textString) tooltipText += " <b>Max of 1,000 for most perks</b>";
 		tooltipText += "<br/><br/><input id='customNumberBox' style='width: 50%' value='" + ((!isNumberBad(game.global.lastCustomExact)) ? prettify(game.global.lastCustomExact) : game.global.lastCustomExact) + "' />";
-		costText = "<div class='maxCenter'><div id='confirmTooltipBtn' class='btn btn-info' onclick='numTab(5, " + textString + ")'>Apply</div><div class='btn btn-info' onclick='cancelTooltip()'>Cancel</div></div>";
+		costText = "<div class='maxCenter'><div id='confirmTooltipBtn' class='btn btn-info' onclick='numTab(5, " + textString + ")'>应用</div><div class='btn btn-info' onclick='cancelTooltip()'>取消</div></div>";
 		game.global.lockTooltip = true;
 		elem.style.left = "33.75%";
 		elem.style.top = "25%";
@@ -350,22 +359,24 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		noExtraCheck = true;
 	}
 	if (what == "Max"){
-		tooltipText = "No reason to spend everything in one place! Here you can set the ratio of your resources to spend when using the 'Max' button. Setting this to 0.5 will spend no more than half of your resources per click, etc."
-		costText = "<ul id='buyMaxUl'><li onclick='setMax(1)'>Max</li><li onclick='setMax(0.5)'>0.5</li><li onclick='setMax(0.33)'>0.33</li><li onclick='setMax(0.25)'>0.25</li><li onclick='setMax(0.1)'>0.1</li></ul>";
+		titleText="最多"
+		tooltipText = "没有理由把一切都在一个地方！ 您可以在此处设置使用“最大”按钮时资源的支出比例。 将此设置为0.5，每次点击所花费的资源不会超过一半。"
+		costText = "<ul id='buyMaxUl'><li onclick='setMax(1)'>最多</li><li onclick='setMax(0.5)'>0.5</li><li onclick='setMax(0.33)'>0.33</li><li onclick='setMax(0.25)'>0.25</li><li onclick='setMax(0.1)'>0.1</li></ul>";
 		game.global.lockTooltip = true;
 		elem.style.left = "33.75%";
 		elem.style.top = "25%";
 	}
 	if (what == "Export"){
+		titleText="导出";
 		if (textString){
 			tooltipText = textString + "<br/><br/><textarea spellcheck='false' style='width: 100%' rows='5'>" + save(true) + "</textarea>";
 			what = "Thanks!";
 		}
 		else
-		tooltipText = "This is your save string. There are many like it but this one is yours. Save this save somewhere safe so you can save time next time. <br/><br/><textarea spellcheck='false' id='exportArea' style='width: 100%' rows='5'>" + save(true) + "</textarea>";
-		costText = "<div class='maxCenter'><div id='confirmTooltipBtn' class='btn btn-info' onclick='cancelTooltip()'>Got it</div>"
+		tooltipText = "这是您的保存字符串。 它们长得很像，但这一个是你的。 将此保存到安全的地方，以便下次可以节省时间。 <br/><br/><textarea spellcheck='false' id='exportArea' style='width: 100%' rows='5'>" + save(true) + "</textarea>";
+		costText = "<div class='maxCenter'><div id='confirmTooltipBtn' class='btn btn-info' onclick='cancelTooltip()'>完成</div>"
 		if (document.queryCommandSupported('copy')){
-			costText += "<div id='clipBoardBtn' class='btn btn-success'>Copy to Clipboard</div>";
+			costText += "<div id='clipBoardBtn' class='btn btn-success'>复制到剪贴板</div>";
 			ondisplay = function(){
 				document.getElementById('exportArea').select();
 				document.getElementById('clipBoardBtn').addEventListener('click', function(event) {
@@ -385,10 +396,11 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		elem.style.top = "25%";
 	}
 	if (what == "Import"){
-		tooltipText = "Import your save string! It'll be fun, I promise.<br/><br/><textarea spellcheck='false' id='importBox' style='width: 100%' rows='5'></textarea>";
-		costText="<div class='maxCenter'><div id='confirmTooltipBtn' class='btn btn-info' onclick='cancelTooltip(); load(true);'>Import</div>"
-		if (playFabId != -1) costText += "<div class='btn btn-primary' onclick='loadFromPlayFab()'>Import From PlayFab</div>";
-		costText += "<div class='btn btn-info' onclick='cancelTooltip()'>Cancel</div></div>";
+		titleText="导入";
+		tooltipText = "导入您的保存字符串！ 这将是有趣，我保证。<br/><br/><textarea spellcheck='false' id='importBox' style='width: 100%' rows='5'></textarea>";
+		costText="<div class='maxCenter'><div id='confirmTooltipBtn' class='btn btn-info' onclick='cancelTooltip(); load(true);'>导入</div>"
+		if (playFabId != -1) costText += "<div class='btn btn-primary' onclick='loadFromPlayFab()'>从PlayFab导入</div>";
+		costText += "<div class='btn btn-info' onclick='cancelTooltip()'>取消</div></div>";
 		game.global.lockTooltip = true;
 		elem.style.left = "33.75%";
 		elem.style.top = "25%";
@@ -416,18 +428,19 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 
 	}
 	if (what == "PlayFab Conflict"){
-		tooltipText = "It looks like your save stored at PlayFab is further along than the save on your computer.<br/><b>Your save on PlayFab has earned " + prettify(textString) + " total Helium, defeated Zone " + attachFunction + ", and cleared " + prettify(numCheck) + " total Zones. The save on your computer only has " + prettify(game.global.totalHeliumEarned) + " total Helium, has defeated Zone " + game.global.highestLevelCleared + ", and cleared " + prettify(game.stats.zonesCleared.value + game.stats.zonesCleared.valueTotal) + " total Zones.</b><br/>Would you like to Download your save from PlayFab, Overwrite your online save with this one, or Cancel and do nothing?";
-		costText = "<span class='btn btn-primary' onclick='playFabFinishLogin(true)'>Download From PlayFab</span><span class='btn btn-warning' onclick='playFabFinishLogin(false)'>Overwrite PlayFab Save</span><span class='btn btn-danger' onclick='cancelPlayFab();'>Cancel</span>";
+		tooltipText = "It looks like your save stored at PlayFab is further along than the save on your computer.<br/><b>Your save on PlayFab has earned " + prettify(textString) + " total Helium, defeated Zone " + attachFunction + ", and cleared " + prettify(numCheck) + " total Zones. The save on your computer only has " + prettify(game.global.totalHeliumEarned) + " total Helium, has defeated Zone " + game.global.highestLevelCleared + ", and cleared " + prettify(game.stats.zonesCleared.value + game.stats.zonesCleared.valueTotal) + " total Zones.</b><br/>您要从PlayFab下载您的存档，使用此文件覆盖您的在线保存还是取消并且不执行任何操作？";
+		costText = "<span class='btn btn-primary' onclick='playFabFinishLogin(true)'>Download From PlayFab</span><span class='btn btn-warning' onclick='playFabFinishLogin(false)'>Overwrite PlayFab Save</span><span class='btn btn-danger' onclick='cancelPlayFab();'>取消</span>";
 		game.global.lockTooltip = true;
 		elem.style.left = "33.75%";
 		elem.style.top = "25%";
 	}
 	if (what == "Fire Trimps"){
 		if (!game.global.firing)
-		tooltipText = "Activate firing mode, turning the job buttons red, and forcing them to fire trimps rather than hire them. The newly unemployed Trimps will start breeding instead of working, but you will not receive a refund on resources.";
+		tooltipText = "激活解雇模式，工作按钮变为红色，并强制解雇它们，而不是雇佣。 新失业的脆皮将开始繁殖，而不是工作，但你不会收到退回的资源。";
 		else
-		tooltipText = "Disable firing mode";
+		tooltipText = "终止解雇模式";
 		costText = "";
+		titleText = "解雇脆皮"
 	}
 	if (what == "Maps"){
 		if (!game.global.preMapsActive)
@@ -437,12 +450,14 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		costText = "";
 	}
 	if (isItIn == "jobs"){
+		var whatCN = ((game.jobs[what].nameCN) ? game.jobs[what].nameCN : what);
 		var buyAmt = game.global.buyAmt;
 		if (buyAmt == "Max") buyAmt = calculateMaxAfford(game.jobs[what], false, false, true);
 		if (game.global.firing){
-			var firstChar = what.charAt(0);
-			var aAn = (firstChar == "A" || firstChar == "E" || firstChar == "I" || firstChar == "O" || firstChar == "U") ? " an " : " a ";
-			tooltipText = "Fire " + aAn + " " + what + ". Refunds no resources, but frees up some workspace for your Trimps.";
+			//var firstChar = what.charAt(0);
+			//var aAn = (firstChar == "A" || firstChar == "E" || firstChar == "I" || firstChar == "O" || firstChar == "U") ? " an " : " a ";
+			//tooltipText = "Fire " + aAn + " " + what + ". Refunds no resources, but frees up some workspace for your Trimps.";
+			tooltipText = "解雇" + whatCN + "。 这不会退还任何资源，但能为你的脆皮释放一些工作空间。";
 			costText = "";
 		}
 		else{
@@ -450,19 +465,22 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 			if (workspaces < buyAmt) buyAmt = workspaces;
 			costText = getTooltipJobText(what, buyAmt);
 		}
-		if (buyAmt > 1) what += " X " + prettify(buyAmt);
+		if (buyAmt > 1) whatCN += " X " + prettify(buyAmt);
+		titleText = whatCN;
 	}
 	if (isItIn == "buildings"){
+		var whatCN = ((game.buildings[what].nameCN) ? game.buildings[what].nameCN : what);
 		costText = canAffordBuilding(what, false, true);
 		if (game.global.buyAmt != 1) {
 			if (game.buildings[what].percent){
-				tooltipText += " <b>You can only purchase 1 " + what + " at a time.</b>";
-				what += " X 1";
+				tooltipText += " <b>你每次只能购买1个 " + whatCN + "</b>";
+				whatCN += " X 1";
 			}
 			else {
-				what += " X " + prettify((game.global.buyAmt == "Max") ? calculateMaxAfford(game.buildings[what], true) : game.global.buyAmt);
+				whatCN += " X " + prettify((game.global.buyAmt == "Max") ? calculateMaxAfford(game.buildings[what], true) : game.global.buyAmt);
 			}
 		}
+		titleText = whatCN;
 	}
 	if (isItIn == "portal"){
 		var resAppend = (game.global.kongBonusMode) ? " Bonus Points" : " Helium Canisters";
@@ -474,6 +492,7 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		what = what.replace("_", " ");
 	}
 	if (isItIn == "equipment"){
+		titleText = ((game.equipment[what].nameCN) ? game.equipment[what].nameCN : what);
 		costText = canAffordBuilding(what, false, true, true);
 		if (what == "Shield" && game.equipment.Shield.blockNow){
 			var blockPerShield = game.equipment.Shield.blockCalculated + (game.equipment.Shield.blockCalculated * game.jobs.Trainer.owned * (game.jobs.Trainer.modifier / 100));
@@ -484,13 +503,14 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		}
 	}
 	if (isItIn == "upgrades"){
+		var whatCN = ((game.upgrades[what].nameCN) ? game.upgrades[what].nameCN : what);
 		var mouseOverElem = (lastMousePos[0] && lastMousePos[1]) ? document.elementFromPoint(lastMousePos[0], lastMousePos[1]) : null;
 		if (mouseOverElem && mouseOverElem.id == "upgradesHere"){
 			cancelTooltip();
 			return;
 		}
 		if (typeof tooltipText.split('@')[1] !== 'undefined'){
-			var prestigeCost = "<b>You may not want to do this right away.</b> Your next " + game.upgrades[what].prestiges + " will grant " + getNextPrestigeValue(what) + ".";
+			var prestigeCost = "<b>你可能做错了什么。</b> Your next " + game.upgrades[what].prestiges + " will grant " + getNextPrestigeValue(what) + ".";
 			tooltipText = tooltipText.replace('@', prestigeCost);
 		}
 		if (typeof tooltipText.split('$')[1] !== 'undefined'){
@@ -512,6 +532,7 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 				tooltipText += "<b>You need enough room for " + prettify(nextCount * 3) + " max Trimps. You are short " + prettify(Math.floor(amtToGo)) + " Trimps.</b>";
 			}
 		}
+		titleText = whatCN;
 	}
 	if (isItIn == "maps"){
 		tooltipText = "This is a map. Click it to see its properties or to run it. Maps can be run as many times as you want.";
@@ -522,7 +543,7 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		what = numCheck;
 		tooltipText = textString;
 		if (!noHide) attachFunction = attachFunction + "; cancelTooltip()";
-		costText = ' <div class="maxCenter" id="confirmTipCost"><div id="confirmTooltipBtn" class="btn btn-info" onclick="' + attachFunction + '">' + renameBtn + '</div><div class="btn btn-danger" onclick="cancelTooltip()">Cancel</div></div>';
+		costText = ' <div class="maxCenter" id="confirmTipCost"><div id="confirmTooltipBtn" class="btn btn-info" onclick="' + attachFunction + '">' + renameBtn + '</div><div class="btn btn-danger" onclick="cancelTooltip()">取消</div></div>';
 		game.global.lockTooltip = true;
 		elem.style.left = "33.75%";
 		elem.style.top = "25%";
@@ -670,10 +691,10 @@ function addTooltipPricing(toTip, what, isItIn) {
 							percentOfTotal = "(" + percentOfTotal + "%)";
 						}
 					}
-					costText += '<span class="' + canAfford + '">' + item + ':&nbsp;' + prettify(price) + '&nbsp;' + percentOfTotal + '</span>, ';
+					costText += '<span class="' + canAfford + '">' + ((game.resources[item].nameCN) ? game.resources[item].nameCN : item) + ':&nbsp;' + prettify(price) + '&nbsp;' + percentOfTotal + '</span>, ';
 				}
 				else
-				costText += item + ": " + prettify(price) + ", ";
+				costText += ((game.resources[item].nameCN) ? game.resources[item].nameCN : item) + ": " + prettify(price) + ", ";
 			}
 			continue;
 		}
@@ -683,7 +704,7 @@ function addTooltipPricing(toTip, what, isItIn) {
 }
 
 function configMessages(){
-	var toCheck = ["Loot", "Unlocks", "Combat"];
+	var toCheck = ["Loot", "Unlocks", "Combat"];//"Loot", "Unlocks", "Combat"//"掉落", "解锁", "战斗"
 	for (var x = 0; x < toCheck.length; x++){
 		var name = toCheck[x];
 		for (var item in game.global.messages[name]){
@@ -700,44 +721,44 @@ function messageConfigHover(what, event){
 	var title = "";
 	switch(what){
 		case 'Lootprimary':
-			text = "Log the common loot items: Food, Wood, and Metal.";
-			title = "Primary";
+			text = "记录常见的战利品：食物，木材和金属。";
+			title = "主要";
 			break;
 		case 'Lootsecondary':
-			text = "Log the less common loot items: Gems, Fragments, Territory Bonus, and others.";
-			title = "Secondary";
+			text = "记录较不常见的战利品：宝石，碎片，领地奖金和其他。";
+			title = "次要";
 			break;
 		case 'Lootevents':
-			text = "Log drops and messages from temporary events, such as holidays.";
-			title = "Events";
+			text = "记录来自临时事件（例如假日）的掉落和消息。";
+			title = "活动";
 			break;
 		case 'Lootexotic':
-			text = "Log the rewards granted by Exotic Imports.";
+			text = "记录由Exotic Imports授予的奖励。";
 			title = "Exotic";
 			break;
 		case 'Loothelium':
-			text = "Log Helium rewards.";
-			title = "Helium";
+			text = "记录氦奖励。"
+			title = "氦";
 			break;
 		case 'Unlocksrepeated':
-			text = "Log all unlocks that drop more than once per run, such as Speedfarming or Coordination.";
-			title = "Repeated";
+			text = "记录每次可重复掉落的所有解锁，例如Speedfarming或Coordination。";
+			title = "重复";
 			break;
 		case 'Unlocksunique':
-			text = "Log all unlocks that only drop once per portal, such as Gyms or Miners.";
-			title = "Unique";
+			text = "记录每次仅掉落一次的所有解锁，例如Gyms或Miners。";
+			title = "唯一";
 			break;
 		case 'Combattrimp':
-			text = "Log all combat messages involving your Trimps.";
-			title = "Trimp";
+			text = "记录涉及您的脆皮的所有战斗信息。";
+			title = "脆皮";
 			break;
 		case 'Combatenemy':
-			text = "Log all combat messages involving the enemy.";
-			title = "Enemy";
+			text = "记录涉及敌人的所有战斗信息。";
+			title = "敌人";
 			break;
 		case 'Lootessence':
-			text = "Log all Dark Essence found by scrying.";
-			title = "Dark Essence";
+			text = "记录所有发现的黑暗精华。";
+			title = "黑暗精华";
 			break;
 		default: return;
 	}
@@ -761,9 +782,12 @@ function unlockTooltip(){
 
 function getPsString(what, rawNum) {
 	if (what == "helium") return;
+	if (what == "氦") return;
 	var resOrder = ["food", "wood", "metal", "science", "gems", "fragments"];
 	var books = ["farming", "lumber", "miner", "science"];
+	var booksCN = ["农业", "伐木", "挖矿", "科研"]
 	var jobs = ["Farmer", "Lumberjack", "Miner", "Scientist", "Dragimp", "Explorer"];
+	var jobsCN = ["农夫","伐木工","矿工","科学家","Dragimp","探险家"]
 	var index = resOrder.indexOf(what);
 	var job = game.jobs[jobs[index]];
 	var book = game.upgrades["Speed" + books[index]];
@@ -771,16 +795,16 @@ function getPsString(what, rawNum) {
 	var base = (what == "fragments") ? 0.1 : 0.5;
 	var textString =  "<table class='bdTable table table-striped'><tbody>";
 	//Add base
-	textString += "<tr><td class='bdTitle'>Base</td><td class='bdPercent'></td><td class='bdNumber'>" + prettify(base) + "</td></tr>";
+	textString += "<tr><td class='bdTitle'>基础</td><td class='bdPercent'></td><td class='bdNumber'>" + prettify(base) + "</td></tr>";
 	//Add job count
 	var currentCalc = job.owned * base;
-	textString += "<tr><td class='bdTitle'>" + jobs[index] + "s</td><td class='bdPercent'>" + prettify(job.owned) + "</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
+	textString += "<tr><td class='bdTitle'>" + jobsCN[index] + "</td><td class='bdPercent'>" + prettify(job.owned) + "</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
 	//Add books
 	if (typeof book !== 'undefined' && book.done > 0){
 		var bookStrength = Math.pow(1.25, book.done);
 		currentCalc *= bookStrength;
 		bookStrength = prettify((bookStrength - 1) * 100) + "%";
-		textString += "<tr><td class='bdTitle'>Speed" + books[index] + "</td><td class='bdPercent'>+ " + bookStrength + "</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
+		textString += "<tr><td class='bdTitle'>快速" + booksCN[index] + "</td><td class='bdPercent'>+ " + bookStrength + "</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
 	}
 	//Add Megabooks
 	if (typeof mBook !== 'undefined' && mBook.done > 0){
@@ -788,19 +812,19 @@ function getPsString(what, rawNum) {
 		var mBookStrength = Math.pow(mod, mBook.done);
 		currentCalc *= mBookStrength;
 		mBookStrength = prettify((mBookStrength - 1) * 100) + "%";
-		textString += "<tr><td class='bdTitle'>Mega" + books[index] + "</td><td class='bdPercent'>+ " + mBookStrength + "</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
+		textString += "<tr><td class='bdTitle'>急速" + booksCN[index] + "</td><td class='bdPercent'>+ " + mBookStrength + "</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
 	}	
 	//Add bounty
 	if (what != "gems" && game.upgrades.Bounty.done > 0){
 		currentCalc *= 2;
-		textString += "<tr><td class='bdTitle'>Bounty</td><td class='bdPercent'>+ 100%</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
+		textString += "<tr><td class='bdTitle'>加倍</td><td class='bdPercent'>+ 100%</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
 	}
 	//Add Tribute
 	if (what == "gems" && game.buildings.Tribute.owned > 0){
 		var tributeStrength = Math.pow(game.buildings.Tribute.increase.by, game.buildings.Tribute.owned);
 		currentCalc *= tributeStrength;
 		tributeStrength = prettify((tributeStrength - 1) * 100) + "%";
-		textString += "<tr><td class='bdTitle'>Tribute</td><td class='bdPercent'>+ " + tributeStrength + "</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
+		textString += "<tr><td class='bdTitle'>捐赠食物</td><td class='bdPercent'>+ " + tributeStrength + "</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
 	}
 	//Add Whipimp
 	if (game.unlocks.impCount.Whipimp > 0){
@@ -902,7 +926,7 @@ function getPsString(what, rawNum) {
 		}
 		var playerStrength = getPlayerModifier();
 		currentCalc += playerStrength;
-		textString += "<tr><td class='bdTitle'>You</td><td class='bdPercent'>+ " + prettify(playerStrength) + "</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
+		textString += "<tr><td class='bdTitle'>你</td><td class='bdPercent'>+ " + prettify(playerStrength) + "</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
 
 	}
 	//Add Loot	ALWAYS LAST
@@ -916,27 +940,27 @@ function getPsString(what, rawNum) {
 	if (rawNum) return currentCalc;
 	textString += "</tbody></table>";
 	game.global.lockTooltip = false;
-	tooltip('confirm', null, 'update', textString, "getPsString('" + what + "')", what.charAt(0).toUpperCase() + what.substr(1, what.length) + " Per Second", "Refresh", true);
+	tooltip('confirm', null, 'update', textString, "getPsString('" + what + "')", "每秒产出" + ((game.resources[what].nameCN) ? game.resources[what].nameCN : what), "刷新", true);
 }
 
 function getZoneStats(event, update) {
 	if (!update && game.global.lockTooltip) return;
 	var textString =  "<table class='bdTable table table-striped'><tbody>";
-	textString += "<tr><td class='bdTitle bdZoneTitle' colspan='3'>Zone "  + game.global.world + ", Cell " + (game.global.lastClearedCell + 2) + "</td></tr>";
-	textString += "<tr><td colspan='3'>You have been in this Zone for " + formatMinutesForDescriptions((new Date().getTime() - game.global.zoneStarted) / 1000 / 60) + "</td></tr>";
+	textString += "<tr><td class='bdTitle bdZoneTitle' colspan='3'>区域 "  + game.global.world + "，房间 " + (game.global.lastClearedCell + 2) + "</td></tr>";
+	textString += "<tr><td colspan='3'>你已经在这个区域停留了" + formatMinutesForDescriptions((new Date().getTime() - game.global.zoneStarted) / 1000 / 60) + "</td></tr>";
 	if ((game.global.mapsActive || game.global.preMapsActive) && game.global.currentMapId){
 		var map = game.global.mapsOwnedArray[getMapIndex(game.global.currentMapId)];
-		textString += "<tr><td class='bdTitle bdZoneTitle' colspan='3'>" + map.name + ", Level " + map.level + ", Cell " + (game.global.lastClearedMapCell + 2) + "</td></tr>";
-		textString += '<tr><td><span class="' + getMapIcon(map) + '"></span> ' + getMapIcon(map, true) + '</td><td><span class="icomoon icon-gift2"></span>' + Math.floor(map.loot * 100) + '%</span> <span class="icomoon icon-cube2"></span>' + map.size + ' <span class="icon icon-warning"></span>' + Math.floor(map.difficulty * 100) + '%</td><td>' + ((map.location == "Void") ? '&nbsp' : ('Items: ' + addSpecials(true, true, map))) + '</td></tr>';
-		textString += "<tr><td colspan='3'>You have been on this map for " + formatMinutesForDescriptions((new Date().getTime() - game.global.mapStarted) / 1000 / 60) + "</td></tr>";
-		if (map.location == "Void") textString += "<tr><td colspan='3'>You have " + game.global.totalVoidMaps + " Void Maps.</td></tr>";
+		textString += "<tr><td class='bdTitle bdZoneTitle' colspan='3'>" + map.name + "等级 " + map.level + "，房间 " + (game.global.lastClearedMapCell + 2) + "</td></tr>";
+		textString += '<tr><td><span class="' + getMapIcon(map) + '"></span> ' + getMapIcon(map, true) + '</td><td><span class="icomoon icon-gift2"></span>' + Math.floor(map.loot * 100) + '%</span> <span class="icomoon icon-cube2"></span>' + map.size + ' <span class="icon icon-warning"></span>' + Math.floor(map.difficulty * 100) + '%</td><td>' + ((map.location == "Void") ? '&nbsp' : ('道具Items: ' + addSpecials(true, true, map))) + '</td></tr>';
+		textString += "<tr><td colspan='3'>你已经在这个地图停留了" + formatMinutesForDescriptions((new Date().getTime() - game.global.mapStarted) / 1000 / 60) + "</td></tr>";
+		if (map.location == "Void") textString += "<tr><td colspan='3'>你有" + game.global.totalVoidMaps + " Void Maps.</td></tr>";
 	}
 	textString += "</tbody></table>";
 	if (update) {
 		document.getElementById("tipText").innerHTML = textString;
 		return;
 	}
-	tooltip("World Info", "customText", event, textString) 
+	tooltip("世界信息", "customText", event, textString) 
 	tooltipUpdateFunction = function() {
 		getZoneStats(null, true);
 	}
@@ -949,11 +973,11 @@ function getTrimpPs() {
 	var base = 0.0085;
 	var textString =  "<table class='bdTable table table-striped'><tbody>";
 	//Add base
-	textString += "<tr><td class='bdTitle'>Base</td><td class='bdPercent'></td><td class='bdNumber'>" + base + "</td></tr>";
+	textString += "<tr><td class='bdTitle'>基础</td><td class='bdPercent'></td><td class='bdNumber'>" + base + "</td></tr>";
 	//Add job count
 	var breeding = trimps.owned - trimps.employed;
 	var currentCalc = breeding * base;
-	textString += "<tr><td class='bdTitle'>Breeding</td><td class='bdPercent'>" + prettify(breeding) + "</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
+	textString += "<tr><td class='bdTitle'>繁殖</td><td class='bdPercent'>" + prettify(breeding) + "</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
 	//Add Potency
 	if (game.upgrades.Potency.done > 0){
 		var potencyStrength = Math.pow(1.1, game.upgrades.Potency.done);
@@ -966,7 +990,7 @@ function getTrimpPs() {
 		var nurseryStrength = Math.pow(1.01, game.buildings.Nursery.owned);
 		currentCalc *= nurseryStrength;
 		nurseryStrength = prettify((nurseryStrength - 1) * 100) + "%";
-		textString += "<tr><td class='bdTitle'>Nurseries</td><td class='bdPercent'>+ " + nurseryStrength + "</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
+		textString += "<tr><td class='bdTitle'>幼儿园</td><td class='bdPercent'>+ " + nurseryStrength + "</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
 	}
 	//Add Venimp
 	if (game.unlocks.impCount.Venimp > 0){
@@ -977,7 +1001,7 @@ function getTrimpPs() {
 	}
 	if (game.global.brokenPlanet){
 		currentCalc /= 10;
-		textString += "<tr style='color: red'><td class='bdTitle'>Broken Planet</td><td class='bdPercent'>X 0.1</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
+		textString += "<tr style='color: red'><td class='bdTitle'>破碎的星球</td><td class='bdPercent'>X 0.1</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
 	
 	}
 	//Add pheromones
@@ -985,14 +1009,14 @@ function getTrimpPs() {
 		var PheromonesStrength = (game.portal.Pheromones.level * game.portal.Pheromones.modifier);
 		currentCalc  *= (PheromonesStrength + 1);
 		PheromonesStrength = prettify(PheromonesStrength * 100) + "%";
-		textString += "<tr><td class='bdTitle'>Pheromones</td><td class='bdPercent'>+ " + PheromonesStrength + "</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
+		textString += "<tr><td class='bdTitle'>信息素</td><td class='bdPercent'>+ " + PheromonesStrength + "</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
 	}
 	//Add Geneticist
 	if (game.jobs.Geneticist.owned > 0) {
 		var mult = Math.pow(.98, game.jobs.Geneticist.owned);
 		currentCalc *= mult;
 		var display = (mult > 0.0001) ? mult.toFixed(4) : mult.toExponential(3);
-		textString += "<tr style='color: red'><td class='bdTitle'>Geneticist</td><td class='bdPercent'>X  " + display + "</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
+		textString += "<tr style='color: red'><td class='bdTitle'>遗传学家</td><td class='bdPercent'>X  " + display + "</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
 	}
 	//Add quick trimps
 	if (game.unlocks.quickTrimps){
@@ -1029,7 +1053,7 @@ function getTrimpPs() {
 	}
 	textString += "</tbody></table>";
 	game.global.lockTooltip = false;
-	tooltip('confirm', null, 'update', textString, "getTrimpPs()", "Trimps Per Second", "Refresh", true);
+	tooltip('confirm', null, 'update', textString, "getTrimpPs()", "每秒繁殖脆皮", "刷新", true);
 }
 
 function getFluctuation(number, minFluct, maxFluct){
@@ -1041,39 +1065,39 @@ function getFluctuation(number, minFluct, maxFluct){
 function getBattleStatBd(what) {
 	var equipment = {};
 	var name = what.charAt(0).toUpperCase() + what.substr(1, what.length);
-	var textString =  "<table class='bdTableSm table table-striped'><tbody><tr><td></td><td>Base</td><td>Level</td><td>Item " + name + "</td><td>Total</td>" + ((what == "attack") ? "<td>Min</td><td>Max</td>" : "") + "</tr>";
+	var textString =  "<table class='bdTableSm table table-striped'><tbody><tr><td></td><td>基础</td><td>Level</td><td>Item " + name + "</td><td>总计</td>" + ((what == "attack") ? "<td>最小</td><td>最大</td>" : "") + "</tr>";
 	var currentCalc = 0;
 	var maxFluct = 0.2;
 	var minFluct = 0.2;
 	var percent = 0;
 	if (what == "health" || what == "attack"){
 		currentCalc += (what == "health") ? 50 : 6;
-		textString += "<tr><td class='bdTitle'>Base</td><td class='bdPercentSm'>" + prettify(currentCalc) + "</td><td></td><td></td><td class='bdNumberSm'>" + prettify(currentCalc) + "</td>" + ((what == "attack") ? "<td>-20%</td><td>+20%</td>" : "") + "</tr>";
+		textString += "<tr><td class='bdTitle'>基础</td><td class='bdPercentSm'>" + prettify(currentCalc) + "</td><td></td><td></td><td class='bdNumberSm'>" + prettify(currentCalc) + "</td>" + ((what == "attack") ? "<td>-20%</td><td>+20%</td>" : "") + "</tr>";
 		if (what == "attack"){
 			//Discipline
 			if (game.global.challengeActive == "Discipline"){
 				minFluct = 0.995;
 				maxFluct = 0.995;
-				textString += "<tr><td class='bdTitle'>Lack Discipline</td><td class='bdPercentSm'></td><td></td><td></td><td class='bdNumberSm'></td><td>-99.5%</td><td>+99.5%</td></tr>";
+				textString += "<tr><td class='bdTitle'>缺乏纪律</td><td class='bdPercentSm'></td><td></td><td></td><td class='bdNumberSm'></td><td>-99.5%</td><td>+99.5%</td></tr>";
 			}
 			else {
 				//Range
 					if (game.portal.Range.level > 0){
 						minFluct -= (0.02 * game.portal.Range.level);
-						textString += "<tr><td class='bdTitle'>Range</td><td class='bdPercentSm'>+2% Min</td><td>" + game.portal.Range.level + "</td><td>+" + prettify(2 * game.portal.Range.level) + "% Min</td><td class='bdNumberSm'></td><td>-" + prettify(minFluct * 100) + "%</td><td>+" + prettify(maxFluct * 100) + "%</td></tr>";
+						textString += "<tr><td class='bdTitle'>范围</td><td class='bdPercentSm'>+2% Min</td><td>" + game.portal.Range.level + "</td><td>+" + prettify(2 * game.portal.Range.level) + "% Min</td><td class='bdNumberSm'></td><td>-" + prettify(minFluct * 100) + "%</td><td>+" + prettify(maxFluct * 100) + "%</td></tr>";
 					}
 				//MinDamageDaily
 					if (typeof game.global.dailyChallenge.minDamage !== 'undefined'){
 						var addMin = dailyModifiers.minDamage.getMult(game.global.dailyChallenge.minDamage.strength);
 						minFluct += addMin;
 						if (minFluct > 1) minFluct = 1;
-						textString += "<tr style='color: red'><td class='bdTitle'>Minimalist (Daily)</td><td class='bdPercentSm'>-" + prettify(addMin * 100) + "% Min</td><td></td><td></td><td class='bdNumberSm'></td><td>-" + prettify(minFluct * 100) + "%</td><td>+" + prettify(maxFluct * 100) + "%</td></tr>";
+						textString += "<tr style='color: red'><td class='bdTitle'>极简主义 (Daily)</td><td class='bdPercentSm'>-" + prettify(addMin * 100) + "% Min</td><td></td><td></td><td class='bdNumberSm'></td><td>-" + prettify(minFluct * 100) + "%</td><td>+" + prettify(maxFluct * 100) + "%</td></tr>";
 					}
 				//MaxDamageDaily
 					if (typeof game.global.dailyChallenge.maxDamage !== 'undefined'){
 						var addMax = dailyModifiers.maxDamage.getMult(game.global.dailyChallenge.maxDamage.strength);
 						maxFluct += addMax;
-						textString += "<tr><td class='bdTitle'>Prodigal (Daily)</td><td class='bdPercentSm'>+" + prettify(addMax * 100) + "% Max</td><td></td><td></td><td class='bdNumberSm'></td><td>-" + prettify(minFluct * 100) + "%</td><td>+" + prettify(maxFluct * 100) + "%</td></tr>";
+						textString += "<tr><td class='bdTitle'>败家子 (Daily)</td><td class='bdPercentSm'>+" + prettify(addMax * 100) + "% Max</td><td></td><td></td><td class='bdNumberSm'></td><td>-" + prettify(minFluct * 100) + "%</td><td>+" + prettify(maxFluct * 100) + "%</td></tr>";
 					}
 			}
 		}
@@ -1083,7 +1107,7 @@ function getBattleStatBd(what) {
 			var equipStrength = temp[what + "Calculated"] * temp.level;
 			currentCalc += equipStrength;
 			percent = ((equipStrength / game.global[what]) * 100).toFixed(1) + "%";
-			textString += "<tr><td class='bdTitle'>" + equip + "</td><td>" + prettify(temp[what + "Calculated"]) + "</td><td>" + temp.level + "</td><td>" + prettify(equipStrength) + " (" + percent + ")</td><td>" + prettify(currentCalc) + "</td>" + ((what == "attack") ? getFluctuation(currentCalc, minFluct, maxFluct) : "") + "</tr>";
+			textString += "<tr><td class='bdTitle'>" + ((temp.nameCN) ? temp.nameCN : equip) + "</td><td>" + prettify(temp[what + "Calculated"]) + "</td><td>" + temp.level + "</td><td>" + prettify(equipStrength) + " (" + percent + ")</td><td>" + prettify(currentCalc) + "</td>" + ((what == "attack") ? getFluctuation(currentCalc, minFluct, maxFluct) : "") + "</tr>";
 		}
 	}
 	else if (what == "block"){
@@ -1093,14 +1117,14 @@ function getBattleStatBd(what) {
 			var gymStrength = gym.owned * gym.increase.by;
 			percent = ((gymStrength / game.global.block) * 100).toFixed(1) + "%";
 			currentCalc += gymStrength;
-			textString += "<tr><td class='bdTitle'>Gym</td><td>" + prettify(gym.increase.by) + "</td><td>" + prettify(gym.owned) + "</td><td>" + prettify(gymStrength) + " (" + percent + ")</td><td>" + prettify(currentCalc) + "</td></tr>";
+			textString += "<tr><td class='bdTitle'>健身房</td><td>" + prettify(gym.increase.by) + "</td><td>" + prettify(gym.owned) + "</td><td>" + prettify(gymStrength) + " (" + percent + ")</td><td>" + prettify(currentCalc) + "</td></tr>";
 		}
 		var shield = game.equipment.Shield;
 		if (shield.blockNow && shield.level > 0){
 			var shieldStrength = shield.level * shield.blockCalculated;
 			percent = ((shieldStrength / game.global.block) * 100).toFixed(1) + "%";
 			currentCalc += shieldStrength;
-			textString += "<tr><td class='bdTitle'>Shield</td><td>" + prettify(shield.blockCalculated) + "</td><td>" + prettify(shield.level) + "</td><td>" + prettify(shieldStrength) + " (" + percent + ")</td><td>" + prettify(currentCalc) + "</td></tr>";
+			textString += "<tr><td class='bdTitle'>木盾</td><td>" + prettify(shield.blockCalculated) + "</td><td>" + prettify(shield.level) + "</td><td>" + prettify(shieldStrength) + " (" + percent + ")</td><td>" + prettify(currentCalc) + "</td></tr>";
 		}
 		var trainer = game.jobs.Trainer;
 		if (trainer.owned > 0){
@@ -1108,16 +1132,16 @@ function getBattleStatBd(what) {
 			trainerStrength = calcHeirloomBonus("Shield", "trainerEfficiency", trainerStrength);
 			currentCalc  *= (trainerStrength + 1);
 			trainerStrength = prettify(trainerStrength * 100) + "%";
-			textString += "<tr><td class='bdTitle'>Trainers</td><td>" + prettify(calcHeirloomBonus("Shield", "trainerEfficiency", trainer.modifier)) + "%</td><td>" + prettify(trainer.owned) + "</td><td>+ " + trainerStrength + "</td><td>" + prettify(currentCalc) + "</td></tr>";
+			textString += "<tr><td class='bdTitle'>教练</td><td>" + prettify(calcHeirloomBonus("Shield", "trainerEfficiency", trainer.modifier)) + "%</td><td>" + prettify(trainer.owned) + "</td><td>+ " + trainerStrength + "</td><td>" + prettify(currentCalc) + "</td></tr>";
 		}
 	}
 	//Add coordination
 	currentCalc  *= game.resources.trimps.maxSoldiers;
-	textString += "<tr><td class='bdTitle'>Soldiers</td><td class='bdPercentSm'></td><td></td><td>x " + prettify(game.resources.trimps.maxSoldiers) + "</td><td class='bdNumberSm'>" + prettify(currentCalc) + "</td>" + ((what == "attack") ? getFluctuation(currentCalc, minFluct, maxFluct) : "") + "</tr>";
+	textString += "<tr><td class='bdTitle'>士兵</td><td class='bdPercentSm'></td><td></td><td>x " + prettify(game.resources.trimps.maxSoldiers) + "</td><td class='bdNumberSm'>" + prettify(currentCalc) + "</td>" + ((what == "attack") ? getFluctuation(currentCalc, minFluct, maxFluct) : "") + "</tr>";
 	//Add achievements
 	if (what == "attack" && game.global.achievementBonus > 0){
 		currentCalc *= 1 + (game.global.achievementBonus / 100);
-		textString += "<tr><td class='bdTitle'>Achievements</td><td class='bdPercentSm'></td><td></td><td>+ " + game.global.achievementBonus + "%</td><td class='bdNumberSm'>" + prettify(currentCalc) + "</td>" + getFluctuation(currentCalc, minFluct, maxFluct) + "</tr>"
+		textString += "<tr><td class='bdTitle'>成就</td><td class='bdPercentSm'></td><td></td><td>+ " + game.global.achievementBonus + "%</td><td class='bdNumberSm'>" + prettify(currentCalc) + "</td>" + getFluctuation(currentCalc, minFluct, maxFluct) + "</tr>"
 	}
 	//Add perk
 	var perk = "";
@@ -1127,14 +1151,14 @@ function getBattleStatBd(what) {
 		var PerkStrength = (game.portal[perk].level * game.portal[perk].modifier);
 		currentCalc  *= (PerkStrength + 1);
 		PerkStrength = prettify(PerkStrength * 100) + "%";
-		textString += "<tr><td class='bdTitle'>" + perk + "</td><td>" + (game.portal[perk].modifier * 100) + "%</td><td>" + game.portal[perk].level + "</td><td>+ " + PerkStrength + "</td><td class='bdNumberSm'>" + prettify(currentCalc) + "</td>" + ((what == "attack") ? getFluctuation(currentCalc, minFluct, maxFluct) : "") + "</tr>";
+		textString += "<tr><td class='bdTitle'>" + ((game.portal[perk].nameCN) ? game.portal[perk].nameCN : perk) + "</td><td>" + (game.portal[perk].modifier * 100) + "%</td><td>" + game.portal[perk].level + "</td><td>+ " + PerkStrength + "</td><td class='bdNumberSm'>" + prettify(currentCalc) + "</td>" + ((what == "attack") ? getFluctuation(currentCalc, minFluct, maxFluct) : "") + "</tr>";
 	}
 	perk = perk + "_II";
 	if (game.portal[perk] && game.portal[perk].level > 0){
 		var PerkStrength = (game.portal[perk].level * game.portal[perk].modifier);
 		currentCalc  *= (PerkStrength + 1);
 		PerkStrength = prettify(PerkStrength * 100) + "%";
-		textString += "<tr><td class='bdTitle'>" + perk + "</td><td>" + (game.portal[perk].modifier * 100) + "%</td><td>" + game.portal[perk].level + "</td><td>+ " + PerkStrength + "</td><td class='bdNumberSm'>" + prettify(currentCalc) + "</td>" + ((what == "attack") ? getFluctuation(currentCalc, minFluct, maxFluct) : "") + "</tr>";
+		textString += "<tr><td class='bdTitle'>" + ((game.portal[perk].nameCN) ? game.portal[perk].nameCN : perk) + "</td><td>" + (game.portal[perk].modifier * 100) + "%</td><td>" + game.portal[perk].level + "</td><td>+ " + PerkStrength + "</td><td class='bdNumberSm'>" + prettify(currentCalc) + "</td>" + ((what == "attack") ? getFluctuation(currentCalc, minFluct, maxFluct) : "") + "</tr>";
 	}	
 	//Add resilience
 	if (what == "health" && game.portal.Resilience.level > 0){
@@ -1262,7 +1286,7 @@ function getBattleStatBd(what) {
 	}
 	textString += "</tbody></table>";
 	game.global.lockTooltip = false;
-	tooltip('confirm', null, 'update', textString, "getBattleStatBd('" + what + "')", name, "Refresh", true);
+	tooltip('confirm', null, 'update', textString, "getBattleStatBd('" + what + "')", name, "刷新", true);
 	if (what == "attack"){
 	var tipElem = document.getElementById('tooltipDiv')
 	swapClass('tooltipExtra', 'tooltipExtraLg', tipElem);
@@ -1280,7 +1304,7 @@ function getMaxTrimps() {
 	var base = 10;
 	var textString =  "<table class='bdTable table table-striped'><tbody>";
 	//Add base
-	textString += "<tr><td class='bdTitle'>Base</td><td class='bdPercent'></td><td class='bdNumber'>" + base + "</td></tr>";
+	textString += "<tr><td class='bdTitle'>基础</td><td class='bdPercent'></td><td class='bdNumber'>" + base + "</td></tr>";
 	//Add job count
 	var housing = trimps.max - game.global.totalGifts - game.unlocks.impCount.TauntimpAdded - base - game.stats.trimpsGenerated.value;
 	var currentCalc = housing + base;
@@ -1329,19 +1353,19 @@ function getMaxTrimps() {
 	}
 	textString += "</tbody></table>";
 	game.global.lockTooltip = false;
-	tooltip('confirm', null, 'update', textString, "getMaxTrimps()", "Max Trimps", "Refresh", true);
+	tooltip('confirm', null, 'update', textString, "getMaxTrimps()", "Max Trimps", "刷新", true);
 }
 
 function getMaxResources(what) {
 	var structure;
 	switch (what) {
-		case "Food":
+		case "food":
 			structure = "Barn";
 			break;
-		case "Wood":
+		case "wood":
 			structure = "Shed";
 			break;
-		case "Metal":
+		case "metal":
 			structure = "Forge";
 			break;
 	}
@@ -1351,12 +1375,12 @@ function getMaxResources(what) {
 	var textString =  "<table class='bdTable table table-striped'><tbody>";
 	//Add base
 	var currentCalc = base;
-	textString += "<tr><td class='bdTitle'>Base</td><td class='bdPercent'></td><td class='bdNumber'>" + base + "</td></tr>";
+	textString += "<tr><td class='bdTitle'>基础</td><td class='bdPercent'></td><td class='bdNumber'>" + base + "</td></tr>";
 	//Add structure
 	var structBonus = Math.pow(2, structureObj.owned);
 	currentCalc *= structBonus;
 	structBonus = prettify(structBonus * 100) + "%";
-	textString += "<tr><td class='bdTitle'>" + structure + "</td><td class='bdPercent'>+ " + structBonus + "</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
+	textString += "<tr><td class='bdTitle'>" + ((structureObj.nameCN) ? structureObj.nameCN : structure) + "</td><td class='bdPercent'>+ " + structBonus + "</td><td class='bdNumber'>" + prettify(currentCalc) + "</td></tr>";
 	//Add packrat
 	if (game.portal.Packrat.level){
 		var packAmt = (game.portal.Packrat.level * 0.2) + 1;
@@ -1372,10 +1396,11 @@ function getMaxResources(what) {
 	}
 	textString += "</tbody></table>";
 	game.global.lockTooltip = false;
-	tooltip('confirm', null, 'update', textString, "getMaxResources('" + what + "')", "Max " + what, "Refresh", true);
+	tooltip('confirm', null, 'update', textString, "getMaxResources('" + what + "')", ((game.resources[what].nameCN) ? game.resources[what].nameCN : what) + "上限", "刷新", true);
 }
 
 function getLootBd(what) {
+	var whatCN = what;
     var map;
 	var world;
 	var level = "";
@@ -1394,12 +1419,13 @@ function getLootBd(what) {
 	if (game.global.mapsUnlocked) textString += '<li role="presentation" onclick="getLootBd(\'Fragments\')"><a href="#">Fragments</a></li><li role="presentation" onclick="getLootBd(\'Gems\')"><a href="#">Gems</a></li>';
 	if (game.global.world >= 20) textString += '<li role="presentation" onclick="getLootBd(\'Helium\')"><a href="#">Helium</a></li>';
 	textString += '</ul></div>';
-	textString +=  "<table class='bdTableSm table table-striped'><tbody><tr><td style='font-weight: bold; font-size: 1.1em'>" + what + "</td><td>Base</td><td>Amount</td><td>Line Total</td><td>Total</td></tr>";
+	textString +=  "<table class='bdTableSm table table-striped'><tbody><tr><td style='font-weight: bold; font-size: 1.1em'>" + what + "</td><td>基础</td><td>数量</td><td>Line Total</td><td>总计</td></tr>";
 	var currentCalc = 0;
 	var percent = 0;
 	var amt = 0;
 	switch(what) {
 		case "Food/Wood/Metal":
+			whatCN = "食物/木头/金属";
 			var tempModifier = 0.5 * Math.pow(1.25, (game.global.world >= 59) ? 59 : game.global.world);
 			//Mega books
 			if (game.global.world >= 60) {
@@ -1420,12 +1446,13 @@ function getLootBd(what) {
 			if (game.global.turkimpTimer > 0 && (game.global.playerGathering == "food" || game.global.playerGathering == "metal" || game.global.playerGathering == "wood")){
 				currentCalc *= (game.talents.turkimp3.purchased) ? 1.249 : 1.166;
 			}
-			textString += "<tr><td class='bdTitle'>Base</td><td></td><td></td><td>" + prettify(amt) + "</td><td>" + prettify(currentCalc) + "</td></tr>";
+			textString += "<tr><td class='bdTitle'>基础</td><td></td><td></td><td>" + prettify(amt) + "</td><td>" + prettify(currentCalc) + "</td></tr>";
 			amt = game.resources.trimps.realMax() * 0.16;
 			currentCalc *= amt;
-			textString += "<tr><td class='bdTitle'>Trimps</td><td>0.16</td><td>x " + prettify(game.resources.trimps.realMax()) + "</td><td>x " + prettify(amt) + "</td><td>" + prettify(currentCalc) + "</td></tr>";
+			textString += "<tr><td class='bdTitle'>脆皮</td><td>0.16</td><td>x " + prettify(game.resources.trimps.realMax()) + "</td><td>x " + prettify(amt) + "</td><td>" + prettify(currentCalc) + "</td></tr>";
 			break;
 		case "Gems":
+			whatCN = "宝石";
 			level = (level - 400) * 1.35;
 			if (level < 0) {
 				level = 0;
@@ -1434,7 +1461,7 @@ function getLootBd(what) {
 			amt += Math.round(0.5 * level);
 			amt = (amt * .8) + ((amt * .002) * (cell + 1));
 			currentCalc = amt;
-			textString += "<tr><td class='bdTitle'>Base</td><td></td><td></td><td>" + prettify(amt) + "</td><td>" + prettify(currentCalc) + "</td></tr>";
+			textString += "<tr><td class='bdTitle'>基础</td><td></td><td></td><td>" + prettify(amt) + "</td><td>" + prettify(currentCalc) + "</td></tr>";
 			if (game.jobs.Dragimp.owned >= 1){
 				amt = 1.5 * game.jobs.Dragimp.modifier;
 				amt = (amt * .8) + ((amt * .002) * (cell + 1));
@@ -1443,11 +1470,13 @@ function getLootBd(what) {
 			}
 			break;
 		case "Fragments":
+			whatCN = "碎片";
 			amt = Math.pow(1.15, game.global.world);
 			currentCalc = amt;
-			textString += "<tr><td class='bdTitle'>Base</td><td></td><td></td><td>" + prettify(amt) + "</td><td>" + prettify(currentCalc) + "</td></tr>";
+			textString += "<tr><td class='bdTitle'>基础</td><td></td><td></td><td>" + prettify(amt) + "</td><td>" + prettify(currentCalc) + "</td></tr>";
 			break;
 		case "Helium":
+			whatCN = "氦";
 			var level = scaleLootLevel(99);
 			level = Math.round((level - 1900) / 100);
 			level *= 1.35;			
@@ -1460,7 +1489,7 @@ function getLootBd(what) {
 			amt += Math.round(baseAmt * level);
 			amt /= baseAmt;
 			currentCalc = amt;
-			textString += "<tr><td class='bdTitle'>Base</td><td></td><td></td><td>" + prettify(amt) + "</td><td>" + prettify(currentCalc) + "</td></tr>";
+			textString += "<tr><td class='bdTitle'>基础</td><td></td><td></td><td>" + prettify(amt) + "</td><td>" + prettify(currentCalc) + "</td></tr>";
 			if (baseAmt >= 5){
 				if (mutations.Magma.active()){
 					currentCalc *= 15;
@@ -1616,7 +1645,7 @@ function getLootBd(what) {
 	}
 	textString += "</tbody></table>";
 	game.global.lockTooltip = false;
-	tooltip('confirm', null, 'update', textString, "getLootBd('" + what + "')", what + " Loot Breakdown", "Refresh", true);
+	tooltip('confirm', null, 'update', textString, "getLootBd('" + what + "')", whatCN + " 掉落明细", "刷新", true);
 }
 
 function swapNotation(updateOnly){
@@ -1729,7 +1758,7 @@ function resetGame(keepPortal) {
 	document.getElementById("buyCol").style.visibility = "hidden";
 	document.getElementById("unempHide").style.visibility = "hidden";
 	document.getElementById("empHide").style.visibility = "hidden";
-	document.getElementById("upgradesTitleSpan").innerHTML = "Upgrades (research first)";
+	document.getElementById("upgradesTitleSpan").innerHTML = "升级（研究第一）";
 	document.getElementById("science").style.visibility = "hidden";
 	document.getElementById("battleContainer").style.visibility = "hidden";
 	document.getElementById("pauseFight").style.display = "none";
@@ -1754,7 +1783,7 @@ function resetGame(keepPortal) {
 	log.scrollTop = log.scrollHeight;
 	document.getElementById("worldNumber").innerHTML = "1";
 	document.getElementById("mapsHere").innerHTML = "";
-	document.getElementById("sciencePs").innerHTML = "+0/sec";
+	document.getElementById("sciencePs").innerHTML = "+0/秒";
 	document.getElementById("repeatBtn").style.display = "none";
 	document.getElementById("helium").style.visibility = "hidden";
 	document.getElementById("jobsTitleDiv").style.display = "none";
@@ -1764,12 +1793,12 @@ function resetGame(keepPortal) {
 	document.getElementById("respecPortalBtn").style.display = "none";
 	document.getElementById("battleHeadContainer").style.display = "block";
 	document.getElementById("mapsCreateRow").style.display = "none";
-	document.getElementById("worldName").innerHTML = "Zone";
+	document.getElementById("worldName").innerHTML = "区域";
 	document.getElementById("wrapper").style.background = "url(css/bg2.png) center repeat-x";
 	document.getElementById("tab5Text").innerHTML = "+1";
 	document.getElementById("turkimpBuff").style.display = "none";
 	document.getElementById("statsBtnRow").style.display = "block";
-	document.getElementById("mapsBtn").innerHTML = "Maps";
+	document.getElementById("mapsBtn").innerHTML = "地图";
 	document.getElementById("mapBonus").innerHTML = "";
 	document.getElementById("roboTrimpTurnsLeft").innerHTML = "";
 	swapClass("shriekState", "shriekStateCooldown", document.getElementById("chainHolder"));
@@ -1783,7 +1812,7 @@ function resetGame(keepPortal) {
 	document.getElementById("voidMapsHere").innerHTML = "";
 	document.getElementById("heirloomWrapper").style.display = "none";
 	document.getElementById("heirloomBtnContainer").style.display = "none";
-	document.getElementById("goodGuyName").innerHTML = 'Trimps (<span id="trimpsFighting">1</span>) <span id="anticipationSpan"></span> <span id="titimpBuff"></span> <span id="debuffSpan"></span>';
+	document.getElementById("goodGuyName").innerHTML = '脆皮 (<span id="trimpsFighting">1</span>) <span id="anticipationSpan"></span> <span id="titimpBuff"></span> <span id="debuffSpan"></span>';
 	document.getElementById("autoStorageBtn").style.display = "none";
 	document.getElementById("repeatVoidsContainer").style.display = "none";
 	document.getElementById('corruptionBuff').innerHTML = "";
@@ -1808,7 +1837,7 @@ function resetGame(keepPortal) {
 	
 	for (var item in game.resources){
 		var elem = document.getElementById(item + "Ps");
-		if (elem !== null) elem.innerHTML = "+0/sec";
+		if (elem !== null) elem.innerHTML = "+0/秒";
 	}
 	filterTabs("all");
 	var gatherBtns = ["buildings", "food", "wood", "metal", "science", "trimps"];
@@ -1998,7 +2027,7 @@ function resetGame(keepPortal) {
 			game.global[heirItem] = heirloomStuff[heirItem];
 		}
 		if (game.global.totalPortals == 1) game.options.menu.extraMapBtns.enabled = 1;
-		if (game.global.totalPortals == 5) message("Heavy use of the portal has created a chance for the Void to seep in to your world. Be alert.", "Story", null, "voidMessage");
+		if (game.global.totalPortals == 5) message("大量使用传送门创造了一个机会让Void渗入你的世界。 注意。", "Story", null, "voidMessage");
 		if (game.global.totalPortals >= 5) document.getElementById("heirloomBtnContainer").style.display = "block";
 		recalculateHeirloomBonuses();
 		if (lastPortal < voidMaxLevel) {
@@ -2049,7 +2078,7 @@ function applyS1(){
 	game.buildings.Trap.owned += 10;
 	fadeIn("trimps", 10);
 	game.global.autoCraftModifier += 0.25;
-	document.getElementById("foremenCount").innerHTML = (game.global.autoCraftModifier * 4) + " Foremen";
+	document.getElementById("foremenCount").innerHTML = (game.global.autoCraftModifier * 4) + " 工头";
 }
 
 function applyS2(){
@@ -2104,7 +2133,7 @@ function message(messageString, type, lootIcon, extraClass, extraTag, htmlPrefix
 	var displayType = (game.global.messages[type].enabled) ? "block" : "none";
 	var prefix = "";
 	var addId = "";
-	if (messageString == "Game Saved!" || extraClass == 'save') {
+	if (messageString == "已保存！" || extraClass == 'save') {
 		addId = " id='saveGame'";
 		if (document.getElementById('saveGame') !== null){
 			log.removeChild(document.getElementById('saveGame'));
@@ -2167,7 +2196,15 @@ function filterMessage(what, updateOnly){ //send true for updateOnly
 		game.global.messages[what].enabled = displayed;
 	}
 	var toChange = document.getElementsByClassName(what + "Message");
-	var btnText = (displayed) ? what : what + " off";
+	var whatCN;
+	switch (what){
+		case "Story" : whatCN = "剧情"; break;
+		case "Loot" : whatCN = "掉落"; break;
+		case "Unlocks" : whatCN = "解锁"; break;
+		case "Combat" : whatCN = "战斗"; break;
+		default : whatCN = what;
+	}
+	var btnText = (displayed) ? whatCN : whatCN + " 关闭";
 	var btnElem = document.getElementById(what + "Filter");
 	if (btnElem == null) return;
 	btnElem.innerHTML = btnText;
@@ -2384,14 +2421,14 @@ function addQueueItem(what) {
 	var name = what.split('.');
 	if (name[1] > 1) name = name[0] + " X" + prettify(name[1]);
 	else name = name[0];
-	elem.innerHTML += '<div class="queueItem" id="queueItem' + game.global.nextQueueId + '" onmouseover="tooltip(\'Queue\',null,event)" onmouseout="tooltip(\'hide\')" onClick="removeQueueItem(\'queueItem' + game.global.nextQueueId + '\'); cancelTooltip();"><span class="queueItemName">' + name + '</span><div id="animationDiv"></div></div>';
+	elem.innerHTML += '<div class="queueItem" id="queueItem' + game.global.nextQueueId + '" onmouseover="tooltip(\'Queue\',null,event)" onmouseout="tooltip(\'hide\')" onClick="removeQueueItem(\'queueItem' + game.global.nextQueueId + '\'); cancelTooltip();"><span class="queueItemName">' + ((game.buildings[name].nameCN) ? game.buildings[name].nameCN : name) + '</span><div id="animationDiv"></div></div>';
 	if (game.global.nextQueueId === 0) setNewCraftItem();
 	game.global.nextQueueId++;
 }
 
 function updateSkeleBtn(){
 	document.getElementById("boneBtnContainer").style.display = "block";
-	document.getElementById("boneBtnText").innerHTML = "Trade " + prettify(game.global.b) + " Bone" + (game.global.b == 1 ? "" : "s");
+	document.getElementById("boneBtnText").innerHTML = "用" + prettify(game.global.b) + " 根骨头交易";// + (game.global.b == 1 ? "" : "s");
 }
 
 //
@@ -2526,7 +2563,7 @@ function updatePs(jobObj, trimps, jobName){ //trimps is true/false, send PS as f
 		psText = prettify(psText);
 /*		var color = (psText < 0) ? "red" : "green";
 		if (psText == 0) color = "black"; */
-		psText = "+" + psText + "/sec";
+		psText = "+" + psText + "/秒";
 		if (trimps && game.unlocks.quickTrimps) {
 			psText += " (x2!)"; 
 		}
@@ -2542,7 +2579,7 @@ function updateSideTrimps(){
 	document.getElementById("maxEmployed").innerHTML = prettify(Math.ceil(trimps.realMax() / 2));
 	var free = (Math.ceil(trimps.realMax() / 2) - trimps.employed);
 	var s = (free > 1) ? "s" : "";
-	document.getElementById("jobsTitleUnemployed").innerHTML = prettify(free) + " workspace" + s;
+	document.getElementById("jobsTitleUnemployed").innerHTML = prettify(free) + " 工作空间";
 }
 
 function unlockBuilding(what) {
@@ -2569,7 +2606,7 @@ function drawAllBuildings(){
 }
 
 function drawBuilding(what, where){
-	where.innerHTML += '<div onmouseover="tooltip(\'' + what + '\',\'buildings\',event)" onmouseout="tooltip(\'hide\')" class="thingColorCanNotAfford thing noselect pointer buildingThing" id="' + what + '" onclick="buyBuilding(\'' + what + '\')"><span class="thingName"><span id="' + what + 'Alert" class="alert badge"></span>' + what + '</span><br/><span class="thingOwned" id="' + what + 'Owned">0</span></div>';
+	where.innerHTML += '<div onmouseover="tooltip(\'' + what + '\',\'buildings\',event)" onmouseout="tooltip(\'hide\')" class="thingColorCanNotAfford thing noselect pointer buildingThing" id="' + what + '" onclick="buyBuilding(\'' + what + '\')"><span class="thingName"><span id="' + what + 'Alert" class="alert badge"></span>' + ((game.buildings[what].nameCN) ? game.buildings[what].nameCN : what) + '</span><br/><span class="thingOwned" id="' + what + 'Owned">0</span></div>';
 }
 
 function unlockJob(what) {
@@ -2598,7 +2635,7 @@ function drawAllJobs(){
 }
 
 function drawJob(what, where){
-	where.innerHTML += '<div onmouseover="tooltip(\'' + what + '\',\'jobs\',event)" onmouseout="tooltip(\'hide\')" class="thingColorCanNotAfford thing noselect pointer jobThing" id="' + what + '" onclick="buyJob(\'' + what + '\')"><span class="thingName"><span id="' + what + 'Alert" class="alert badge"></span>' + what + '</span><br/><span class="thingOwned" id="' + what + 'Owned">0</span></div>';
+	where.innerHTML += '<div onmouseover="tooltip(\'' + what + '\',\'jobs\',event)" onmouseout="tooltip(\'hide\')" class="thingColorCanNotAfford thing noselect pointer jobThing" id="' + what + '" onclick="buyJob(\'' + what + '\')"><span class="thingName"><span id="' + what + 'Alert" class="alert badge"></span>' + ((game.jobs[what].nameCN) ? game.jobs[what].nameCN : what) + '</span><br/><span class="thingOwned" id="' + what + 'Owned">0</span></div>';
 }
 
 function drawGeneticistassist(where){
@@ -2710,7 +2747,7 @@ function drawUpgrade(what, where){
 	var done = upgrade.done;
 	var dif = upgrade.allowed - done;
 	if (dif >= 1) dif -= 1;
-	where.innerHTML += '<div onmouseover="tooltip(\'' + what + '\',\'upgrades\',event)" onmouseout="tooltip(\'hide\')" class="thingColorCanNotAfford thing noselect pointer upgradeThing" id="' + what + '" onclick="buyUpgrade(\'' + what + '\')"><span id="' + what + 'Alert" class="alert badge"></span><span class="thingName">' + what + '</span><br/><span class="thingOwned" id="' + what + 'Owned">' + done + '</span></div>';
+	where.innerHTML += '<div onmouseover="tooltip(\'' + what + '\',\'upgrades\',event)" onmouseout="tooltip(\'hide\')" class="thingColorCanNotAfford thing noselect pointer upgradeThing" id="' + what + '" onclick="buyUpgrade(\'' + what + '\')"><span id="' + what + 'Alert" class="alert badge"></span><span class="thingName">' + ((game.upgrades[what].nameCN) ? game.upgrades[what].nameCN : what) + '</span><br/><span class="thingOwned" id="' + what + 'Owned">' + done + '</span></div>';
 	if (dif >= 1) document.getElementById(what + "Owned").innerHTML = upgrade.done + "(+" + dif + ")";
 }
 
@@ -2841,7 +2878,7 @@ function drawEquipment(what, elem){
 	if (equipment.prestige > 1){
 		numeral = romanNumeral(equipment.prestige);
 	}
-	elem.innerHTML += '<div onmouseover="tooltip(\'' + what + '\',\'equipment\',event)" onmouseout="tooltip(\'hide\')" class="noselect pointer thingColorCanNotAfford thing" id="' + what + '" onclick="buyEquipment(\'' + what + '\')"><span class="thingName">' + what + ' <span id="' + what + 'Numeral">' + numeral + '</span></span><br/><span class="thingOwned">Level: <span id="' + what + 'Owned">0</span></span></div>';	
+	elem.innerHTML += '<div onmouseover="tooltip(\'' + what + '\',\'equipment\',event)" onmouseout="tooltip(\'hide\')" class="noselect pointer thingColorCanNotAfford thing" id="' + what + '" onclick="buyEquipment(\'' + what + '\')"><span class="thingName">' + ((game.equipment[what].nameCN) ? game.equipment[what].nameCN : what) + ' <span id="' + what + 'Numeral">' + numeral + '</span></span><br/><span class="thingOwned">等级：<span id="' + what + 'Owned">0</span></span></div>';	
 }
 
 //isPrevious returns the previous color, used for swapping with str.replace to know which one was before
@@ -3066,10 +3103,10 @@ function toggleSetting(setting, elem, fromPortal, updateOnly){
 		if (forHover && ((!one && !achievement.showAll && displayNumber > achievement.finished) || (one && (game.global.highestLevelCleared < achievement.filters[displayNumber] && !achievement.finished[displayNumber])))) {
 			document.getElementById("achievement" + location).style.display = "block";
 			document.getElementById("achievement" + location + "IconContainer").innerHTML = '<span style= "color: ' + color + ';" class="icomoon icon-locked achievementPopupIcon"></span>';
-			document.getElementById("achievement" + location + "Title").innerHTML = "Locked";
+			document.getElementById("achievement" + location + "Title").innerHTML = "未解锁";
 			document.getElementById("achievement" + location + "Title").style.color = color;
-			document.getElementById("achievement" + location + "Description").innerHTML = "Locked";
-			document.getElementById("achievement" + location + "Reward").innerHTML = '<b>Reward:</b> +' + game.tierValues[achievement.tiers[displayNumber]] + "% Damage";
+			document.getElementById("achievement" + location + "Description").innerHTML = "未解锁";
+			document.getElementById("achievement" + location + "Reward").innerHTML = '<b>奖励：</b> +' + game.tierValues[achievement.tiers[displayNumber]] + "% 伤害";
 			prog.innerHTML = "";
 			return;
 		}
@@ -3078,9 +3115,9 @@ function toggleSetting(setting, elem, fromPortal, updateOnly){
 		document.getElementById("achievement" + location + "Title").innerHTML = achievement.names[displayNumber];
 		document.getElementById("achievement" + location + "Title").style.color = color;
 		document.getElementById("achievement" + location + "Description").innerHTML = achievement.description(displayNumber);
-		document.getElementById("achievement" + location + "Reward").innerHTML = '<b>Reward:</b> +' + game.tierValues[achievement.tiers[displayNumber]] + "% Damage";
+		document.getElementById("achievement" + location + "Reward").innerHTML = '<b>奖励：</b> +' + game.tierValues[achievement.tiers[displayNumber]] + "% 伤害";
 		if (forHover && typeof achievement.progress !== 'undefined' && (typeof achievement.highest === 'undefined' || achievement.highest > 0)){
-			prog.innerHTML = "Progress: " + achievement.progress();
+			prog.innerHTML = "进度：" + achievement.progress();
 		}
 		else
 			prog.innerHTML = "";
@@ -3188,7 +3225,7 @@ function toggleSetting(setting, elem, fromPortal, updateOnly){
 		if (!trimpAchievementsOpen) return;
 		displayAchievements();
 		var fluff = [
-			[", better get some more achievements", ", you'd do fine with a few more achievements", " but you wish you had a few more achievements"],
+			[", 更好地获得一些更多的成就", ", 获得几个成就你会做得更好", " 但你希望你有更多的成就"],
 			[", your achievement game shows promise", " on your path to achievement", ", thanks to your achievements"],
 			[", thanks to your bounty of achievements", ", must be all those achievements", ", you are one with the achievements", " and you water your achievements daily"],
 			[", your Trimps are mighty impressed", ", your achievements are mind blowing", ". You wake up, achieve, then sleep", ", you have achievement in your blood"],
