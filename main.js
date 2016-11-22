@@ -1530,11 +1530,7 @@ function activatePortal(){
 			}
 	}
 	if (game.global.challengeActive == "Daily"){
-		var dailyReward = abandonDaily();
-		if (!isNumberBad(dailyReward)) {
-		game.resources.helium.respecMax += dailyReward;
-		game.global.tempHighHelium += dailyReward;
-		}
+		abandonDaily();
 	}
 	var refund = game.resources.helium.respecMax - game.resources.helium.totalSpentTemp;
 	if (!commitPortalUpgrades(true)) return;	
@@ -3720,13 +3716,6 @@ var mutations = {
 		},
 		getTrimpDecayMult: function (world){
 			return 0.8;
-			if (!world) world = game.global.world;
-			var decay = (1 - ((1 / ((world - mutations.Magma.start()) + 100)) * 100));
-			decay -= 0.2;
-			if (decay < 0) decay = 0;
-			decay += 0.2;
-			decay = 1 - decay;
-			return decay;
 		},
         getEligibleOrigin: function(currentArray) {
 			if(game.global.world % 5 === 0 && this.targetCells === this.singlePathMaxSize) {
@@ -4286,7 +4275,13 @@ function showGeneratorUpgradeInfo(item, permanent){
 		cost = game.generatorUpgrades[item].cost();
 	}
 	var color = (game.global.magmite >= cost) ? "Success" : "Danger";
-	elem.innerHTML = "<div id='generatorUpgradeName'>" + item + "</div><div onclick='buyGeneratorUpgrade(\"" + item + "\")' id='magmiteCost' class='pointer noSelect hoverColor color" + color + "'>Buy: " + prettify(cost) + " Magmite</div>" + description + "<br/>";
+	var text;
+	if (permanent && game.permanentGeneratorUpgrades[item].owned){
+		color = "Grey";
+		text = "Done";
+	}
+	else text = "Buy: " + prettify(cost) + " Magmite";
+	elem.innerHTML = "<div id='generatorUpgradeName'>" + item + "</div><div onclick='buyGeneratorUpgrade(\"" + item + "\")' id='magmiteCost' class='pointer noSelect hoverColor color" + color + "'>" + text + "</div>" + description + "<br/>";
 	lastViewedDGUpgrade = [item, permanent];
 }
 
@@ -5892,11 +5887,8 @@ function getNextTalentCost(){
 }
 
 function getTotalTalentCost(){
-	var cost = 0;
-	for (var x = 0; x < Object.keys(game.talents).length; x++){
-		cost += Math.floor(10 * Math.pow(3, x));
-	}
-	return cost;
+	var count = Object.keys(game.talents).length;
+	return 10 * (Math.pow(3, count) - 1) / (3 - 1);
 }
 
 function nextWorld() {
@@ -5966,12 +5958,12 @@ function nextWorld() {
 	if (game.talents.blacksmith.purchased){
 		if (game.global.world <= Math.floor((game.global.highestLevelCleared + 1) / 2))
 			dropPrestiges();
-		else if (game.talents.blacksmith2.purchased && game.global.world <= Math.floor((game.global.highestLevelCleared + 1) / 1.33))
+		else if (game.talents.blacksmith2.purchased && game.global.world <= Math.floor((game.global.highestLevelCleared + 1) * 0.75))
 			dropPrestiges();
 	}
 	if (game.talents.bionic.purchased){
 		var bTier = ((game.global.world - 126) / 15);
-		game.mapUnlocks.BionicWonderland.canRunOnce = false;
+		if (game.global.world >= 126) game.mapUnlocks.BionicWonderland.canRunOnce = false;
 		if (bTier % 1 === 0 && bTier == game.global.bionicOwned) {
 			game.mapUnlocks.roboTrimp.createMap(bTier);
 			refreshMaps();
