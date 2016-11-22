@@ -835,11 +835,7 @@ var toReturn = {
 		},
 		blacksmith2: {
 			get description () {
-<<<<<<< HEAD
-				return "Z" + Math.floor((game.global.highestLevelCleared + 1) / 1.33) + "（达到的最高区域的75%）之后的每个完成区域将获得从地图中删除所有可用的设备权限。";
-=======
-				return "Each cleared zone through Z" + Math.floor((game.global.highestLevelCleared + 1) * 0.75) + " (75% of your highest zone reached) will drop all available equipment prestiges from maps.";
->>>>>>> refs/remotes/Trimps/master
+				return "Z" + Math.floor((game.global.highestLevelCleared + 1) * 0.75) + "（达到的最高区域的75%）之后的每个完成区域将获得从地图中删除所有可用的设备权限。";
 			},
 			name: "Blacksmithery II",
 			tier: 5,
@@ -5174,13 +5170,8 @@ var toReturn = {
 			craftTime: 120,
 			get tooltip () {
 				if (mutations.Magma.active())
-<<<<<<< HEAD
-					return "对幼儿园来说，岩浆不是一个好环境环境。 每个幼儿园依然会增加1%的繁殖率（叠加）， 但随着岩浆的靠近，会有10%的幼儿园被关闭。 安全第一！";
+					return "<p>对幼儿园来说，岩浆不是一个好环境。 每个幼儿园依然会增加1%的繁殖率（叠加）， 但随着岩浆的靠近，会有10%的幼儿园被关闭。 安全第一！</p><p>你已经购买了" + prettify(this.purchased) + "幼儿园。</p>";
 				return "建造一个宝石动力的幼儿园，幼小的脆皮在这里可以长得更快。 增加1%的繁殖率（叠加）。";
-=======
-					return "<p>Magma is generally not conductive to a healthy Nursery environment. Each Nursery will still increase Trimps per second from breeding by 1% (compounding), but 10% of your active Nurseries will shut down each zone as the Magma moves closer. Safety first!</p><p>You have purchased " + prettify(this.purchased) + " total Nurseries.</p>";
-				return "Construct a gem-powered nursery, where baby Trimps can grow up faster. Increases Trimps per second from breeding by 1% (compounding).";
->>>>>>> refs/remotes/Trimps/master
 				
 			},
 			cost: {
