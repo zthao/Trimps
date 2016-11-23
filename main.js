@@ -3694,7 +3694,7 @@ var mutations = {
         get targetCells () {return (game.talents.magmaFlow.purchased) ? 18 : 16},
         get singlePathMaxSize () {return (game.talents.magmaFlow.purchased) ? 18 : 16},
         discardMultiplePaths: true,
-        discardMaxThreshold: 6,
+        discardMaxThreshold: 20,
 		multiplier: -1,
 		lastCalculatedMultiplier: -1,
 		getTrimpDecay: function (demandRecount){
@@ -3723,8 +3723,8 @@ var mutations = {
 		getTrimpDecayMult: function (world){
 			return 0.8;
 		},
-        getEligibleOrigin: function(currentArray) {
-			if(game.global.world % 5 === 0 && this.targetCells === this.singlePathMaxSize) {
+        getEligibleOrigin: function(currentArray, riversPrior) {
+			if(game.global.world % 5 === 0 && riversPrior === 0) {
 				return {x: 9, y: 9};
 			}
             var b,i,x,y;
@@ -3935,7 +3935,7 @@ var mutations = {
                 if(targetCells > 0) { //if we're still supposed to be adding cells
                     var newTarget = targetCells > singlePathMaxSize ? singlePathMaxSize : targetCells; //determine target river length
                    
-                    origin = this.getEligibleOrigin(currentArray);
+                    origin = this.getEligibleOrigin(currentArray, riversAmt);
                     if(origin === null) { //this will never occur unless the edges of the map are completely filled up
                         return riversAmt;
                     }
@@ -3967,8 +3967,8 @@ var mutations = {
            
             for(i = 0; i <= threshold; i++) {
                 rivers = this.generateRivers(currentArray);
-                if(rivers == 1)
-                    break;
+				if(rivers == Math.ceil(this.targetCells / this.singlePathMaxSize))
+					break;
                 else if(i != threshold) {
                     for(j = 0; j < tempCurrentArray.length; j++)
                         currentArray[j] = tempCurrentArray[j];
@@ -4164,13 +4164,15 @@ function updateGeneratorInfo(){
 	changeGeneratorState(null, true);
 	if (game.permanentGeneratorUpgrades.Hybridization.owned) document.getElementById('generatorHybridBtn').style.display = 'inline';
 	updateGeneratorFuel();
-	document.getElementById('generatorTrimpsPs').innerHTML = prettify(scaleNumberForCarp(nextTickAmount));
+	document.getElementById('generatorTrimpsPs').innerHTML = prettify(scaleNumberForBonusHousing(nextTickAmount));
 	document.getElementById('upgradeMagmiteTotal').innerHTML = prettify(game.global.magmite) + " Mi";	
 }
 
-function scaleNumberForCarp(num){
+function scaleNumberForBonusHousing(num){
 	if (game.portal.Carpentry.level > 0) num = Math.floor(num * (Math.pow(1 + game.portal.Carpentry.modifier, game.portal.Carpentry.level)));
 	if (game.portal.Carpentry_II.level > 0) num = Math.floor(num * (1 + (game.portal.Carpentry_II.modifier * game.portal.Carpentry_II.level)));
+	if (game.global.challengeActive == "Daily" && typeof game.global.dailyChallenge.large !== "undefined") 
+		num = Math.floor(num * dailyModifiers.large.getMult(game.global.dailyChallenge.large.strength));
 	return num;
 }
 
