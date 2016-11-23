@@ -1812,7 +1812,7 @@ var toReturn = {
 			description: function (number) {
 				return "建造你的第一个" + this.breakpoints[number];
 			},
-			breakpoints: ["Hut", "House", "Mansion", "Hotel", "Resort", "Gateway", "Wormhole", "Collector", "Warpstation"],
+			breakpoints: ["小屋", "房子", "豪宅", "酒店", "度假村", "Gateway", "虫洞", "Collector", "Warpstation"],
 			tiers: [1, 1, 1, 1, 2, 2, 2, 2, 3],
 			names: ["Tiny Homes", "Residential Development", "Taste for Luxury", "Fancy", "The Skyline", "Dimensional Drift", "Too Cool For Helium", "Space From Stars", "To Infinity and Beyond"],
 			icon: "icomoon icon-building-o",
@@ -2524,7 +2524,7 @@ var toReturn = {
 			block: 1.5,
 			blockCalculated: 1.5,
 			prestige: 1,
-			nameCN: "木盾"
+			nameCN: "盾牌"
 		},
 		Dagger: {
 			locked: 1,
@@ -3537,53 +3537,67 @@ var toReturn = {
 		locations: {
 		//Add new resources to function getMapIcon in updates.js to get icons on maps
 			Sea: {
-				resourceType: "食物"//Food
+				resourceType: "Food",
+				resourceTypeCN: "食物"
 			},
 			Mountain: {
-				resourceType: "金属"//Metal
+				resourceType: "Metal",
+				resourceTypeCN: "金属"
 			},
 			Forest: {
-				resourceType: "木头"//Wood
+				resourceType: "Wood",
+				resourceTypeCN: "木头"
 			},
 			Depths: {
-				resourceType: "宝石"//Gems
+				resourceType: "Gems",
+				resourceTypeCN: "宝石"
 			},
 			Plentiful: {
-				resourceType: "任意"//Any
+				resourceType: "Any",
+				resourceTypeCN: "任意"
 			},
 			Hell: {
-				resourceType: "金属",
+				resourceType: "Metal",
+				resourceTypeCN: "金属",
 				upgrade: "Portal"//Portal
 			},
 			Block: {
-				resourceType: "木头",
+				resourceType: "Wood",
+				resourceTypeCN: "木头",
 				upgrade: "Shieldblock"
 			},
 			Wall: {
-				resourceType: "食物",
+				resourceType: "Food",
+				resourceTypeCN: "食物",
 				upgrade: "Bounty"
 			},
 			Doom: {
-				resourceType: "金属",
+				resourceType: "Metal",
+				resourceTypeCN: "金属",
 				upgrade: "Relentlessness"
 			},
 			Prison: {
-				resourceType: "食物",
+				resourceType: "Food",
+				resourceTypeCN: "食物",
 				upgrade: "Keys"
 			},
 			Bionic: {
-				resourceType: "任意",
+				resourceType: "Any",
+				resourceTypeCN: "任意",
 				upgrade: ["roboTrimp", "Geneticistassist"]
 			},
 			Void: {
-				resourceType: "任意",
+				resourceType: "Any",
+				resourceTypeCN: "任意",
 				upgrade: ["AutoStorage", "Heirloom"]
 			},
 			Star: {
-				resourceType: "金属"
+				resourceType: "Metal",
+				resourceTypeCN: "金属"
 			},
 			All: {
-				resourceType: "金属"
+				resourceType: "Metal",
+				resourceTypeCN: "金属"
 			}
 		},
 		sizeBase: 50,
@@ -3874,7 +3888,7 @@ var toReturn = {
 		},		
 		Polierarm: {
 			world: -1,
-			message: "你找到一本书，会教你如何升级你的Polearm!",
+			message: "你找到一本书，会教你如何升级你的长柄武器！",
 			level: "last",
 			icon: "book",
 			title: "Polierarm",
@@ -4915,7 +4929,7 @@ var toReturn = {
 			first: function () {
 				if (document.getElementById("trimps").style.visibility == "hidden") fadeIn("trimps", 10);
 			},
-			nameCN:"陷阱"
+			nameCN: "陷阱"
 		},
 		Barn: {
 			locked: 1,
@@ -5321,7 +5335,7 @@ var toReturn = {
 				if (justStacks) return timeOnZone;
 				return 1 + ((((1 - Math.pow(boostMult, this.owned)) * boostMax)) * (Math.pow(expInc, timeOnZone) - 1));
 			},
-			nameCN: ""		
+			nameCN: "Magmamancer"		
 		}
 	},
 	
@@ -5491,7 +5505,7 @@ var toReturn = {
 		Shieldblock: { //11
 			locked: 1,
 			allowed: 0,
-			tooltip: "这本书解释了使用盾牌来实际阻挡伤害的方法。 当前的盾需要被完全破坏和重建，但它会给予格挡而不是生命。 <b>这是不可逆的</b>。 你的盾牌必须是Prestige III或更高 $Your Shield Must be Prestige III or higher$",
+			tooltip: "这本书解释了使用盾牌来实际阻挡伤害的方法。 当前的盾需要被完全破坏和重建，但它会给予格挡而不是生命。 <b>这是不可逆的</b>。 $你的盾牌必须是“盾牌 III”或更高$",
 			done: 0,
 			specialFilter: function () {
 				return (game.equipment.Shield.prestige >= 3) ? true : false;
@@ -5886,7 +5900,7 @@ var toReturn = {
 		Polierarm: {
 			locked: 1,
 			allowed: 0,
-			tooltip: "这将重置你的Polearm到1级，并大大增加进一步升级的成本，但将大大增加攻击。 @",
+			tooltip: "这将重置你的长柄武器到1级，并大大增加进一步升级的成本，但将大大增加攻击。 @",
 			done: 0,
 			cost: {
 				resources: {

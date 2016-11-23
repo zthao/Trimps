@@ -5147,7 +5147,8 @@ function selectMap(mapId, force) {
 	document.getElementById("mapStatsDifficulty").innerHTML = Math.floor(map.difficulty * 100) + "%";
 	document.getElementById("mapStatsLoot").innerHTML = Math.floor(map.loot * 100) + "%";
 	document.getElementById("mapStatsItems").innerHTML = (map.location == "Void") ? "&nbsp;" : addSpecials(true, true, map);
-	document.getElementById("mapStatsResource").innerHTML = game.mapConfig.locations[map.location].resourceType;
+	var resourceCN = game.mapConfig.locations[map.location].resourceTypeCN;
+	document.getElementById("mapStatsResource").innerHTML = ((resourceCN) ? resourceCN : game.mapConfig.locations[map.location].resourceType);
 	if (typeof game.global.mapsOwnedArray[getMapIndex(game.global.lookingAtMap)] !== 'undefined') {
 		var prevSelected = document.getElementById(game.global.lookingAtMap);
 		prevSelected.className = prevSelected.className.replace("mapElementSelected","mapElementNotSelected");
@@ -8253,14 +8254,14 @@ function formatMinutesForDescriptions(number){
 	var text;
 	var minutes = Math.round(number % 60);
 	var hours = Math.floor(number / 60);
-	if (hours == 0) text = minutes + " minutes";
+	if (hours == 0) text = minutes + "分钟";
 	else if (minutes > 0) {
 		if (minutes < 10) minutes = "0" + minutes;
 		text = hours + ":" + minutes;
 	}
 	else {
 		var s = (hours > 1) ? "s" : "";
-		text = hours + " hour" + s;
+		text = hours + "小时";
 	}
 	return text;
 }
@@ -8318,7 +8319,7 @@ function toggleAutoTrap(updateOnly) {
 	var elem = document.getElementById("autoTrapBtn");
 	if (!game.global.trapBuildAllowed){
 		elem.style.display = "none";
-		elem.innerHTML = "AutoTraps Off";
+		elem.innerHTML = "自动建造陷阱关闭";
 		swapClass("color", "colorDanger", elem);
 		return;
 	}
@@ -8326,11 +8327,11 @@ function toggleAutoTrap(updateOnly) {
 	if (!updateOnly) game.global.trapBuildToggled = !game.global.trapBuildToggled;
 	if (game.global.trapBuildToggled){
 		swapClass("color", "colorSuccess", elem);
-		elem.innerHTML = "AutoTraps On";
+		elem.innerHTML = "自动建造陷阱开启";
 		return;
 	}
 	swapClass("color", "colorDanger", elem);
-	elem.innerHTML = "AutoTraps Off";
+	elem.innerHTML = "自动建造陷阱关闭";
 }
 
 function toggleAutoStorage(noChange){

@@ -500,14 +500,14 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		costText = canAffordBuilding(what, false, true, true);
 		if (what == "Shield" && game.equipment.Shield.blockNow){
 			var blockPerShield = game.equipment.Shield.blockCalculated + (game.equipment.Shield.blockCalculated * game.jobs.Trainer.owned * (game.jobs.Trainer.modifier / 100));
-			tooltipText += " (" + prettify(blockPerShield) + " after Trainers)";
+			tooltipText += " (计算教练的加成后为 " + prettify(blockPerShield) + " 格挡)";
 		}
 		if (game.global.buyAmt != 1) {
 			what += " X " + ((game.global.buyAmt == "Max") ? calculateMaxAfford(game.equipment[what], false, true) : game.global.buyAmt);
 		}
 	}
 	if (isItIn == "upgrades"){
-		var whatCN = ((game.upgrades[what].nameCN) ? game.upgrades[what].nameCN : what);
+		titleText = ((game.upgrades[what].nameCN) ? game.upgrades[what].nameCN : what);
 		var mouseOverElem = (lastMousePos[0] && lastMousePos[1]) ? document.elementFromPoint(lastMousePos[0], lastMousePos[1]) : null;
 		if (mouseOverElem && mouseOverElem.id == "upgradesHere"){
 			cancelTooltip();
@@ -536,7 +536,6 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 				tooltipText += "<b>You need enough room for " + prettify(nextCount * 3) + " max Trimps. You are short " + prettify(Math.floor(amtToGo)) + " Trimps.</b>";
 			}
 		}
-		titleText = whatCN;
 	}
 	if (isItIn == "maps"){
 		tooltipText = "This is a map. Click it to see its properties or to run it. Maps can be run as many times as you want.";
@@ -954,8 +953,8 @@ function getZoneStats(event, update) {
 	textString += "<tr><td colspan='3'>你已经在这个区域停留了" + formatMinutesForDescriptions((new Date().getTime() - game.global.zoneStarted) / 1000 / 60) + "</td></tr>";
 	if ((game.global.mapsActive || game.global.preMapsActive) && game.global.currentMapId){
 		var map = game.global.mapsOwnedArray[getMapIndex(game.global.currentMapId)];
-		textString += "<tr><td class='bdTitle bdZoneTitle' colspan='3'>" + map.name + "等级 " + map.level + "，房间 " + (game.global.lastClearedMapCell + 2) + "</td></tr>";
-		textString += '<tr><td><span class="' + getMapIcon(map) + '"></span> ' + getMapIcon(map, true) + '</td><td><span class="icomoon icon-gift2"></span>' + Math.floor(map.loot * 100) + '%</span> <span class="icomoon icon-cube2"></span>' + map.size + ' <span class="icon icon-warning"></span>' + Math.floor(map.difficulty * 100) + '%</td><td>' + ((map.location == "Void") ? '&nbsp' : ('道具Items: ' + addSpecials(true, true, map))) + '</td></tr>';
+		textString += "<tr><td class='bdTitle bdZoneTitle' colspan='3'>" + map.name + " 等级 " + map.level + "，房间 " + (game.global.lastClearedMapCell + 2) + "</td></tr>";
+		textString += '<tr><td><span class="' + getMapIcon(map) + '"></span> ' + getMapIcon(map, true) + '</td><td><span class="icomoon icon-gift2"></span>' + Math.floor(map.loot * 100) + '%</span> <span class="icomoon icon-cube2"></span>' + map.size + ' <span class="icon icon-warning"></span>' + Math.floor(map.difficulty * 100) + '%</td><td>' + ((map.location == "Void") ? '&nbsp' : ('道具数量: ' + addSpecials(true, true, map))) + '</td></tr>';
 		textString += "<tr><td colspan='3'>你已经在这个地图停留了" + formatMinutesForDescriptions((new Date().getTime() - game.global.mapStarted) / 1000 / 60) + "</td></tr>";
 		if (map.location == "Void") textString += "<tr><td colspan='3'>你有" + game.global.totalVoidMaps + " Void Maps.</td></tr>";
 	}
@@ -2673,8 +2672,9 @@ function getUniqueColor(item){
 
 function getMapIcon(mapObject, nameOnly) {
 	var icon = mapObject.location;
-	icon = game.mapConfig.locations[icon].resourceType;
-	if (nameOnly) return icon;
+	iconCN = game.mapConfig.locations[icon].resourceTypeCN;
+	icon = game.mapConfig.locations[icon].resourceType;	
+	if (nameOnly) return ((iconCN) ? iconCN : icon);
 	switch (icon){
 		case "Food":
 			return "glyphicon glyphicon-apple";

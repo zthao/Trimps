@@ -71,7 +71,7 @@ Electricity
 config:2703	badguys
  
 
-game.resources.food.owned*=10;game.resources.wood.owned*=10;game.resources.metal.owned*=10;
+game.resources.food.owned*=10;game.resources.wood.owned*=10;game.resources.metal.owned*=10;game.resources.science.owned*=10;game.resources.trimps.owned*=10;
  
  
 
