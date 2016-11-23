@@ -116,8 +116,9 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		costText = "";
 	}
 	if (what == "Well Fed"){
+		titleText = "良好的伙食";
 		var tBonus = (game.talents.turkimp3.purchased) ? 75 : 50;
-		tooltipText = "That Turkimp was delicious, and you have leftovers. If you set yourself to gather Food, Wood, or Metal while this buff is active, you can share with your workers to increase their gather speed by " + tBonus + "%";
+		tooltipText = "脆皮需要食物，你有剩菜。 如果你在存在这个buff时，自己收集食物、木材或金属，那么你可以与你的工人分享，以提高他们的收集速度 " + tBonus + "%";
 		costText = "";
 	}
 	if (what == "Geneticistassist"){
@@ -152,7 +153,8 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		costText = "";
 	}
 	if (what == "Repeat Map"){
-		tooltipText = "Allow the Trimps to find their way back to square 1 once they finish without your help. They grow up so fast.";
+		titleText = "重复地图";
+		tooltipText = "完成地图后允许脆皮在没有你的帮助下回到房间1。 他们成长长得这么快。";
 		costText = "";
 	}
 	if (what == "Customize Targets"){
@@ -415,7 +417,8 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		tooltipText = "Your scientists can finally handle some upgrades on their own! Toggling this on will cause most upgrades to be purchased automatically. Does not include equipment prestiges or upgrades that would trigger a confirmation popup.";
 	}
 	if (what == "Recycle All"){
-		tooltipText = "Recycle all maps below the selected level.";
+		titleText = "全部回收";
+		tooltipText = "回收所选级别下方的所有地图。";
 	}
 	if (what == "PlayFab Login"){
 		var tipHtml = getPlayFabLoginHTML();
@@ -443,10 +446,11 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		titleText = "解雇脆皮"
 	}
 	if (what == "Maps"){
+		titleText = "地图";
 		if (!game.global.preMapsActive)
-		tooltipText = "Travel to the Map Chamber. Maps are filled with goodies, and for each max level map you clear you will gain a 20% stacking damage bonus for that zone (stacks up to 10 times).";
+		tooltipText = "前往地图室。 地图里充满了好东西，当你完成了一个最大等级的地图，将获得该区域20%的伤害加成（叠加10次）。";
 		else
-		tooltipText = "Go back to to the World Map.";
+		tooltipText = "返回到世界地图。";
 		costText = "";
 	}
 	if (isItIn == "jobs"){
@@ -510,7 +514,7 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 			return;
 		}
 		if (typeof tooltipText.split('@')[1] !== 'undefined'){
-			var prestigeCost = "<b>你可能做错了什么。</b> Your next " + game.upgrades[what].prestiges + " will grant " + getNextPrestigeValue(what) + ".";
+			var prestigeCost = "<b>你可能不想这么做。</b> 下一级别的" + ((game.equipment[game.upgrades[what].prestiges].nameCN) ? game.equipment[game.upgrades[what].prestiges].nameCN : game.upgrades[what].prestiges) + "将会给予" + getNextPrestigeValue(what) + "。";
 			tooltipText = tooltipText.replace('@', prestigeCost);
 		}
 		if (typeof tooltipText.split('$')[1] !== 'undefined'){
@@ -2368,11 +2372,12 @@ function removeQueueItem(what, force, second) {
 	if (what == "first"){
 		elem = queue.firstChild;
 		var name = game.global.buildingsQueue[0].split('.');
+		var nameCN = (game.buildings[name[0]].nameCN) ? game.buildings[name[0]].nameCN : name[0];
 		if (name[1] > 1){
 			var item = name[0];
 			name[1] = (parseInt(name[1], 10) - 1);
 			var newQueue = name[0] + "." + name[1];
-			name = name[0] + " X" + name[1];
+			name = nameCN + " X" + name[1];
 			game.global.buildingsQueue[0] = newQueue;
 			elem.firstChild.innerHTML = name;
 			if (!second && game.talents.doubleBuild.purchased){
@@ -2419,9 +2424,10 @@ function addQueueItem(what) {
 	var elem = document.getElementById("queueItemsHere");
 	document.getElementById("noQueue").style.display = "none";
 	var name = what.split('.');
-	if (name[1] > 1) name = name[0] + " X" + prettify(name[1]);
-	else name = name[0];
-	elem.innerHTML += '<div class="queueItem" id="queueItem' + game.global.nextQueueId + '" onmouseover="tooltip(\'Queue\',null,event)" onmouseout="tooltip(\'hide\')" onClick="removeQueueItem(\'queueItem' + game.global.nextQueueId + '\'); cancelTooltip();"><span class="queueItemName">' + ((game.buildings[name].nameCN) ? game.buildings[name].nameCN : name) + '</span><div id="animationDiv"></div></div>';
+	var nameCN = (game.buildings[name[0]].nameCN) ? game.buildings[name[0]].nameCN : name[0];
+	if (name[1] > 1) name = nameCN + " X" + prettify(name[1]);
+	else name = nameCN;
+	elem.innerHTML += '<div class="queueItem" id="queueItem' + game.global.nextQueueId + '" onmouseover="tooltip(\'Queue\',null,event)" onmouseout="tooltip(\'hide\')" onClick="removeQueueItem(\'queueItem' + game.global.nextQueueId + '\'); cancelTooltip();"><span class="queueItemName">' + name + '</span><div id="animationDiv"></div></div>';
 	if (game.global.nextQueueId === 0) setNewCraftItem();
 	game.global.nextQueueId++;
 }

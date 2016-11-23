@@ -2695,10 +2695,16 @@ function getNextPrestigeValue(what){
 	var name = game.upgrades[what].prestiges;
 	var equipment = game.equipment[name];
 	var stat;
+	var statCN;
 	if (equipment.blockNow) stat = "block";
 	else stat = (typeof equipment.health !== 'undefined') ? "health" : "attack";
+	switch (stat){
+		case "block": statCN = "格挡"; break;
+		case "health": statCN = "生命"; break;
+		case "attack": statCN = "攻击"; break;
+	}
 	var toReturn = Math.round(equipment[stat] * Math.pow(1.19, ((equipment.prestige) * game.global.prestige[stat]) + 1));
-	return prettify(toReturn) + " " + stat;
+	return prettify(toReturn) + " " + statCN;
 }
 
 function getHighestPrestige(){
@@ -2814,7 +2820,7 @@ function createMap(newLevel, nameOverride, locationOverride, lootOverride, sizeO
 		newMap.loot += .25;
 	}
 	game.global.mapsOwnedArray.push(newMap);
-    if (!messageOverride) message("You just made " + mapName[0] + "!", "Loot", "th-large", null, 'secondary');
+    if (!messageOverride) message("你刚刚创造了地图 " + mapName[0] + "！", "Loot", "th-large", null, 'secondary');
     unlockMap(game.global.mapsOwnedArray.length - 1);
 }
 
@@ -2882,7 +2888,7 @@ function createVoidMap() {
 		voidBuff: voidSpecials[prefixNum]
 	});
 	game.global.totalVoidMaps++;
-	message("A chill runs down your spine, and the bad guy quickly frosts over. A purple glow radiates from the ground in front of you, and a Void Map appears.", "Loot", "th-large", "voidMessage", 'secondary');
+	message("寒冷在你的脊椎下流动，坏蛋门很快被冻结了。 紫色的光芒从你面前的地面辐射出来，并出现了虚空(Void)地图。", "Loot", "th-large", "voidMessage", 'secondary');
 	addVoidAlert();
 	unlockMap(game.global.mapsOwnedArray.length - 1);
 }
@@ -4858,7 +4864,7 @@ function recycleBelow(confirmed){
 	var level = parseInt(document.getElementById("mapLevelInput").value, 10);
 	if (isNaN(level) || level < 6) return;
 	if (!confirmed) {
-		tooltip('confirm', null, 'update', 'You are about to recycle all maps below level ' + level + '. Are you sure?' , 'recycleBelow(true)', 'Mass Recycle');
+		tooltip('confirm', null, 'update', '您即将回收' + level + ' 级以下的所有地图。您确定吗？' , 'recycleBelow(true)', 'Mass Recycle');
 		return;
 	}
 	var refund = 0;
@@ -4870,7 +4876,7 @@ function recycleBelow(confirmed){
 			total++;
 			}
 	}
-	if (total > 0) message("Recycled " + total + " maps for " + prettify(refund) + " fragments.", "Notices");
+	if (total > 0) message("回收了 " + total + " 张地图，获得了 " + prettify(refund) + " 碎片。", "Notices");
 }
 
 function recycleMap(map, fromMass, killVoid) {
@@ -4905,7 +4911,7 @@ function recycleMap(map, fromMass, killVoid) {
 	if (!killVoid) {
 		refund = getRecycleValue(mapObj.level);
 		game.resources.fragments.owned += refund;
-		if (!fromMass) message("Recycled " + mapObj.name + " for " + prettify(refund) + " fragments.", "Notices");
+		if (!fromMass) message("回收了 " + mapObj.name + " ，获得了" + prettify(refund) + " 碎片。", "Notices");
 	}
 	game.global.mapsOwnedArray.splice(map, 1);
     if (killVoid) {
@@ -4974,10 +4980,10 @@ function mapsClicked(confirmed) {
         return;
     }
     if (game.global.fighting && !game.global.preMapsActive) {
-		message("Waiting to travel until your soldiers are finished.", "Notices");
+		message("等待你的士兵结束战斗", "Notices");
 		
 		document.getElementById("mapsBtn").className = "btn btn-warning fightBtn shrinkBtnText";
-		document.getElementById("mapsBtn").innerHTML = "Abandon Soldiers";
+		document.getElementById("mapsBtn").innerHTML = "放弃士兵";
 		}
     if (game.global.preMapsActive) {
         mapsSwitch();
@@ -5006,7 +5012,7 @@ function mapsSwitch(updateOnly, fromRecycle) {
 	if (game.global.currentMapId !== "") currentMapObj = getCurrentMapObject();
 	var mapsBtn = document.getElementById("mapsBtn");
 	var recycleBtn = document.getElementById("recycleMapBtn");
-	recycleBtn.innerHTML = "Recycle Map";
+	recycleBtn.innerHTML = "回收地图";
 	document.getElementById("mapsBtn").className = "btn btn-warning fightBtn";
     if (game.global.preMapsActive) {
 		if (currentMapObj && currentMapObj.location == "Void") {
@@ -5021,13 +5027,13 @@ function mapsSwitch(updateOnly, fromRecycle) {
         document.getElementById("grid").style.display = "none";
         document.getElementById("preMaps").style.display = "block";
         toggleMapGridHtml();
-        mapsBtn.innerHTML = "World";
+        mapsBtn.innerHTML = "返回世界地图";
         if (game.global.lookingAtMap && !game.global.currentMapId) selectMap(game.global.lookingAtMap, true);
 		else if (game.global.currentMapId === "") {
 			clearMapDescription();
         } else {
             selectMap(game.global.currentMapId, true);
-            document.getElementById("selectMapBtn").innerHTML = "Continue";
+            document.getElementById("selectMapBtn").innerHTML = "继续探索地图";
             document.getElementById("selectMapBtn").style.visibility = "visible";
             recycleBtn.style.visibility = "visible";
 			if (currentMapObj.noRecycle) recycleBtn.innerHTML = "Abandon Map";
@@ -5070,7 +5076,7 @@ function toggleMapGridHtml(on, currentMapObj){
 	}
 	document.getElementById("repeatBtn").style.display = settings[3];
 	if (!on) return;
-	document.getElementById("mapsBtn").innerHTML = (game.global.mapBonus) ? "Maps (" + game.global.mapBonus + ")" : "Maps";
+	document.getElementById("mapsBtn").innerHTML = (game.global.mapBonus) ? "地图 (" + game.global.mapBonus + ")" : "地图";
 	document.getElementById("mapBonus").innerHTML = "";
 	document.getElementById("battleHeadContainer").style.display = "block";
 	if (!currentMapObj) return; 
@@ -5083,7 +5089,7 @@ function toggleMapGridHtml(on, currentMapObj){
 function clearMapDescription(){
 	document.getElementById("selectMapBtn").style.visibility = "hidden";
 	document.getElementById("recycleMapBtn").style.visibility = "hidden";
-	document.getElementById("selectedMapName").innerHTML = "Select a Map!";
+	document.getElementById("selectedMapName").innerHTML = "选择一张地图！";
 	document.getElementById("mapStatsSize").innerHTML = "";
 	document.getElementById("mapStatsDifficulty").innerHTML = "";
 	document.getElementById("mapStatsLoot").innerHTML = "";
@@ -5092,7 +5098,7 @@ function clearMapDescription(){
 }
 
 function setNonMapBox(){
-	document.getElementById("mapsBtn").innerHTML = "Maps";
+	document.getElementById("mapsBtn").innerHTML = "地图";
 	var worldNumElem = document.getElementById("worldNumber");
 	worldNumElem.style.display = (game.global.spireActive) ? 'none' : 'inline';
 	document.getElementById("worldNumber").innerHTML = game.global.world;
@@ -5124,13 +5130,13 @@ function repeatClicked(updateOnly){
 	var elem = document.getElementById("repeatBtn");
 	elem.className = "";
 	elem.className = "btn fightBtn " + color;
-	elem.innerHTML = (game.global.repeatMap) ? "Repeat On" : "Repeat Off";
+	elem.innerHTML = (game.global.repeatMap) ? "重复地图开启" : "重复地图关闭";
 }
 
 function selectMap(mapId, force) {
 	if (game.options.menu.pauseGame.enabled && !force) return;
     if (!force && game.global.currentMapId !== "") {
-        message("You must finish or recycle your current map before moving on.", "Notices");
+        message("在移动之前，你必须完成或回收当前地图。", "Notices");
         return;
     }
     var map = getMapIndex(mapId);
@@ -5149,7 +5155,7 @@ function selectMap(mapId, force) {
 	var currentSelected = document.getElementById(mapId);
 	currentSelected.className = currentSelected.className.replace("mapElementNotSelected", "mapElementSelected");
     game.global.lookingAtMap = mapId;
-    document.getElementById("selectMapBtn").innerHTML = "Run Map";
+    document.getElementById("selectMapBtn").innerHTML = "开始探索地图";
     document.getElementById("selectMapBtn").style.visibility = "visible";
 	document.getElementById("recycleMapBtn").style.visibility = (map.noRecycle) ? "hidden" : "visible";
 }
@@ -5160,7 +5166,7 @@ function runMap() {
 	if (game.global.challengeActive == "Watch") game.challenges.Watch.enteredMap = true;
 	if (game.global.challengeActive == "Mapology" && !game.global.currentMapId) {
 		if (game.challenges.Mapology.credits < 1){
-			message("You are all out of Map Credits! Clear some more zones to earn some more.", "Notices");
+			message("你是所有的地图积分！ 完成更多的区域，以赚取更多。", "Notices");
 			return;
 		}
 		game.challenges.Mapology.credits--;
@@ -8851,7 +8857,7 @@ var playFabSaveErrors = 0;
 function saveToPlayFabCallback(data, error){
 	if (error){
 		playFabSaveErrors++;
-		message("Unable to back up your save to PlayFab! Double check your internet connection, and don't forget to back up your save manually.", "Notices");
+		message("无法将您的保存备份到PlayFab！ 请仔细检查您的互联网连接，不要忘记手动备份您的手机。", "Notices");
 		swapClass("iconState", "iconStateBad", document.getElementById('playFabIndicator'));
 		console.log(error);
 		if (playFabId != -1) {
@@ -8862,7 +8868,7 @@ function saveToPlayFabCallback(data, error){
 	if (data){
 		swapClass("iconState", "iconStateGood", document.getElementById('playFabIndicator'));
 		lastOnlineSave = performance.now();
-		message("Game saved and backed up to PlayFab! Next automatic online save in 30 minutes.", "Notices", null, "save");
+		message("游戏保存并备份到PlayFab！ 下一步自动在线保存在30分钟后。", "Notices", null, "save");
 		return true;
 	}
 }

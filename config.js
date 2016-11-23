@@ -669,7 +669,7 @@ var toReturn = {
 	},
 	talents: {
 		bionic: {
-			description: "当你通过该区域时，自动拾取每个级别的Bionic Wonderland，只要你在经过该区域之前已经使用。",
+			description: "当你通过该区域时，自动拾取每个级别的仿生仙境，只要你在经过该区域之前已经使用。",
 			name: "Bionic Magnet",//仿生磁铁
 			tier: 1,
 			purchased: false,
@@ -1391,7 +1391,7 @@ var toReturn = {
 			unlockString: "reach Zone 120"
 		},
 		Crushed: {
-			description: "Journey to a dimension where the atmosphere is rich in helium, but Bad Guys have a 50% chance to Critical Strike for +400% damage unless your Block is as high as your current Health. Clearing <b>Bionic Wonderland (Z125)</b> will reward you with an additional 100% of all helium earned up to but not including Z125. This challenge is repeatable.",
+			description: "进入一个氦气丰富的维度，但坏蛋有50%的几率爆击造成 400%的伤害，除非你的格挡与你现在的生命一样高。 完成<b>仿生仙境(Z125)</b>会奖励你额外100%的氦获得，但不包括Z125。 这个挑战是可重复的。",
 			completed: false,
 			filter: function () {
 				return (game.global.highestLevelCleared >= 124);
@@ -2100,7 +2100,7 @@ var toReturn = {
 			title: "Speed: Bionic",
 			description: function (number) {
 				number = formatMinutesForDescriptions(this.breakpoints[number]);
-				return "<span style='font-size: .8em'>在 " + number + " 内完成Bionic Wonderland</span>";
+				return "<span style='font-size: .8em'>在 " + number + " 内完成仿生仙境</span>";
 			},
 			display: function () {
 				return (game.global.highestLevelCleared >= 79);
@@ -2802,7 +2802,7 @@ var toReturn = {
 			fast: true,
 			loot: function (level) {
 				var amt = rewardResource("food", 0.5, level, true);
-				message("That Chickimp dropped " + prettify(amt) + " food!", "Loot", "apple", null, 'primary');
+				message("这只Chickimp掉落了 " + prettify(amt) + " 食物！", "Loot", "apple", null, 'primary');
 			}
 		},
 		Hippopotamimp: {
@@ -2824,7 +2824,7 @@ var toReturn = {
 			fast: false,
 			loot: function (level) {
 				var amt = rewardResource("wood", 0.5, level, true);
-				message("That Grimp dropped " + prettify(amt) + " wood!", "Loot", "tree-deciduous", null, 'primary');
+				message("这只Grimp掉落了 " + prettify(amt) + " 木头！", "Loot", "tree-deciduous", null, 'primary');
 			}
 		},
 		Seirimp: {
@@ -2834,7 +2834,7 @@ var toReturn = {
 			fast: false,
 			loot: function (level) {
 				var amt = rewardResource("metal", 0.5, level, true);
-				message("That Seirimp dropped " + prettify(amt) + " metal! Neat-O.", "Loot", "*cubes", null, 'primary');
+				message("这只Seirimp掉落了 " + prettify(amt) + " 金属！ Neat-O.", "Loot", "*cubes", null, 'primary');
 			}
 		},
 		Slagimp: {
@@ -2844,7 +2844,7 @@ var toReturn = {
 			fast: true,
 			loot: function (level) {
 				var amt = rewardResource("gems", 0.3, level, true);
-				message("That Slagimp fell over, and " + prettify(amt) + " gems popped out! How about that?!", "Loot", "*diamond", null, 'secondary'); 
+				message("这只Slagimp倒下了，掉落了 " + prettify(amt) + " 宝石！怎么样！", "Loot", "*diamond", null, 'secondary'); 
 			}
 		},
 		Moltimp: {
@@ -2854,7 +2854,7 @@ var toReturn = {
 			fast: false,
 			loot: function (level) {
 				var amt = rewardResource("metal", 0.2, level, true);
-				message("The Moltimp thanked you for the combat, and handed you " + prettify(amt) + " bars of metal! Then he died.", "Loot", "*cubes", null, 'primary');
+				message("Moltimp感谢与你的战斗，并交给你 " + prettify(amt) + " 金属！ 然后它死了。", "Loot", "*cubes", null, 'primary');
 			}
 		},
 		Golimp: {
@@ -2870,17 +2870,17 @@ var toReturn = {
 				var tag;
 				if (random === 0) {
 					amt = rewardResource("fragments", 1, level, true);
-					res = "fragments";
+					res = "碎片";
 					icon = "th";
 					tag = "secondary";
 				}
 				else {
 					amt = rewardResource("metal", 0.3, level, true);
-					res = "bars of metal";
+					res = "金属";
 					icon = "*cubes";
 					tag = "primary";
 				}
-				message("The Golimp fell to pieces! You manage to grab " + prettify(amt) + " " + res + " before it begins pulling itself together.", "Loot", icon, null, tag);
+				message("Golimp跌倒了！在它们聚合在一起之前你抓住了 " + prettify(amt) + " " + res , "Loot", icon, null, tag);
 			}
 		},
 		Lavimp: {
@@ -2920,7 +2920,7 @@ var toReturn = {
 			fast: true,
 			loot: function (level) {
 				var amt = rewardResource("wood", 0.35, level, true);
-				message("The Entimp is no more. You manage to salvage " + prettify(amt) + " logs of wood from his trunk!", "Loot", "tree-deciduous", null, 'primary');
+				message("没有更多的Entimp。你设法从他的躯干里取了 " + prettify(amt) + " 木头！", "Loot", "tree-deciduous", null, 'primary');
 			}
 		},
 		Squirrimp: {
@@ -2930,7 +2930,7 @@ var toReturn = {
 			fast: false,
 			loot: function (level) {
 				var amt = rewardResource("food", 0.35, level, true);
-				message("Time for some stew! You scored " + prettify(amt) + " food from that Squirrimp!", "Loot", "apple", null, 'primary');
+				message("来做饭吧！你从那个Squirrimp那里得到了 " + prettify(amt) + " 食物！", "Loot", "apple", null, 'primary');
 			}			
 		},
 		Gravelimp: {
@@ -2940,7 +2940,7 @@ var toReturn = {
 			fast: false,
 			loot: function (level) {
 				var amt = rewardResource("metal", 0.35, level, true);
-				message("You sift through the Gravelimp, and manage to find " + prettify(amt) + " bars of metal! Good on you!", "Loot", "*cubes", null, 'primary');
+				message("你过滤了Gravelimp，找到 " + prettify(amt) + " 金属！是个好消息！", "Loot", "*cubes", null, 'primary');
 			}
 		},
 		Blimp: {
@@ -2954,14 +2954,14 @@ var toReturn = {
 				var amt = rewardResource("food", 2, level);
 				rewardResource("wood", 2, level);
 				rewardResource("metal", 2, level);
-				message("That Blimp dropped " + prettify(amt) + " Food, Wood and Metal! That should be useful.", "Loot", "piggy-bank", null, 'primary');
+				message("那个Blimp掉落了 " + prettify(amt) + " 食物，木头和金属！ 这很有用！", "Loot", "piggy-bank", null, 'primary');
 				if (game.global.world >= 21 && (game.global.totalPortals >= 1 || game.global.portalActive)){
 					if (game.resources.helium.owned == 0) fadeIn("helium", 10);
 					amt = rewardResource("helium", 1, level);
-					message("You were able to extract " + prettify(amt) + " Helium canisters from that Blimp!", "Loot", "oil", "helium", "helium");
+					message("你能够从那个Blimp中提取 " + prettify(amt) + " 氦！", "Loot", "oil", "helium", "helium");
 					if (game.global.world >= 40 && game.global.challengeActive == "Balance") {
 						var reward = game.challenges.Balance.heldHelium;
-						message("You have completed the Balance challenge! You have been rewarded with " + prettify(reward) + " Helium, and you may repeat the challenge.", "Notices");
+						message("你已经完成了挑战“平衡”！ 作为奖励，你获得了 " + prettify(reward) + " 氦，你可以重复这个挑战。", "Notices");
 						game.challenges.Balance.abandon();
 						game.global.challengeActive = "";
 						addHelium(reward);
@@ -2987,14 +2987,14 @@ var toReturn = {
 					percentage += 2;
 				}
 				amt = rewardResource("helium", amt, level, false, percentage);
-				var msg = "Cthulimp and the map it came from crumble into the darkness. You find yourself instantly teleported to ";
+				var msg = "Cthulimp和他所在的地图崩坏了。 你发现自己被传送到";
 				if (game.options.menu.repeatVoids.enabled && game.global.totalVoidMaps > 1){
-					msg += "the next Void map";
+					msg += "下一张虚空地图中";
 				}
 				else {
-					msg += ((game.options.menu.exitTo.enabled) ? "the world " : "your map chamber");
+					msg += ((game.options.menu.exitTo.enabled) ? "世界地图" : "你的地图室");
 				}
-				message(msg + " with an extra " + prettify(amt) + " Helium!", "Loot", "oil", "helium", "helium");
+				message(msg + "，并获得了 " + prettify(amt) + " 氦！", "Loot", "oil", "helium", "helium");
 				game.stats.highestVoidMap.evaluate();
 			}
 		},
@@ -3031,7 +3031,7 @@ var toReturn = {
 			fast: false,
 			loot: function (level) {
 				var amt = rewardResource("gems", 0.35, level, false);
-				message("That Dragimp dropped " + prettify(amt) + " gems!", "Loot", "*diamond", null, 'secondary');
+				message("这只Dragimp掉落了 " + prettify(amt) + " 宝石！", "Loot", "*diamond", null, 'secondary');
 			}
 		},
 		Mitschimp: {
@@ -3044,7 +3044,7 @@ var toReturn = {
 			loot: function (level) {
 				checkAchieve("blockTimed");
 				var amt = rewardResource("wood", 2, level, true);
-				message("Mitschimp dropped " + prettify(amt) + " wood!", "Loot", "tree-deciduous", null, 'primary');
+				message("Mitschimp掉落了 " + prettify(amt) + " 木头！", "Loot", "tree-deciduous", null, 'primary');
 			}
 		},
 		Brickimp: {
@@ -3068,17 +3068,17 @@ var toReturn = {
 			loot: function (level) {
 				checkAchieve("doomTimed");
 				var amt = rewardResource("metal", 2, level, true);
-				message("Indianimp dropped " + prettify(amt) + " metal!", "Loot", "*cubes", null, 'primary');
+				message("Indianimp掉落了 " + prettify(amt) + " 金属！", "Loot", "*cubes", null, 'primary');
 				if (game.global.challengeActive == "Trapper"){
 					game.global.challengeActive = "";
 					game.challenges.Trapper.abandon();
 					game.portal.Anticipation.locked = false;
-					message("You have completed the 'Trapper' challenge! Your Trimps now remember how to breed, and you have unlocked a new perk!", "Notices");
+					message("你完成了挑战“Trapper”！ 你的脆皮现在知道了如何繁殖，你解锁了一个新的perk！", "Notices");
 				}
 				if (game.global.challengeActive == "Meditate"){
 					game.global.challengeActive = "";
 					game.portal.Meditation.locked = false;
-					message("You have completed the 'Meditate' challenge! The dimension has returned to normal, and you have unlocked a new perk!", "Notices");
+					message("你完成了挑战“Meditate”！ 维度已恢复正常，您已解锁一个新的perk！", "Notices");
 				}
 			}
 		},
@@ -3093,9 +3093,9 @@ var toReturn = {
 				checkAchieve("prisonTimed");
 				if (game.global.challengeActive == "Electricity" || game.global.challengeActive == "Mapocalypse") {
 					var reward = Math.floor(game.challenges.Electricity.heldHelium * 1.5);
-					if (game.global.challengeActive == "Electricity") message("You have completed the Electricity challenge! You have been rewarded with " + prettify(reward) + " Helium, and you may repeat the challenge.", "Notices");
+					if (game.global.challengeActive == "Electricity") message("你完成了挑战“Electricity”！ 作为奖励，你获得了 " + prettify(reward) + " 氦，你可以重复这个挑战。", "Notices");
 					else if (game.global.challengeActive == "Mapocalypse") {
-						message("You have completed the Mapocalypse challenge! You have unlocked the 'Siphonology' Perk, and have been rewarded with " + prettify(game.challenges.Electricity.heldHelium) + " Helium.", "Notices");
+						message("你完成了挑战“Mapocalypse ”！ 你解锁了Perk“Siphonology”， 作为奖励，你获得了 " + prettify(game.challenges.Electricity.heldHelium) + " 氦。", "Notices");
 						if (game.portal.Siphonology.locked) addNewSetting('siphonologyMapLevel');
 						game.portal.Siphonology.locked = false;
 						game.challenges.Mapocalypse.abandon();
@@ -3521,69 +3521,69 @@ var toReturn = {
 	
 	mapConfig: {
 		names: {
-			prefix: ["Whispering", "Sandy", "Little", "Big", "Rancid", "Tired", "Laughing", "Weeping", "Windy", "Terrible", "Nasty", "Dirty", 
-			"Red", "Black", "Singing", "Fiery", "Rocky", "Haunted", "Forgotten", "Miserable", "Cursed", "Tainted", "Blessed", "Sacred", 
-			"Abandoned", "Natural", "Enchanted", "Magical", "Calm", "Rugged", "Violent", "Weird", "Secret", "Forbidden", "Bewitched", 
-			"Dark", "Light", "Magnificent", "Evil", "Holy", "Hallowed", "Desecrated", "Silent", "Eternal", "Underground", "Temperate", "Chilly", 
-			"Muddy", "Dank", "Steamy", "Humid", "Dry", "Putrid", "Foul", "Dangerous", "Marred", "Blighted", "Crystal", "Frozen", "Simple", "Timeless"],
-			suffix: ["Creek.Sea", "Coast.Sea", "Swamp.Sea", "Forest.Forest", "Mountain.Mountain", "Beach.Sea", "Hill.Mountain", "Butte.Mountain", 
-			"Ridge.Mountain", "Mesa.Mountain", "Valley.Depths", "Peak.Mountain", "Canyon.Depths", "Plateau.Mountain", "Crag.Depths", 
-			"Crater.Depths", "Oaks.Forest",  "Volcano.Mountain", "Glacier.Sea",  "Brook.Sea", "Cave.Depths",  "Sea.Sea", "Ocean.Sea", 
-			"Lake.Sea", "Jungle.Forest", "Island.Sea", "Ruins.Depths", "Temple.Depths", "Bog.Sea", "Grove.Forest", "Jungle.Forest", 
-			"Thicket.Forest", "Woods.Forest", "Oasis.Forest", "Mineshaft.Depths", "Tunnel.Depths", "Depths.Depths", "Cavern.Depths", 
-			"Gardens.Plentiful", "Gardens.Plentiful", "Gardens.Plentiful", "Gardens.Plentiful", "Gardens.Plentiful", "Gardens.Plentiful", 
-			"Gardens.Plentiful", "Gardens.Plentiful", "Gardens.Plentiful", "Gardens.Plentiful"]
+			prefix: ["低语的", "沙土的", "较小的", "较大的", "腐坏的", "厌倦的", "谈笑风生的", "哭泣的", "多风的", "可怕的", "令人不愉快的", "肮脏的", 
+			"染红了的", "染黑了的", "鸟语花香的", "火热的", "岩石的", "闹鬼的", "被遗忘的", "悲惨的", "被诅咒的", "腐坏的", "神圣的", "不容亵渎的", 
+			"被遗弃的", "自然的", "令人销魂的", "不可思议的", "安静的", "崎岖的", "狂暴的", "无人的", "秘密的", "被禁止的", "蛊惑的", 
+			"黑暗的", "明亮的", "壮丽的", "邪恶的", "圣洁的", "不可侵犯的", "亵渎的", "寂静的", "不朽的", "隐蔽的", "温和的", "寒冷的", 
+			"泥泞的", "阴冷的", "蒸汽的", "潮湿的", "干燥的", "剧毒的", "邪恶的", "危险的", "毁坏的", "破损的", "水晶的", "冰封的", "天真的", "永恒的"],
+			suffix: ["小河.Sea", "海岸.Sea", "沼泽.Sea", "森林.Forest", "山脉.Mountain", "海滨.Sea", "小山.Mountain", "小丘.Mountain", 
+			"山脉.Mountain", "平顶山.Mountain", "山谷.Depths", "山峰.Mountain", "峡谷.Depths", "高原.Mountain", "悬崖.Depths", 
+			"火山口.Depths", "橡木林.Forest",  "火山.Mountain", "冰河.Sea",  "小溪.Sea", "洞穴.Depths",  "海洋.Sea", "大洋.Sea", 
+			"湖泊.Sea", "丛林.Forest", "岛屿.Sea", "废墟.Depths", "神殿.Depths", "泥沼.Sea", "小树林.Forest", "丛林.Forest", 
+			"灌木丛.Forest", "树林.Forest", "绿洲.Forest", "矿井.Depths", "隧道.Depths", "深渊.Depths", "山洞.Depths", 
+			"花园.Plentiful", "花园.Plentiful", "花园.Plentiful", "花园.Plentiful", "花园.Plentiful", "花园.Plentiful", 
+			"花园.Plentiful", "花园.Plentiful", "花园.Plentiful", "花园.Plentiful"]
 		},
 		locations: {
 		//Add new resources to function getMapIcon in updates.js to get icons on maps
 			Sea: {
-				resourceType: "Food"
+				resourceType: "食物"//Food
 			},
 			Mountain: {
-				resourceType: "Metal"
+				resourceType: "金属"//Metal
 			},
 			Forest: {
-				resourceType: "Wood"
+				resourceType: "木头"//Wood
 			},
 			Depths: {
-				resourceType: "Gems"
+				resourceType: "宝石"//Gems
 			},
 			Plentiful: {
-				resourceType: "Any"
+				resourceType: "任意"//Any
 			},
 			Hell: {
-				resourceType: "Metal",
-				upgrade: "Portal"
+				resourceType: "金属",
+				upgrade: "Portal"//Portal
 			},
 			Block: {
-				resourceType: "Wood",
+				resourceType: "木头",
 				upgrade: "Shieldblock"
 			},
 			Wall: {
-				resourceType: "Food",
+				resourceType: "食物",
 				upgrade: "Bounty"
 			},
 			Doom: {
-				resourceType: "Metal",
+				resourceType: "金属",
 				upgrade: "Relentlessness"
 			},
 			Prison: {
-				resourceType: "Food",
+				resourceType: "食物",
 				upgrade: "Keys"
 			},
 			Bionic: {
-				resourceType: "Any",
+				resourceType: "任意",
 				upgrade: ["roboTrimp", "Geneticistassist"]
 			},
 			Void: {
-				resourceType: "Any",
+				resourceType: "任意",
 				upgrade: ["AutoStorage", "Heirloom"]
 			},
 			Star: {
-				resourceType: "Metal"
+				resourceType: "金属"
 			},
 			All: {
-				resourceType: "Metal"
+				resourceType: "金属"
 			}
 		},
 		sizeBase: 50,
@@ -3615,11 +3615,11 @@ var toReturn = {
 			createMap: function(tier) {
 				game.global.bionicOwned++;
 				if (game.global.bionicOwned == 1) 
-					message("You found a map to the Bionic Wonderland. Sounds fun!", "Story");
+					message("你找到了一张仿生仙境的地图。 听起来很有趣！", "Story");
 				else
-					message("You found a map to an even more advanced version of the Bionic Wonderland! Looks scary...", "Story");
+					message("你找到了一张更加高级的仿生仙境的地图！ 看起来可怕...", "Story");
 				var roman = romanNumeral(tier + 1);
-				createMap(((tier * 15) + 125), "Bionic Wonderland " + roman, "Bionic", 3, 100, 2.6, true);
+				createMap(((tier * 15) + 125), "仿生仙境 " + roman, "Bionic", 3, 100, 2.6, true);
 			},
 			fire: function (fromTalent) {
 				var level = game.global.mapsOwnedArray[getMapIndex(game.global.currentMapId)].level;
@@ -3631,8 +3631,8 @@ var toReturn = {
 				if (bionicTier - 1 == game.global.roboTrimpLevel) {
 					if (game.global.roboTrimpLevel == 0){
 						cancelTooltip();
-						var text = "There seems to be a small RoboTrimp that you appear to have orphaned. You decide to take him with you, since you're pretty good at training stuff. He deals <b>20%</b> extra damage for you, and has a special ability. You can learn more about the special ability by hovering over the new <span class='icomoon icon-chain'></span> icon by your soldiers.<br/><br/>You also found a map to a more powerful version of the Bionic Wonderland. You would bet there's another RoboTrimp who needs 'rescuing' in there.";
-						if (game.options.menu.tooltips.enabled == 0) text += '<br/><br/><b>Just a heads up</b>: You have tooltips disabled, so you will need to hold shift when you mouse over the <span class="icomoon icon-chain"></span> to read about it.';
+						var text = "似乎有一个小RoboTrimp，似乎是孤儿。 你决定带他和你在一起，因为你很擅长训练的东西。 它为你造成额外的 <b>20%</b> 伤害，并有特殊能力。 你可以通过你的士兵悬停在新<span class='icomoon icon-chain'></span>图标上了解更多关于特殊能力。<br/><br/>你还找到了一张更加高级的仿生仙境的地图。你打赌会有另一个RoboTrimp在那里需要“抢救”。";
+						if (game.options.menu.tooltips.enabled == 0) text += '<br/><br/><b>抬一下头</b>：你禁用了提示，所以你需要在鼠标经过<span class="icomoon icon-chain"></span>时按住Shift来阅读详细内容。';
 						tooltip('confirm', null, 'update', text, null, 'RoboTrimp');
 						game.global.roboTrimpLevel = 1;
 						document.getElementById("chainHolder").style.visibility = 'visible';
@@ -3641,7 +3641,7 @@ var toReturn = {
 						game.global.roboTrimpLevel++;
 						var values = game.global.roboTrimpLevel;
 						values = [(values) * 20, ((1 - this.getShriekValue()) * 100).toFixed(1)];
-						message("<span class='icomoon icon-chain'></span> Hey look, another baby RoboTrimp! You decide to add him to your collection. You now deal " + Math.floor(values[0]) + "% extra damage thanks to your pets, and MagnetoShriek now removes " + Math.floor(values[1]) + "% of an Improbability's attack", "Notices");					
+						message("<span class='icomoon icon-chain'></span> 嘿看，另一个小RoboTrimp！ 你决定将他添加到你的收藏中。你现在可以造成 " + Math.floor(values[0]) + "% 的额外伤害 and MagnetoShriek now removes " + Math.floor(values[1]) + "% of an Improbability's attack", "Notices");					
 					}
 				}
 			}
@@ -3692,7 +3692,7 @@ var toReturn = {
 			fire: function () {
 				createHeirloom();
 				if (game.global.world >= 60 && game.global.voidDeaths == 0 && game.global.voidBuff == "bleed") giveSingleAchieve(13);
-				message("You found an Heirloom!", "Loot", "*archive", null, "secondary");
+				message("你发现了 Heirloom!", "Loot", "*archive", null, "secondary");
 			}
 		},
 		Keys: {
@@ -3814,7 +3814,7 @@ var toReturn = {
 		},
 		Supershield: {
 			world: -1,
-			message: "You found a book that will teach you how to upgrade your Shield!",
+			message: "你找到一本书，会教你如何升级你的盾牌！",
 			level: "last",
 			icon: "book",
 			title: "Supershield",
@@ -3826,7 +3826,7 @@ var toReturn = {
 		},
 		Dagadder: {
 			world: -1,
-			message: "You found a book that will teach you how to upgrade your Dagger!",
+			message: "你找到一本书，会教你如何升级你的匕首！",
 			level: "last",
 			icon: "book",
 			title: "Dagadder",
@@ -3838,7 +3838,7 @@ var toReturn = {
 		},
 		Bootboost: {
 			world: -1,
-			message: "You found a book that will teach you how to upgrade your Boots!",
+			message: "你找到一本书，会教你如何升级你的靴子！",
 			level: "last",
 			icon: "book",
 			title: "Bootboost",
@@ -3850,7 +3850,7 @@ var toReturn = {
 		},
 		Megamace: {
 			world: -1,
-			message: "You found a book that will teach you how to upgrade your Mace!",
+			message: "你找到一本书，会教你如何升级你的锤！",
 			level: "last",
 			icon: "book",
 			title: "Megamace",
@@ -3862,7 +3862,7 @@ var toReturn = {
 		},
 		Hellishmet: {
 			world: -1,
-			message: "You found a book that will teach you how to upgrade your Helmet!",
+			message: "你找到一本书，会教你如何升级你的头盔！",
 			level: "last",
 			icon: "book",
 			title: "Hellishmet",
@@ -3874,7 +3874,7 @@ var toReturn = {
 		},		
 		Polierarm: {
 			world: -1,
-			message: "You found a book that will teach you how to upgrade your Polearm!",
+			message: "你找到一本书，会教你如何升级你的Polearm!",
 			level: "last",
 			icon: "book",
 			title: "Polierarm",
@@ -3886,7 +3886,7 @@ var toReturn = {
 		},
 		Pantastic: {
 			world: -1,
-			message: "You found a book that will teach you how to upgrade your Pants!",
+			message: "你找到一本书，会教你如何升级你的裤子！",
 			level: "last",
 			icon: "book",
 			title: "Pantastic",
@@ -3898,7 +3898,7 @@ var toReturn = {
 		},
 		Axeidic: {
 			world: -1,
-			message: "You found a book that will teach you how to upgrade your Battleaxe!",
+			message: "你找到一本书，会教你如何升级你的战斧！",
 			level: "last",
 			icon: "book",
 			title: "Axeidic",
@@ -3910,7 +3910,7 @@ var toReturn = {
 		},
 		Smoldershoulder: {
 			world: -1,
-			message: "You found a book that will teach you how to upgrade your Shoulderguards!",
+			message: "你找到一本书，会教你如何升级你的护肩！",
 			level: "last",
 			icon: "book",
 			title: "Smoldershoulder",
@@ -3922,7 +3922,7 @@ var toReturn = {
 		},
 		Greatersword: {
 			world: -1,
-			message: "You found a book that will teach you how to upgrade your Greatsword!",
+			message: "你找到一本书，会教你如何升级你的大剑！",
 			level: "last",
 			icon: "book",
 			title: "Greatersword",
@@ -3934,7 +3934,7 @@ var toReturn = {
 		},
 		Bestplate: {
 			world: -1,
-			message: "You found a book that will teach you how to upgrade your Breastplate!",
+			message: "你找到一本书，会教你如何升级你的胸甲！",
 			title: "Bestplate",
 			level: "last",
 			icon: "book",
@@ -3946,7 +3946,7 @@ var toReturn = {
 		},
 		Harmbalest: {
 			world: -1,
-			message: "You found a book that will teach you how to upgrade your Arbalest!",
+			message: "你找到一本书，会教你如何升级你的Arbalest！",
 			title: "Harmbalest",
 			level: "last",
 			specialFilter: function () {
@@ -3961,7 +3961,7 @@ var toReturn = {
 		},
 		GambesOP: {
 			world: -1,
-			message: "You found a book that will teach you how to upgrade your Gambeson!",
+			message: "你找到一本书，会教你如何升级你的Gambeson！",
 			title: "GambesOP",
 			level: "last",
 			specialFilter: function () {
@@ -3976,27 +3976,27 @@ var toReturn = {
 		},
 		TheBlock: {
 			world: -1,
-			message: "Holy cowimp! A unique map!",
+			message: "神圣的cowimp！一个独特的地图！",
 			level: [10, 20],
 			icon: "th-large",
 			title: "The Block",
 			startAt: 11,
 			canRunOnce: true,
 			fire: function () {
-				message("You just made a map to The Block!", "Story");
+				message("你找到了一个指向The Block的地图！", "Story");
 				createMap(11, "The Block", "Block", 2, 100, 1.3, true, true); 
 			}
 		},
 		TheWall: {
 			world: -1,
-			message: "Oh snap! Another unique map!",
+			message: "哦！又一个独特的地图！",
 			level: [10, 20],
 			icon: "th-large",
 			title: "The Wall",
 			startAt: 15,
 			canRunOnce: true,
 			fire: function () {
-				message("You just made a map to The Wall!", "Story");
+				message("你找到了一个指向The Wall的地图！", "Story");
 				createMap(15, "The Wall", "Wall", 2, 100, 1.5, true, true); 
 			}
 		},
@@ -4018,11 +4018,11 @@ var toReturn = {
 			level: [1, 15],
 			icon: "th-large",
 			canRunOnce: true,
-			title: "Bionic Wonderland",
+			title: "仿生仙境",
 			fire: function () {
-				message("You found a map to the Bionic Wonderland. Sounds fun!", "Story");
+				message("你找到了一个指向仿生仙境的地图。听起来很有趣！", "Story");
 				game.global.bionicOwned++;
-				createMap(125, "Bionic Wonderland", "Bionic", 3, 100, 2.6, true);
+				createMap(125, "仿生仙境", "Bionic", 3, 100, 2.6, true);
 			}
 		},
 		ImplodingStar: {
@@ -4030,19 +4030,19 @@ var toReturn = {
 			level: [1, 15],
 			icon: 'th-large',
 			canRunOnce: true,
-			title: 'Imploding Star',
+			title: '爆炸之星',
 			fire: function () {
-				message("You found a map to an Imploding Star inside of a supercooled dimension. The temperature there is perfect!", "Story");
-				createMap(170, "Imploding Star", "Star", 3, 100, 3.2, true);
+				message("你在这么冷的维度里发现了一个指向爆炸之星的地图。那里的温度是完美的！", "Story");
+				createMap(170, "爆炸之星", "Star", 3, 100, 3.2, true);
 			}
 		},
 		Mansion: {
 			world: -1,
 			startAt: 8,
-			message: "You found plans for a Mansion! Your Trimps will be pretty stoked",
+			message: "你发现了一个豪宅的图纸！ 你的Trimps会很兴奋",
 			level: [10, 20],
 			icon: "*home4",
-			title: "Mansion",
+			title: "豪宅",
 			canRunOnce: true,
 			fire: function () {
 				if (!this.canRunOnce) return;
@@ -4052,10 +4052,10 @@ var toReturn = {
 		Hotel: {
 			world: -1,
 			startAt: 14,
-			message: "You found plans for a hotel! (A decent hotel, too)",
+			message: "你找到了一家酒店的图纸！（一个像样的酒店）",
 			level: [10, 20],
 			icon: "*office",
-			title: "The Trimps' Guide to Cheap Hotel Construction",
+			title: "脆皮酒店建设指南",
 			canRunOnce: true,
 			fire: function () {
 				if (!this.canRunOnce) return;
@@ -4065,7 +4065,7 @@ var toReturn = {
 		UberHut: {
 			world: -1,
 			startAt: 18,
-			message: "This extremely technical book will teach anyone who can understand the big words how to make bigger huts.",
+			message: "这本非常有技术的书将教会会说大话的人如何做更大的小屋。",
 			level: [10, 20],
 			icon: "book",
 			title: "Hut hut hut",
@@ -4077,10 +4077,10 @@ var toReturn = {
 		UberHouse: {
 			world: -1, 
 			startAt: 29,
-			message: "This book talks about adding a second floor to your homes! Mind... blown...",
+			message: "这本书谈到在你的家增加一个二楼！ 心灵... ...",
 			level: [10, 20],
 			icon: "book",
-			title: "A Tale of Two Stories",
+			title: "两个故事的故事",
 			canRunOnce: true,
 			fire: function () {
 				unlockUpgrade("UberHouse");
@@ -4089,10 +4089,10 @@ var toReturn = {
 		UberMansion: {
 			world: -1, 
 			startAt: 34,
-			message: "This book will teach you how to make your Trimps share their mansions!",
+			message: "这本书将教你如何让你的脆皮分享他们的豪宅！",
 			level: [10, 20],
 			icon: "book",
-			title: "Sharing is Caring",
+			title: "分享就是爱心",
 			canRunOnce: true,
 			fire: function () {
 				unlockUpgrade("UberMansion");
@@ -4101,10 +4101,10 @@ var toReturn = {
 		UberHotel: {
 			world: -1,
 			startAt: 40,
-			message: "This book will teach you how to build smaller hotel rooms!",
+			message: "这本书将教你如何建立小型酒店房间！",
 			level: [5, 10],
 			icon: "book",
-			title: "The Art of Tiny Hotel Rooms",
+			title: "小型酒店的艺术",
 			canRunOnce: true,
 			fire: function () {
 				unlockUpgrade("UberHotel");
@@ -4114,9 +4114,9 @@ var toReturn = {
 			world: -1,
 			startAt: 47,
 			level: [5, 10],
-			message: "Wow! This book! It's so Resortsfull!",
+			message: "哇！ 这本书！ 这是度假圣地！",
 			icon: "book",
-			title: "Time for a better vacation",
+			title: "更好的度假时间",
 			canRunOnce: true,
 			fire: function () {
 				unlockUpgrade("UberResort");
@@ -4125,10 +4125,10 @@ var toReturn = {
 		Resort: {
 			world: -1,
 			startAt: 25,
-			message: "You found plans for a huge resort!",
+			message: "你发现了一个巨大的度假村的蓝图！",
 			level: [10, 20],
 			icon: "*building",
-			title: "Time for a vacation",
+			title: "度假时间",
 			canRunOnce: true,
 			fire: function () {
 				if (!this.canRunOnce) return;
@@ -4138,7 +4138,7 @@ var toReturn = {
 		Gateway: {
 			world: -1,
 			startAt: 30,
-			message: "You found a key to Dimension ZZZ!",
+			message: "你找到了Dimension ZZZ的钥匙！",
 			level: [10, 20],
 			icon: "cog",
 			title: "Transgalactic Gateway",
@@ -4151,10 +4151,10 @@ var toReturn = {
 		Wormhole: {
 			world: -1,
 			startAt: 37,
-			message: "You found a crystal powerful enough to create wormholes!",
+			message: "你发现了一个足以创造虫洞的水晶！",
 			level: [10, 20],
 			icon: "link",
-			title: "Inter-Dimensional Hole-Maker",
+			title: "三维空间的打孔器",
 			canRunOnce: true,
 			fire: function () {
 				if (!this.canRunOnce) return;
@@ -4164,10 +4164,10 @@ var toReturn = {
 		Collector: {
 			world: -1,
 			startAt: 50,
-			message: "You found plans for some sort of overly complicated solar panel.",
+			message: "你发现了一些过于复杂的太阳能电池板的蓝图。",
 			level: [3, 19],
 			icon: "dashboard",
-			title: "Collector",
+			title: "收集器",
 			canRunOnce: true,
 			fire: function () {
 				if (!this.canRunOnce) return;
@@ -4177,10 +4177,10 @@ var toReturn = {
 		Trapstorm: {
 			world: -1,
 			startAt: 10,
-			message: "A book that teaches your Foremen a new skill. Riveting.",
+			message: "一本教你的工头一种新技能的书。铆接。",
 			level: [5, 15],
 			icon: "book",
-			title: "Trapstorm",
+			title: "陷阱风暴",
 			canRunOnce: true,
 			fire: function () {
 				unlockUpgrade("Trapstorm");
@@ -4190,10 +4190,10 @@ var toReturn = {
 		Nursery: {
 			world: -1,
 			startAt: 23,
-			message: "You found blueprints for some sort of nursery that can harness more power from gems.",
+			message: "你发现了一些幼儿园的蓝图，可以从宝石里获得更多力量。",
 			level: [5, 20],
 			icon: "home",
-			title: "Nursery",
+			title: "幼儿园",
 			canRunOnce: true,
 			fire: function () {
 				unlockBuilding("Nursery");
@@ -4204,11 +4204,11 @@ var toReturn = {
 			world: -1,
 			level: [0, 7],
 			icon: "*diamond",
-			title: "Gems",
+			title: "宝石",
 			repeat: 5,
 			fire: function (level) {
 				var amt = rewardResource("gems", 0.5, level, true);
-				message("You found " + prettify(amt) + " gems! Terrific!", "Loot", "*diamond", null, "secondary");
+				message("你发现了 " + prettify(amt) + " 宝石！ 好极了！", "Loot", "*diamond", null, "secondary");
 			}
 		},
 		//This one is for depths maps
@@ -4217,18 +4217,18 @@ var toReturn = {
 			level: [0, 4],
 			repeat: 3,
 			icon: "*diamond",
-			title: "Gems",
+			title: "宝石",
 			filter: true,
 			fire: function (level) {
 				var amt = rewardResource("gems", 0.5, level, true);
-				message("You found " + prettify(amt) + " gems! Terrific!", "Loot", "*diamond", null, "secondary");
+				message("你发现了 " + prettify(amt) + " 宝石！ 好极了！", "Loot", "*diamond", null, "secondary");
 			}
 		},
 		Any: {
 			world: -1,
 			level: [0, 2],
 			icon: "*leaf2",
-			title: "Food/Wood/Metal",
+			title: "食物/木头/金属",
 			repeat: 2,
 			filter: true,
 			fire: function (level) {
@@ -4250,36 +4250,36 @@ var toReturn = {
 			world: -1,
 			level: [0, 2],
 			icon: "*cubes",
-			title: "Metal",
+			title: "金属",
 			repeat: 2,
 			filter: true,
 			fire: function (level) {
 				var amt = rewardResource("metal", 0.5, level, true);
-				message("You just found " + prettify(amt) + " bars of metal! Convenient!", "Loot", "*cubes", null, "primary");
+				message("你刚刚发现了 " + prettify(amt) + " 块金属！ 好棒！", "Loot", "*cubes", null, "primary");
 			}
 		},
 		Food: {
 			world: -1,
 			level: [0, 2],
 			icon: "apple",
-			title: "Food",
+			title: "食物",
 			repeat: 2,
 			filter: true,
 			fire: function (level) {
 				var amt = rewardResource("food", 0.5, level, true);
-				message("That guy just left " + prettify(amt) + " food on the ground! Sweet!", "Loot", "apple", null, "primary");
+				message("那家伙刚刚留下了 " + prettify(amt) + " 个食物！ Sweet!", "Loot", "apple", null, "primary");
 			}
 		},
 		Wood: {
 			world: -1,
 			level: [0, 2],
 			icon: "tree-deciduous",
-			title: "Wood",
+			title: "木头",
 			repeat: 2,
 			filter: true,
 			fire: function (level) {
 				var amt = rewardResource("wood", 0.5, level, true);
-				message("You just found " + prettify(amt) + " wood! That's pretty neat!", "Loot", "tree-deciduous", null, "primary");
+				message("你刚刚发现了 " + prettify(amt) + " 个木头！ 很好！", "Loot", "tree-deciduous", null, "primary");
 			}
 		}
 	},
@@ -4804,7 +4804,7 @@ var toReturn = {
 			fire: function () {
 				game.global.mapsUnlocked = true;
 				unlockMapStuff();
-				createMap(6, "Tricky Paradise", "Plentiful", 1.2, 45, 0.85);
+				createMap(6, "棘手的天堂", "Plentiful", 1.2, 45, 0.85);
 				message("你找到了你的第一张地图！ 到你的地图室查看它。", "Story");
 			}
 		},
@@ -4857,7 +4857,7 @@ var toReturn = {
 			repeat: 9,
 			fire: function (level) {
 				var amt = rewardResource("food", 0.5, level);
-				message("那家伙刚刚在地上落下了 " + prettify(amt) + " 个食物！ Sweet!", "Loot", "apple", null, 'primary');
+				message("那家伙刚刚留下了 " + prettify(amt) + " 个食物！ Sweet!", "Loot", "apple", null, 'primary');
 			}
 		},
 		groundLumber: {
@@ -4868,7 +4868,7 @@ var toReturn = {
 			repeat: 8,
 			fire: function (level) {
 				var amt = rewardResource("wood", 0.5, level);
-				message("你刚刚发现了 " + prettify(amt) + " 个木头！ 这很漂亮！", "Loot", "tree-deciduous", null, 'primary');
+				message("你刚刚发现了 " + prettify(amt) + " 个木头！ 很好！", "Loot", "tree-deciduous", null, 'primary');
 			}
 		},
 		freeMetals: {
@@ -5806,7 +5806,7 @@ var toReturn = {
 		Supershield: {
 			locked: 1,
 			allowed: 0,
-			tooltip: "这将使你的盾牌级别为1，并大大增加进一步升级的成本，但将大大增加统计给出的数量。 @",
+			tooltip: "这将重置你的盾牌级别为1，并大大增加进一步升级的成本，但将大大增加统计给出的数量。 @",
 			done: 0,
 			cost: {
 				resources: {
@@ -5822,7 +5822,7 @@ var toReturn = {
 		Dagadder: {
 			locked: 1,
 			allowed: 0,
-			tooltip: " 这将使你的匕首级别为1，并大大增加进一步升级的成本，但将大大增加攻击。 @",
+			tooltip: " 这将重置你的匕首级别为1，并大大增加进一步升级的成本，但将大大增加攻击。 @",
 			done: 0,
 			cost: {
 				resources: {
@@ -5838,7 +5838,7 @@ var toReturn = {
 		Bootboost: {
 			locked: 1,
 			allowed: 0,
-			tooltip: "这将使你的靴子级别为1，并大大增加进一步升级的成本，但将大大增加生命。 @",
+			tooltip: "这将重置你的靴子级别为1，并大大增加进一步升级的成本，但将大大增加生命。 @",
 			done: 0,
 			cost: {
 				resources: {
@@ -5854,7 +5854,7 @@ var toReturn = {
 		Megamace: {
 			locked: 1,
 			allowed: 0,
-			tooltip: "这将使你的锤到1级，并大大增加进一步升级的成本，但将大大增加攻击。 @",
+			tooltip: "这将重置你的锤到1级，并大大增加进一步升级的成本，但将大大增加攻击。 @",
 			done: 0,
 			cost: {
 				resources: {
@@ -5870,7 +5870,7 @@ var toReturn = {
 		Hellishmet: {
 			locked: 1,
 			allowed: 0,
-			tooltip: "这将使你的头盔到1级，并大大增加进一步升级的成本，但将大大增加生命。 @",
+			tooltip: "这将重置你的头盔到1级，并大大增加进一步升级的成本，但将大大增加生命。 @",
 			done: 0,
 			cost: {
 				resources: {
@@ -5886,7 +5886,7 @@ var toReturn = {
 		Polierarm: {
 			locked: 1,
 			allowed: 0,
-			tooltip: "这将使你的polearm到1级，并大大增加进一步升级的成本，但将大大增加攻击。 @",
+			tooltip: "这将重置你的Polearm到1级，并大大增加进一步升级的成本，但将大大增加攻击。 @",
 			done: 0,
 			cost: {
 				resources: {
@@ -5918,7 +5918,7 @@ var toReturn = {
 		Axeidic: {
 			locked: 1,
 			allowed: 0,
-			tooltip: "这将使你的斧头到1级，并大大增加进一步升级的成本，但将大大增加攻击。 @",
+			tooltip: "这将重置你的战斧到1级，并大大增加进一步升级的成本，但将大大增加攻击。 @",
 			done: 0,
 			cost: {
 				resources: {
@@ -5934,7 +5934,7 @@ var toReturn = {
 		Smoldershoulder: {
 			locked: 1,
 			allowed: 0,
-			tooltip: "这将使你的护肩到1级，并大大增加进一步升级的成本，但将大大增加生命。 @",
+			tooltip: "这将重置你的护肩到1级，并大大增加进一步升级的成本，但将大大增加生命。 @",
 			done: 0,
 			cost: {
 				resources: {
@@ -5966,7 +5966,7 @@ var toReturn = {
 		Bestplate: {
 			locked: 1,
 			allowed: 0,
-			tooltip: "这将使你的胸甲到1级，并大大增加进一步升级的成本，但将大大增加生命。 @",
+			tooltip: "这将重置你的胸甲到1级，并大大增加进一步升级的成本，但将大大增加生命。 @",
 			done: 0,
 			cost: {
 				resources: {
@@ -5982,7 +5982,7 @@ var toReturn = {
 		Harmbalest: {
 			locked: 1,
 			allowed: 0,
-			tooltip: "这将使你的arbalest到1级，并大大增加进一步升级的成本，但将大大增加攻击。 @",
+			tooltip: "这将重置你的arbalest到1级，并大大增加进一步升级的成本，但将大大增加攻击。 @",
 			done: 0,
 			cost: {
 				resources: {
@@ -5998,7 +5998,7 @@ var toReturn = {
 		GambesOP: {
 			locked: 1,
 			allowed: 0,
-			tooltip: "这将使你的gambeson到1级，并大大增加进一步升级的成本，但将大大增加生命。 @",
+			tooltip: "这将重置你的gambeson到1级，并大大增加进一步升级的成本，但将大大增加生命。 @",
 			done: 0,
 			cost: {
 				resources: {
@@ -6043,7 +6043,8 @@ var toReturn = {
 			},
 			fire: function () {
 				game.jobs.Trainer.modifier = Math.ceil(game.jobs.Trainer.modifier += 5);
-			}
+			},
+			nameCN: "格斗训练"
 		},
 		Efficiency: {
 			locked: 1,
