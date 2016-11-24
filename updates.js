@@ -149,7 +149,8 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		elem.style.top = "25%";
 	}
 	if (what == "Portal"){
-		tooltipText = "The portal device you found shines green in the lab. Such a familiar shade...";
+		titleText = "传送门";
+		tooltipText = "你发现的传送装置在实验室里闪着绿光。一副熟悉的画面……";
 		costText = "";
 	}
 	if (what == "Repeat Map"){
@@ -533,7 +534,7 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 			if (!canAffordCoordinationTrimps()){
 				var nextCount = (game.portal.Coordinated.level) ? game.portal.Coordinated.currentSend : game.resources.trimps.maxSoldiers;
 				var amtToGo = ((nextCount * 3) - game.resources.trimps.realMax());
-				tooltipText += "<b>You need enough room for " + prettify(nextCount * 3) + " max Trimps. You are short " + prettify(Math.floor(amtToGo)) + " Trimps.</b>";
+				tooltipText += "<b>你需要足够的空间来安置最少 " + prettify(nextCount * 3) + " 脆皮。你还需要安置 " + prettify(Math.floor(amtToGo)) + " 脆皮。</b>";
 			}
 		}
 	}

@@ -40,7 +40,7 @@ Minimalist	极简主义
 Prodigal	败家子
 
 Bionic Wonderland	仿生仙境
-Dimension of Anger
+Dimension of Anger	愤怒的维度
 
 health	生命
 block	格挡

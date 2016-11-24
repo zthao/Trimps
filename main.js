@@ -775,7 +775,7 @@ function portalClicked() {
 	var titleText = "时间传送门";
 	if (game.global.sLevel >= 1) titleText += " Mk. " + romanNumeral(game.global.sLevel + 1);
 	document.getElementById("portalTitle").innerHTML = titleText;
-	document.getElementById("portalStory").innerHTML = "好吧，你做到了。 你随你的直觉通过了这个奇怪的世界，使你的方式通过了愤怒的维度(Dimension of Anger)，并获得这个传送门。 但为什么？ 也许通过这个传送门会有答案...你的科学家告诉你，他们可以超频它将更多的回忆和项目带回来，但他们将需要氦来冷却它。";
+	document.getElementById("portalStory").innerHTML = "好吧，你做到了。 你随你的直觉到达了这个奇怪的世界，使用了你的方式通过了愤怒的维度(Dimension of Anger)，并获得了这个传送门。 但为什么？ 也许通过这个传送门会有答案……你的科学家告诉你，他们可以超频这个传送门并将更多的回忆和项目带回来，但他们将需要氦来冷却传送门。";
 	document.getElementById("portalHelium").innerHTML = '<span id="portalHeliumOwned">' + prettify(game.resources.helium.owned + game.global.heliumLeftover) + '</span> Helium';
 	document.getElementById("totalHeliumEarned").innerHTML = prettify(game.global.totalHeliumEarned);
 	document.getElementById("totalPortals").innerHTML = game.global.totalPortals;
@@ -871,7 +871,7 @@ function selectChallenge(what) {
 	}
 	if (!game.challenges[what].filter()){
 		var unlockString = (typeof game.challenges[what].unlockString === 'function') ? game.challenges[what].unlockString() : game.challenges[what].unlockString;
-		document.getElementById("specificChallengeDescription").innerHTML = "一旦你 " + unlockString + "，你将解锁这个挑战";
+		document.getElementById("specificChallengeDescription").innerHTML = "一旦你" + unlockString + "，你将解锁这个挑战";
 		game.global.selectedChallenge = "";
 		document.getElementById("flagMustRestart").style.display = "none";
 		if (addChallenge !== null) addChallenge.innerHTML = "";
@@ -893,7 +893,7 @@ function selectChallenge(what) {
 	game.global.selectedChallenge = what;
 	document.getElementById("flagMustRestart").style.display = (what == "Scientist") ? "inline" : "none";
 	
-	if (addChallenge !== null) addChallenge.innerHTML = "你有 <b>" + what + " 挑战</b> 已激活。";
+	if (addChallenge !== null) addChallenge.innerHTML = "挑战 <b>" + what + "</b> 已激活。";
 	
 	if (what == "Daily") updateDailyClock();
 }
@@ -1296,8 +1296,8 @@ function activateClicked(){
 	if (game.global.kongBonusMode){
 		newText = "All set?";
 	}
-	else newText = "Are you sure you want to enter the portal? You will lose all progress other than the portal-compatible upgrades you've earned, such as Helium, Perks, Bones, and Exotic Imports. Who knows where or when it will send you.";
-	if (game.global.selectedChallenge) newText += " <span id='addChallenge'>You have the <b>" + game.global.selectedChallenge + " Challenge</b> active.</span>";
+	else newText = "你确定你要进入传送门么？你将会失去所有与传送门不兼容的东西，例如氦，Perks，Bones和Exotic Imports。谁知道会什么时候还给你。";
+	if (game.global.selectedChallenge) newText += " <span id='addChallenge'>挑战 <b>" + game.global.selectedChallenge + "</b> 已激活。</span>";
 	else newText += " <span id='addChallenge'></span>";
 	if (game.global.challengeActive == "Daily") newText += "<br/><span style='color: red;'><i>You still have the Daily challenge active! If you portal right now, your reward will be applied at the beginning of your next run. Alternatively, click 'Finish Daily' in the World or inside 'View Perks' to get the bonus now.</i></span>";
 	newText += "<br/>";
@@ -1305,7 +1305,7 @@ function activateClicked(){
 		var s = (game.global.heirloomsExtra.length > 1) ? "s" : "";
 		newText += "<div class='heirloomRecycleWarning'>You have " + game.global.heirloomsExtra.length + " extra Heirloom" + s + ", which will be recycled for " + prettify(recycleAllExtraHeirlooms(true)) + " Nullifium if you portal now. Make sure you carry any that you want to save!</div>";
 	}
-	newText += "<div class='btn btn-info activatePortalBtn' onclick='activatePortal()'>Let's do it.</div>";
+	newText += "<div class='btn btn-info activatePortalBtn' onclick='activatePortal()'>来吧！</div>";
 	document.getElementById("portalStory").innerHTML = newText;
 }
 

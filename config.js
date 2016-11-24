@@ -1130,7 +1130,7 @@ var toReturn = {
 				abandonDaily();
 			},
 			fireAbandon: true,
-			unlockString: "reach Zone 100"
+			unlockString: "到达区域100"
 		},
 		Discipline: {
 			description: "Tweak the portal to bring you back to a universe where Trimps are less disciplined, in order to teach you how to be a better Trimp trainer. Your Trimps' minimum damage will be drastically lower, but their high end damage will be considerably higher. Completing The Dimension Of Anger will cause Trimp damage to return to normal.",
@@ -1155,7 +1155,7 @@ var toReturn = {
 			fireAbandon: false,
 			heldBooks: 0,
 			unlocks: "Artisanistry",
-			unlockString: "reach Zone 25"
+			unlockString: "到达区域25"
 		},
 		Size: {
 			description: "Tweak the portal to bring you to an alternate reality, where Trimps are bigger and stronger, to force yourself to figure out a way to build larger housing. Your Trimps will gather 50% more resources, but your housing will fit 50% fewer Trimps. If you complete The Dimension of Anger without disabling the challenge, your stats will return to normal.",
@@ -1177,7 +1177,7 @@ var toReturn = {
 			},
 			fireAbandon: true,
 			unlocks: "Carpentry",
-			unlockString: "reach Zone 35"
+			unlockString: "到达区域35"
 		},
 		Balance: { 
 			description: "Your scientists have discovered a chaotic dimension filled with helium. All enemies have 100% more health, enemies in world deal 17% more damage, and enemies in maps deal 135% more damage. Starting at Zone 6, every time an enemy in the world is slain you will gain a stack of 'Unbalance'. Every time an enemy in a map is slain, you will lose a stack of Unbalance. Each stack of Unbalance reduces your health by 1%, but increases your Trimps' gathering speed by 1%. Unbalance can only stack to 250. Completing <b>Zone 40</b> with this challenge active will grant an additional 100% of all helium earned up to that point. This challenge is repeatable!",
@@ -1217,7 +1217,7 @@ var toReturn = {
 			fireAbandon: true,
 			heldHelium: 0,
 			heliumThrough: 40,
-			unlockString: "reach Zone 40"
+			unlockString: "到达区域40"
 		},
 		Scientist: {
 			get description (){ 
@@ -1266,11 +1266,11 @@ var toReturn = {
 			},
 			fireAbandon: false,
 			unlockString: function () {
-				if (game.global.sLevel == 0) return "reach Zone 40";
-				else if (game.global.sLevel == 1) return "reach Zone 50";
-				else if (game.global.sLevel == 2) return "reach Zone 90";
-				else if (game.global.sLevel == 3) return "reach Zone 110";
-				else if (game.global.sLevel >= 4) return "reach Zone 130";
+				if (game.global.sLevel == 0) return "到达区域40";
+				else if (game.global.sLevel == 1) return "到达区域50";
+				else if (game.global.sLevel == 2) return "到达区域90";
+				else if (game.global.sLevel == 3) return "到达区域110";
+				else if (game.global.sLevel >= 4) return "到达区域130";
 			}
 		},
 		Meditate: {
@@ -1280,7 +1280,7 @@ var toReturn = {
 				return (game.global.highestLevelCleared >= 44);
 			},
 			unlocks: "Meditation",
-			unlockString: "reach Zone 45"
+			unlockString: "到达区域45"
 		},
 		Decay: {
 			description: "Tweak the portal to bring you to an alternate reality, where added chaos will help you learn to create a peaceful place. You will gain 10x loot, 10x gathering (excluding helium), and 5x Trimp attack, but a stack of Decay will accumulate every second. Each stack of Decay reduces loot, gathering, and Trimp attack by 0.5% of the current amount. These stacks reset each time a Blimp is killed and cap at 999. Completing <b>Zone 55</b> with this challenge active will allow you to select the Gardens biome when creating maps, and all future Gardens maps created will gain +25% loot.",
@@ -1293,7 +1293,7 @@ var toReturn = {
 			filter: function () {
 				return (game.global.highestLevelCleared >= 54);
 			},
-			unlockString: "reach Zone 55",
+			unlockString: "到达区域55",
 		},
 		Trimp: {
 			description: "Tweak the portal to bring you to a dimension where Trimps explode if more than 1 fights at a time. You will not be able to learn Coordination, but completing <b>'The Block' (11)</b> will teach you how to keep your Trimps alive for much longer.",
@@ -1309,7 +1309,7 @@ var toReturn = {
 					unlockUpgrade("Coordination");
 				}
 			},
-			unlockString: "reach Zone 60"
+			unlockString: "到达区域60"
 		},
 		Trapper: {
 			description: "Travel to a dimension where Trimps refuse to breed in captivity, teaching yourself new ways to take advantage of situations where breed rate is low. Clearing <b>'Trimple Of Doom' (33)</b> with this challenge active will return your breeding rate to normal.",
@@ -1325,7 +1325,7 @@ var toReturn = {
 					unlockUpgrade("Potency");
 				}
 			},
-			unlockString: "reach Zone 70"
+			unlockString: "到达区域70"
 		},
 		Electricity: {
 			description: "Use the keys you found in the Prison to bring your portal to an extremely dangerous dimension. In this dimension enemies will electrocute your Trimps, stacking a debuff with each attack that damages Trimps for 10% of total health per turn per stack, and reduces Trimp attack by 10% per stack. Clearing <b>'The Prison' (80)</b> will reward you with an additional 150% of all helium earned up to but not including Zone 80. This is repeatable!",
@@ -1363,7 +1363,7 @@ var toReturn = {
 			abandon: function () {
 				this.start(true);
 			},
-			unlockString: "reach Zone 100"
+			unlockString: "到达区域100"
 		},
 		Mapocalypse: {
 			description: "Experience a slightly distorted version of the 'Electricity' dimension, to help understand the relationship between maps and the world. Everything will work exactly the same as Electricity, but all maps will have an extra 300% difficulty. Clearing <b>'The Prison' (80)</b> will cause the world to return to normal. You <b>will</b> receive the Helium reward from Electricity.",
@@ -1378,7 +1378,7 @@ var toReturn = {
 				}
 			},
 			unlocks: "Siphonology",
-			unlockString: "reach Zone 115",
+			unlockString: "到达区域115",
 			difficultyIncrease: 3
 		},
 		Coordinate: {
@@ -1388,7 +1388,7 @@ var toReturn = {
 				return (game.global.highestLevelCleared >= 119);
 			},
 			unlocks: "Coordinated",
-			unlockString: "reach Zone 120"
+			unlockString: "到达区域120"
 		},
 		Crushed: {
 			description: "进入一个氦气丰富的维度，但坏蛋有50%的几率爆击造成 400%的伤害，除非你的格挡与你现在的生命一样高。 完成<b>仿生仙境(Z125)</b>会奖励你额外100%的氦获得，但不包括Z125。 这个挑战是可重复的。",
@@ -1404,7 +1404,7 @@ var toReturn = {
 			},
 			heldHelium: 0,
 			heliumThrough: 124,
-			unlockString: "reach Zone 125"
+			unlockString: "到达区域125"
 		},
 		Slow: {
 			description: "Legends tell of a dimension inhabited by incredibly fast bad guys, where blueprints exist for a powerful yet long forgotten weapon and piece of armor. All bad guys will attack first in this dimension, but clearing <b>Zone 120</b> with this challenge active will forever-after allow you to create these new pieces of equipment.",
@@ -1412,7 +1412,7 @@ var toReturn = {
 			filter: function () {
 				return (game.global.highestLevelCleared >= 129);
 			},
-			unlockString: "reach Zone 130"
+			unlockString: "到达区域130"
 		},
 		Nom: {
 			description: "Travel to a dimension where bad guys enjoy the taste of Trimp. Whenever a group of Trimps dies, the bad guy will eat them, gaining 25% (compounding) more attack damage and healing for 5% of their maximum health. The methane-rich atmosphere causes your Trimps to lose 5% of their total health after each attack, but the bad guys are too big and slow to attack first. Clearing <b>Zone 145</b> will reward you with an additional 200% of all helium earned up to that point. This is repeatable!",
@@ -1422,7 +1422,7 @@ var toReturn = {
 			},
 			heldHelium: 0,
 			heliumThrough: 145,
-			unlockString: "reach Zone 145"
+			unlockString: "到达区域145"
 		},
 		Mapology: {
 			description: "Travel to a dimension where maps are scarce, in an attempt to learn to be more resourceful. You will earn one map Credit for each World Zone you clear, and it costs 1 credit to run 1 map. Completing <b>Zone 100</b> with this challenge active will return you to your original dimension. Double prestige from Scientist IV will not work during this challenge.",
@@ -1439,7 +1439,7 @@ var toReturn = {
 			},
 			unlocks: "Resourceful",
 			credits: 0,
-			unlockString: "reach Zone 150"
+			unlockString: "到达区域150"
 		},
 		Toxicity: {
 			description: "Travel to a dimension rich in helium, but also rich in toxic bad guys. All bad guys have 5x attack and 2x health. Each time you attack a bad guy, your Trimps lose 5% of their health, and toxins are released into the air which reduce the breeding speed of your Trimps by 0.3% (of the current amount), but also increase all loot found by 0.15%, stacking up to 1500 times. These stacks will reset when you clear a zone. Completing <b>Zone 165</b> with this challenge active will reward you with an additional 200% of all helium earned up to that point. This is repeatable!",
@@ -1454,7 +1454,7 @@ var toReturn = {
 			maxStacks: 1500, //Changing this breaks the feat spaghetti
 			stackMult: 0.997,
 			lootMult: 0.15,
-			unlockString: "reach Zone 165"
+			unlockString: "到达区域165"
 		},
 		Devastation: {
 			description: "Travel to a harsh dimension where Trimps are penalized for the mistakes of previous generations. If your army is killed at any point, any overkill damage will be applied 750% to the next group of Trimps to fight. Completing <b>Imploding Star (Zone 170)</b> will return the world to normal.",
@@ -1464,7 +1464,7 @@ var toReturn = {
 			},
 			lastOverkill: -1,
 			unlocks: "Overkill",
-			unlockString: "reach Zone 170"
+			unlockString: "到达区域170"
 		},
 		Watch: {
 			description: "Travel to a strange dimension where life is easier but harder at the same time. At the end of each World Zone any available equipment upgrades will drop, and any unassigned Trimps will be split evenly amongst Farmer, Lumberjack, and Miner. However, resource production and drops from all sources will be halved, and all enemies will deal 25% more damage. Completing <b>Zone 180</b> with this challenge active will reward you with an additional 150% of all helium earned up to that point.",
@@ -1474,7 +1474,7 @@ var toReturn = {
 			heliumMultiplier: 1.5,
 			heldHelium: 0,
 			heliumThrough: 180,
-			unlockString: "reach Zone 180",
+			unlockString: "到达区域180",
 			enteredMap: false
 		},
 		Lead: {
@@ -1486,7 +1486,7 @@ var toReturn = {
 			stacks: 0,
 			heldHelium: 0,
 			heliumThrough: 180,
-			unlockString: "reach Zone 180",
+			unlockString: "到达区域180",
 			fireAbandon: true,
 			abandon: function () {
 				if (document.getElementById('determinedBuff')) document.getElementById('determinedBuff').style.display = "none";
@@ -1501,7 +1501,7 @@ var toReturn = {
 			heldHelium: 0,
 			heliumThrough: 190,
 			hiredGenes: false,
-			unlockString: "reach Zone 190"
+			unlockString: "到达区域190"
 		}
 	},
 	stats:{
@@ -3750,11 +3750,11 @@ var toReturn = {
 			canRunOnce: true,
 			fire: function () {
 				if (!this.canRunOnce) return;
-				message("Don't ever let anyone tell you that you didn't just kill that Megablimp. Because you did. As he melts away into nothingness, you notice a green, shining box on the ground. In tiny writing on the box, you can make out the words 'Time portal. THIS SIDE UP'", "Story");
+				message("你杀掉了Megablimp。当他化为虚无时，你注意到地上有一个闪着绿光的盒子。 盒子上有一行小字，“时间传送门  此面向上”", "Story");
 				game.global.portalActive = true;
 				fadeIn("helium", 10);
 				addHelium(45);
-				message("<span class='glyphicon glyphicon-oil'></span> You were able to extract 45 Helium canisters from that Blimp! Now that you know how to do it, you'll be able to extract helium from normal Blimps.", "Story"); 
+				message("<span class='glyphicon glyphicon-oil'></span> 你从那个Blimp中提取了45氦！ 现在你知道了如何从正常的Blimps提取氦。", "Story"); 
 				fadeIn("portalBtn", 10);
 				if (game.global.challengeActive == "Metal"){
 					game.global.challengeActive = "";
@@ -5586,7 +5586,7 @@ var toReturn = {
 		Gymystic: { //25
 			locked: 1,
 			allowed: 0,
-			tooltip: "这本书会使你购买的每个健身房增加所有健身房提供的格挡5%。 此升级的后续级别将额外提供1%的格挡。 <b>The extra block provided compounds per Gym.</b>",
+			tooltip: "这本书会使你购买的每个健身房增加所有健身房提供的格挡5%。 此升级的后续级别将额外提供1%的格挡。 <b>额外的格挡加成到健身房。</b>",
 			done: 0,
 			cost: {
 				resources: {
@@ -5600,7 +5600,7 @@ var toReturn = {
 				game.buildings.Gym.increase.by = 6 * Math.pow(game.upgrades.Gymystic.modifier + (0.01 * (game.upgrades.Gymystic.done)), game.buildings.Gym.owned);
 				game.global.block += ((game.buildings.Gym.increase.by - oldBlock) * game.buildings.Gym.owned);
 			},
-			nameCN: "健身房"
+			nameCN: "健身学"
 		},	
 	//Formations
 		Formations: {
