@@ -42,10 +42,15 @@ Prodigal	败家子
 Bionic Wonderland	仿生仙境
 Dimension of Anger	愤怒的维度
 
+shop
+Quick Trimps	快速繁殖
+
 health	生命
 block	格挡
 attack	攻击
-perk
+perk	奖励
+Bone	骨头
+Exotic Imports	外来物种
 dimension	维度
 
 Perk
@@ -58,7 +63,7 @@ Meditate
 Electricity
 
 
-你已经完成了挑战“平衡”！ 作为奖励，你获得了 " + prettify(reward) + " 氦，你可以重复这个挑战。
+你已经完成了挑战“平衡”！ 作为奖励，你获得了 " + prettify(reward) + " 氦气，你可以重复这个挑战。
 
 ((game.upgrades[what].nameCN) ? game.upgrades[what].nameCN : what)
 ((game.equipment[what].nameCN) ? game.equipment[what].nameCN : what)

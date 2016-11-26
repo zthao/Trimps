@@ -1391,7 +1391,7 @@ var toReturn = {
 			unlockString: "到达区域120"
 		},
 		Crushed: {
-			description: "进入一个氦气丰富的维度，但坏蛋有50%的几率爆击造成 400%的伤害，除非你的格挡与你现在的生命一样高。 完成<b>仿生仙境(Z125)</b>会奖励你额外100%的氦获得，但不包括Z125。 这个挑战是可重复的。",
+			description: "进入一个氦气丰富的维度，但坏蛋有50%的几率爆击造成 400%的伤害，除非你的格挡与你现在的生命一样高。 完成<b>仿生仙境(Z125)</b>会奖励你额外100%的氦气获得，但不包括Z125。 这个挑战是可重复的。",
 			completed: false,
 			filter: function () {
 				return (game.global.highestLevelCleared >= 124);
@@ -1810,9 +1810,10 @@ var toReturn = {
 			finished: 0,
 			title: "Real Estate",
 			description: function (number) {
-				return "建造你的第一个" + this.breakpoints[number];
+				return "建造你的第一个" + this.breakpointsCN[number];
 			},
-			breakpoints: ["小屋", "房子", "豪宅", "酒店", "度假村", "Gateway", "虫洞", "Collector", "Warpstation"],
+			breakpoints: ["Hut", "House", "Mansion", "Hotel", "Resort", "Gateway", "Wormhole", "Collector", "Warpstation"],
+			breakpointsCN: ["小屋", "房子", "豪宅", "酒店", "度假村", "Gateway", "虫洞", "Collector", "Warpstation"],
 			tiers: [1, 1, 1, 1, 2, 2, 2, 2, 3],
 			names: ["Tiny Homes", "Residential Development", "Taste for Luxury", "Fancy", "The Skyline", "Dimensional Drift", "Too Cool For Helium", "Space From Stars", "To Infinity and Beyond"],
 			icon: "icomoon icon-building-o",
@@ -1884,7 +1885,7 @@ var toReturn = {
 			finished: 0,
 			title: "Helium Collection",
 			description: function (number) {
-				return "总共收集 " + prettify(this.breakpoints[number]) + " 氦";
+				return "总共收集 " + prettify(this.breakpoints[number]) + " 氦气";
 			},
 			progress: function (){
 				if (this.breakpoints.length > this.finished) return prettify(this.evaluate()) + " / " + prettify(this.breakpoints[this.finished]);
@@ -1952,7 +1953,7 @@ var toReturn = {
 			title: "Daily Bonus",
 			description: function (number) {
 				var number = this.breakpoints[number];
-				return "从每日挑战获得 " + prettify(number) + " 氦";
+				return "从每日挑战获得 " + prettify(number) + " 氦气";
 			},
 			evaluate: function () {
 				return game.stats.dailyBonusHelium.value + game.stats.dailyBonusHelium.valueTotal;
@@ -2493,7 +2494,7 @@ var toReturn = {
 		helium: {
 			owned: 0,
 			max: -1,
-			nameCN: "氦"
+			nameCN: "氦气"
 		} 
 	},
 	
@@ -2958,10 +2959,10 @@ var toReturn = {
 				if (game.global.world >= 21 && (game.global.totalPortals >= 1 || game.global.portalActive)){
 					if (game.resources.helium.owned == 0) fadeIn("helium", 10);
 					amt = rewardResource("helium", 1, level);
-					message("你能够从那个Blimp中提取 " + prettify(amt) + " 氦！", "Loot", "oil", "helium", "helium");
+					message("你能够从那个Blimp中提取 " + prettify(amt) + " 氦气！", "Loot", "oil", "helium", "helium");
 					if (game.global.world >= 40 && game.global.challengeActive == "Balance") {
 						var reward = game.challenges.Balance.heldHelium;
-						message("你已经完成了挑战“平衡”！ 作为奖励，你获得了 " + prettify(reward) + " 氦，你可以重复这个挑战。", "Notices");
+						message("你已经完成了挑战“平衡”！ 作为奖励，你获得了 " + prettify(reward) + " 氦气，你可以重复这个挑战。", "Notices");
 						game.challenges.Balance.abandon();
 						game.global.challengeActive = "";
 						addHelium(reward);
@@ -2994,7 +2995,7 @@ var toReturn = {
 				else {
 					msg += ((game.options.menu.exitTo.enabled) ? "世界地图" : "你的地图室");
 				}
-				message(msg + "，并获得了 " + prettify(amt) + " 氦！", "Loot", "oil", "helium", "helium");
+				message(msg + "，并获得了 " + prettify(amt) + " 氦气！", "Loot", "oil", "helium", "helium");
 				game.stats.highestVoidMap.evaluate();
 			}
 		},
@@ -3093,9 +3094,9 @@ var toReturn = {
 				checkAchieve("prisonTimed");
 				if (game.global.challengeActive == "Electricity" || game.global.challengeActive == "Mapocalypse") {
 					var reward = Math.floor(game.challenges.Electricity.heldHelium * 1.5);
-					if (game.global.challengeActive == "Electricity") message("你完成了挑战“Electricity”！ 作为奖励，你获得了 " + prettify(reward) + " 氦，你可以重复这个挑战。", "Notices");
+					if (game.global.challengeActive == "Electricity") message("你完成了挑战“Electricity”！ 作为奖励，你获得了 " + prettify(reward) + " 氦气，你可以重复这个挑战。", "Notices");
 					else if (game.global.challengeActive == "Mapocalypse") {
-						message("你完成了挑战“Mapocalypse ”！ 你解锁了Perk“Siphonology”， 作为奖励，你获得了 " + prettify(game.challenges.Electricity.heldHelium) + " 氦。", "Notices");
+						message("你完成了挑战“Mapocalypse ”！ 你解锁了Perk“Siphonology”， 作为奖励，你获得了 " + prettify(game.challenges.Electricity.heldHelium) + " 氦气。", "Notices");
 						if (game.portal.Siphonology.locked) addNewSetting('siphonologyMapLevel');
 						game.portal.Siphonology.locked = false;
 						game.challenges.Mapocalypse.abandon();
@@ -3754,7 +3755,7 @@ var toReturn = {
 				game.global.portalActive = true;
 				fadeIn("helium", 10);
 				addHelium(45);
-				message("<span class='glyphicon glyphicon-oil'></span> 你从那个Blimp中提取了45氦！ 现在你知道了如何从正常的Blimps提取氦。", "Story"); 
+				message("<span class='glyphicon glyphicon-oil'></span> 你从那个Blimp中提取了45氦气！ 现在你知道了如何从正常的Blimps提取氦气。", "Story"); 
 				fadeIn("portalBtn", 10);
 				if (game.global.challengeActive == "Metal"){
 					game.global.challengeActive = "";
@@ -5097,7 +5098,7 @@ var toReturn = {
 			owned: 0,
 			purchased: 0,
 			craftTime: 600,
-			tooltip: "使用你那疯狂的氦冷却的易于瞄准的虫洞发电机创建易于旅行的链接到其他殖民地行星，在哪里您的脆皮可以正常睡觉和工作。 可以容纳 $incby$ 只脆皮。 <b>这个建筑需要用氦建造。</b>",
+			tooltip: "使用你那疯狂的氦气冷却的易于瞄准的虫洞发电机创建易于旅行的链接到其他殖民地行星，在哪里您的脆皮可以正常睡觉和工作。 可以容纳 $incby$ 只脆皮。 <b>这个建筑需要用氦气建造。</b>",
 			cost: {
 				helium: [10, 1.075],
 				metal: [100000, 1.1]

@@ -108,7 +108,7 @@
 							</tbody>
 						</table>
 						<div id="minusRes" style="display: none">
-							One of your storage structures will be more expensive than the amount you can receive from this boost. 首先花一些资源来获得最大的利益！
+							你将要获得的资源不足以购买足够的存储空间。先花一些资源来获得最大的利益！
 						</div>
 					</div>
 					</div>
@@ -140,41 +140,41 @@
 
 				</div>
 				<div id="boneMiscColumn" class="col-xs-4 boneBuyColumn">
-					<div class="boneBuyTitle">Other Goodies</div>
+					<div class="boneBuyTitle">其他</div>
 						<div class="boostSpacer">
 						<div id="buyHeliumArea">
-							<div class="boneBtn boneBtnStateOn pointer noselect" id="heliumPurchaseBtn" onclick="tooltip('Confirm Purchase', null, 'update', 'You are about to purchase one Instant Portal for 100 bones. Your new helium will appear in the View Perks menu at the bottom of the screen. Is this what you wanted to do?', 'purchaseMisc(\'helium\')', 100)"> 
-								Buy Portal (100 bones)
+							<div class="boneBtn boneBtnStateOn pointer noselect" id="heliumPurchaseBtn" onclick="tooltip('Confirm Purchase', null, 'update', '您即将花费100根骨头购买一次立即通过时间传送门的机会。新的氦气将会在屏幕底部的 查看奖励 菜单中显示。 你确定么？', 'purchaseMisc(\'helium\')', 100)"> 
+								购买传送门 (100 骨头)
 							</div>
 							<div class="miscDesc">
-								<b>+ <span id="heliumGainedMisc"></span> Helium </b><br/>
-								Automatically gain helium equal to the amount you earned on your best run
+								<b>+ <span id="heliumGainedMisc"></span> 氦气 </b><br/>
+								自动获得相当于你得到氦气最多的那一次量的氦气
 							</div>
 						</div>
 						<div id="buyHeirloomArea">
-							<div class="boneBtn boneBtnStateOn pointer noselect" id="heirloomPurchaseBtn" onclick="tooltip('Confirm Purchase', null, 'update', 'You are about to purchase one Heirloom for 30 bones. This will be created at a random rarity, and will be just like completing a Void Map at your highest ever Zone reached. Are you sure?', 'purchaseMisc(\'heirloom\')', 30)"> 
-								Buy Heirloom (30 bones)
+							<div class="boneBtn boneBtnStateOn pointer noselect" id="heirloomPurchaseBtn" onclick="tooltip('Confirm Purchase', null, 'update', '您即将花费30根骨头购买一个传家宝，稀有度随机。 This will be created at a random rarity, and will be just like completing a Void Map at your highest ever Zone reached. 你确定么？', 'purchaseMisc(\'heirloom\')', 30)"> 
+								购买传家宝 (30 骨头)
 							</div>
 							
 							<div class="miscDesc">
 							<div id="heirloomRarityMisc"></div>
-								Get&nbsp;one&nbsp;Heirloom&nbsp;at&nbsp;the&nbsp;chances&nbsp;above,&nbsp;based&nbsp;on&nbsp;highest&nbsp;zone
+								获得不同稀有度的传家宝的几率如上，依据你到达的最高区域
 							</div>							
 						</div>
 						<div id="mapsMisc">
-							<div class="boneBtn boneBtnStateOn pointer noselect" id="mapsPurchaseBtn" onclick="tooltip('Confirm Purchase', null, 'update', 'You are about to purchase Golden Maps for 20 bones. All of your current and future maps will gain +100% loot added to their normal loot roll. Is this what you wanted to do?', 'purchaseMisc(\'maps\')', 20)">
-								Buy Golden Maps (20 bones)
+							<div class="boneBtn boneBtnStateOn pointer noselect" id="mapsPurchaseBtn" onclick="tooltip('Confirm Purchase', null, 'update', '您即将花费20根骨头购买黄金地图 。所有当前和未来的地图将获得+ 100%的战利品掉落基于原始掉落 (All of your current and future maps will gain +100% loot added to their normal loot roll.) 你确定么？', 'purchaseMisc(\'maps\')', 20)">
+								购买黄金地图 (20 骨头)
 							</div>
 							<div class="miscDesc" id="goldMapsDesc">
-								All of your current and future maps will gain +100% loot<br/><b>Until your next portal</b>
+								所有当前和未来的地图将获得+ 100%的战利品<br/><b>直到你穿过传送门</b>
 							</div>
 						</div>
 						<div id="trimpsMisc">
-							<div class="boneBtn boneBtnStateOn pointer noselect" id="trimpsPurchaseBtn" onclick="tooltip('Confirm Purchase', null, 'update', 'You are about to purchase Quick Trimps for 20 bones. All of your Trimps will create more Trimps twice as fast until the next time you use the Portal. Is this what you wanted to do?', 'purchaseMisc(\'trimps\')', 20)">
-								Buy Quick Trimps (20 bones)
+							<div class="boneBtn boneBtnStateOn pointer noselect" id="trimpsPurchaseBtn" onclick="tooltip('Confirm Purchase', null, 'update', '您即将花费20根骨头购买快速繁殖。 在你穿过传送门之前，你的脆皮的繁殖速度将提高一倍。 你确定么？', 'purchaseMisc(\'trimps\')', 20)">
+								购买快速繁殖 (20 bones)
 							</div>
 							<div class="miscDesc" id="quickTrimpsDesc">
-								All of your Trimps will breed 2x faster <br/><b>Until your next portal</b>
+								你的脆皮的繁殖速度提高一倍<br/><b>直到你穿过传送门</b>
 							</div>
 						</div>
 					</div>
@@ -289,7 +289,7 @@
 					<span class="psText sizeSecRegular pointer noselect" id="gemsPs" style="display: none" onclick="getPsString('gems')">+0/秒</span>
 				</div>
 				<div id="helium" class="playerGather playerGatherSm" style="display: none">
-					<span class="title">氦</span>
+					<span class="title">氦气</span>
 					<br/>
 					<span class="ownedArea"><span id="heliumOwned">0</span></span>
 					<br/>
@@ -618,7 +618,7 @@
 							</div>
 							<div class="battleSideBtnContainer">
 								<span class="btn voidMessage fightBtn" id="voidMapsBtn" onclick="toggleVoidMaps()" style="display: none">
-									无效地图
+									虚空地图
 								</span>
 							</div>
 							<div class="battleSideBtnContainer">
@@ -849,15 +849,15 @@
 			</div>
 			<div id='titleCol2' class='titleCol'>
 				<div>
-					<div id="portalHelium">拥有 <span id="portalHeliumOwned">0</span> 氦罐</div>
-					<div id="portalTotalHelium">累计获得 <span id="totalHeliumEarned">0</span> 氦罐</div>
+					<div id="portalHelium">拥有 <span id="portalHeliumOwned">0</span> 氦气罐</div>
+					<div id="portalTotalHelium">累计获得 <span id="totalHeliumEarned">0</span> 氦气罐</div>
 					<div id="portalTotalPortals">传送门使用<span id="totalPortals">0</span> 次</div>		
 				</div>
 			</div>
 		</div>
 		<div class="row" id="portalRow">
 			<div id="perkCol" class="col-xs-7">
-			<div class="challengeTitle">Perks</div>
+			<div class="challengeTitle">奖励</div>
 			<div id="portalStory"></div>
 				<div id="pnumTabs" class="numTabs">
 					<ul class="nav nav-tabs nav-justified" id="portalTabs">
@@ -885,22 +885,22 @@
 					</ul>
 				</div>
 				<div style="text-align: center">
-					<div class="btn btn-warning inPortalBtnSm" style="display: none" id="clearPerksBtn" onclick="clearPerks()">Clear All Perks</div>
+					<div class="btn btn-warning inPortalBtnSm" style="display: none" id="clearPerksBtn" onclick="clearPerks()">清除所有奖励Clear All Perks</div>
 				</div>
 				
 				<div id="portalUpgradesHere"></div>
 			</div>
 			<div id="challengeCol" class="col-xs-5">
 				<div id="viewChallenge" style="display: none">
-					<span id="viewChallengeText">You do not currently have an active challenge.</span>
+					<span id="viewChallengeText">您目前没有已激活的挑战。</span>
 				<br/><br/>
-				<div class="btn btn-warning inPortalBtn" style="display: none" id="cancelChallengeBtn" onclick="confirmAbandonChallenge()">Abandon Challenge</div>
+				<div class="btn btn-warning inPortalBtn" style="display: none" id="cancelChallengeBtn" onclick="confirmAbandonChallenge()">放弃挑战</div>
 
 				</div>
 				<div id="challenges"  style="display: none">
-					<div class="challengeTitle">Challenges</div>
+					<div class="challengeTitle">挑战</div>
 					<div id="challengeDescription">
-						<span id="challengeDescriptionPre">You can also choose to activate a challenge before using your portal. Completing a challenge will earn you a permanent reward. You can abandon or view an active challenge at any time by clicking the "View Perks" button.</span>
+						<span id="challengeDescriptionPre">You can also choose to activate a challenge before using your portal. Completing a challenge will earn you a permanent reward. You can abandon or view an active challenge at any time by clicking the "查看奖励" button.</span>
 						<span id="flagMustRestart" style="display: none;"><b>If you abandon this challenge, the portal will become unstable and the world will restart (you'll keep permanent bonuses like helium)</b></span>
 
 						<div id="specificChallengeDescription">

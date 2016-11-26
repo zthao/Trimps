@@ -190,7 +190,7 @@ function load(saveString, autoLoad, fromPf) {
         savegame = JSON.parse(LZString.decompressFromBase64(((fromImport) ? document.getElementById("importBox").value.replace(/(\r\n|\n|\r|\s)/gm,"") : saveString)));
         tooltip('hide');
 		if (!savegame) {
-			message("您的导入代码似乎无法正常工作。 请确保您的导出代码保存在与所有字符兼容的文本文件中。U77会将一些字符过滤为星号*，请不要将存档保存在评论中。 如果你认为这个代码应该工作，你可以发电子邮件到Trimpsgame@gmail.com，我会尽我所能为您恢复它！", "Notices");
+			message("您的导入代码似乎无法正常工作。 请确保您的导出代码保存在与所有字符兼容的文本文件中。 如果你认为这个代码应该工作，你可以发电子邮件到Trimpsgame@gmail.com，我会尽我所能为您恢复它！", "Notices");
 			return false;
 		}
 		else if (fromImport){
@@ -371,7 +371,7 @@ function load(saveString, autoLoad, fromPf) {
 	if (oldVersion < 2.3){
 		if (game.global.highestLevelCleared >= 80) game.global.prisonClear++;
 		if (game.global.world >= 70) {
-			message("欢迎来到2.3！ 由于你目前通过70区，你已经自动解锁了新的挑战 - “陷阱”和新的工作 - “遗传学家”", "Notices");
+			message("欢迎来到2.3！ 由于你目前通过区域70，你已经自动解锁了新的挑战 - “Trapper”和新的工作 - “遗传学家”", "Notices");
 			unlockJob("Geneticist");
 		}
 		else if (game.global.highestLevelCleared >= 69){
@@ -421,7 +421,7 @@ function load(saveString, autoLoad, fromPf) {
 	}
 	if (oldVersion < 2.9){
 		if (game.options.menu.showFullBreed.enabled == 2) game.options.menu.showFullBreed.enabled = 1;
-		if (game.global.totalPortals >= 5) message("大量使用传送门创造了一个机会让Void渗入你的世界。 注意。", "Story", null, "voidMessage");
+		if (game.global.totalPortals >= 5) message("大量使用传送门创造了一个让Void渗入你的世界机会。 请注意。", "Story", null, "voidMessage");
 	}
 	if (oldVersion < 3){
 		game.global.heirloomSeed = getRandomIntSeeded(game.global.voidSeed, 0, 1000000);
@@ -775,7 +775,7 @@ function portalClicked() {
 	var titleText = "时间传送门";
 	if (game.global.sLevel >= 1) titleText += " Mk. " + romanNumeral(game.global.sLevel + 1);
 	document.getElementById("portalTitle").innerHTML = titleText;
-	document.getElementById("portalStory").innerHTML = "好吧，你做到了。 你随你的直觉到达了这个奇怪的世界，使用了你的方式通过了愤怒的维度(Dimension of Anger)，并获得了这个传送门。 但为什么？ 也许通过这个传送门会有答案……你的科学家告诉你，他们可以超频这个传送门并将更多的回忆和项目带回来，但他们将需要氦来冷却传送门。";
+	document.getElementById("portalStory").innerHTML = "好吧，你做到了。 你随你的直觉到达了这个奇怪的世界，使用了你的方式通过了愤怒的维度(Dimension of Anger)，并获得了这个传送门。 但为什么？ 也许通过这个传送门会有答案……你的科学家告诉你，他们可以超频这个传送门并将更多的回忆和项目带回来，但他们将需要氦气来冷却传送门。";
 	document.getElementById("portalHelium").innerHTML = '<span id="portalHeliumOwned">' + prettify(game.resources.helium.owned + game.global.heliumLeftover) + '</span> Helium';
 	document.getElementById("totalHeliumEarned").innerHTML = prettify(game.global.totalHeliumEarned);
 	document.getElementById("totalPortals").innerHTML = game.global.totalPortals;
@@ -881,7 +881,7 @@ function selectChallenge(what) {
 
 	var desc = game.challenges[what].description;
 	desc += "<b>";
-	if (game.portal[game.challenges[what].unlocks]) desc += (game.portal[game.challenges[what].unlocks].locked) ? " 你也会赚到一个新的Perk！" : " 你不会赚一个新的perk。";
+	if (game.portal[game.challenges[what].unlocks]) desc += (game.portal[game.challenges[what].unlocks].locked) ? " 同时你也会得到一个新的Perk！" : " 你不会得到一个新的perk。";
 	else if (what == "Scientist") {
 		var sciLev = getScientistLevel();
 		if (sciLev == game.global.sLevel) desc += " 你已经完成了这个挑战！";
@@ -933,7 +933,7 @@ function confirmAbandonChallenge(){
 		return;
 	}
 	var text = "你确定要放弃这个挑战？";
-	if (game.global.challengeActive == 'Scientist') text += " <b>放弃这个挑战会导致传送门变得不稳定，并从这次运行开始。 （你会保持你的永久奖励像氦和津贴）Abandoning this challenge will cause the portal to become unstable and start you from the beginning of this run. (You'll keep your permanent rewards like helium and perks)</b>"; 
+	if (game.global.challengeActive == 'Scientist') text += " <b>放弃这个挑战会导致传送门变得不稳定，并从这次运行开始。 （你会保持你的永久奖励像氦气和奖励）Abandoning this challenge will cause the portal to become unstable and start you from the beginning of this run. (You'll keep your permanent rewards like helium and perks)</b>"; 
 	tooltip('confirm', null, 'update', text, 'abandonChallenge()', 'Abandon Challenge');
 	if (game.global.challengeActive == "Scientist") document.getElementById("confirmTipCost").innerHTML += '<div class="btn btn-success" onclick="abandonChallenge(true); cancelTooltip()">重新开始挑战</div>';
 }
@@ -986,7 +986,7 @@ function viewPortalUpgrades() {
 	document.getElementById("wrapper").style.display = "none";
 	swapClass("portalMk", "portalMkPreview", document.getElementById("portalWrapper"));
 	fadeIn("portalWrapper", 10);
-	document.getElementById("portalTitle").innerHTML = "View Perks";
+	document.getElementById("portalTitle").innerHTML = "查看奖励";
 	document.getElementById("portalHelium").innerHTML = '<span id="portalHeliumOwned">' + prettify(parseInt(game.global.heliumLeftover, 10)) + '</span> Helium Left Over';
 	document.getElementById("portalStory").innerHTML = "These are all of your perks! You can reset them once per run.";
 	document.getElementById("totalHeliumEarned").innerHTML = prettify(game.global.totalHeliumEarned);
@@ -1296,10 +1296,10 @@ function activateClicked(){
 	if (game.global.kongBonusMode){
 		newText = "All set?";
 	}
-	else newText = "你确定你要进入传送门么？你将会失去所有与传送门不兼容的东西，例如氦，Perks，Bones和Exotic Imports。谁知道会什么时候还给你。";
+	else newText = "你确定你要进入传送门么？你将会失去所有与传送门不兼容的东西，例如氦气，奖励，骨头和外来物种。谁知道会什么时候还给你。";
 	if (game.global.selectedChallenge) newText += " <span id='addChallenge'>挑战 <b>" + game.global.selectedChallenge + "</b> 已激活。</span>";
 	else newText += " <span id='addChallenge'></span>";
-	if (game.global.challengeActive == "Daily") newText += "<br/><span style='color: red;'><i>You still have the Daily challenge active! If you portal right now, your reward will be applied at the beginning of your next run. Alternatively, click 'Finish Daily' in the World or inside 'View Perks' to get the bonus now.</i></span>";
+	if (game.global.challengeActive == "Daily") newText += "<br/><span style='color: red;'><i>You still have the Daily challenge active! If you portal right now, your reward will be applied at the beginning of your next run. Alternatively, click 'Finish Daily' in the World or inside '查看奖励' to get the bonus now.</i></span>";
 	newText += "<br/>";
 	if (game.global.heirloomsExtra.length){
 		var s = (game.global.heirloomsExtra.length > 1) ? "s" : "";
@@ -2076,7 +2076,7 @@ function buyBuilding(what, confirmed, fromAuto, forceAmt) {
     var canAfford = ((forceAmt) ? canAffordBuilding(what, false, false, false, false, purchaseAmt) : canAffordBuilding(what));
 	if (canAfford){
 		if (what == "Wormhole" && !confirmed && game.options.menu.confirmhole.enabled){
-			tooltip('Confirm Purchase', null, 'update', 'You are about to purchase ' + purchaseAmt + ' Wormholes, <b>which cost helium</b>. Make sure you can earn back what you spend!', 'buyBuilding(\'Wormhole\', true)');
+			tooltip('Confirm Purchase', null, 'update', '你将要购买 ' + purchaseAmt + ' 虫洞，<b>这会花费氦气</b>。确保你可以赚回你所花的！', 'buyBuilding(\'Wormhole\', true)');
 			return;
 		}
 		((forceAmt) ? canAffordBuilding(what, true, false, false, false, purchaseAmt) : canAffordBuilding(what, true));
@@ -2424,7 +2424,7 @@ function buyUpgrade(what, confirmed, noTip, heldCtrl) {
     var canAfford = canAffordTwoLevel(upgrade);
     if (!canAfford) return false;
 	if (what == "Gigastation" && !confirmed && game.options.menu.confirmhole.enabled){
-		tooltip('Confirm Purchase', null, 'update', 'You are about to purchase a Gigastation, <b>which is not a renewable upgrade</b>. Make sure you have purchased all of the Warpstations you can afford first!', 'buyUpgrade(\'Gigastation\', true, false, ' + ctrlPressed + ')');
+		tooltip('Confirm Purchase', null, 'update', '你将要购买 Gigastation, <b>这是一个不可逆的升级</b>。请确保你已经购买了所有你买得起的Warpstations！', 'buyUpgrade(\'Gigastation\', true, false, ' + ctrlPressed + ')');
 		return;
 	}
 	if (what == "Shieldblock" && !confirmed && game.options.menu.confirmhole.enabled && game.global.highestLevelCleared >= 30){
@@ -3020,7 +3020,7 @@ function addCarried(confirmed){
 	var cost = getNextCarriedCost();
 	if (game.global.nullifium < cost) return;
 	if (!confirmed) {
-		tooltip('confirm', null, 'update', 'You are about to purchase 1 extra slot to carry Heirlooms through the Portal for ' + cost + ' Nullifium. Are you sure?' , 'addCarried(true)', 'Upgrade Carried Slots');
+		tooltip('confirm', null, 'update', '你将要花费' + cost + ' Nullifium 购买1个额外的槽来运载传家宝通过传送门。 你确定吗？' , 'addCarried(true)', 'Upgrade Carried Slots');
 		return;
 	}
 	game.global.nullifium -= cost;

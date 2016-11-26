@@ -64,17 +64,18 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		what = what[0].toUpperCase() + what.substr(1)
 	}
 	if (what == "Confirm Purchase"){
+		titleText = "购买确认";
 		if (attachFunction == "purchaseImport()" && !boneTemp.selectedImport) return;
 		if (game.options.menu.boneAlerts.enabled == 0 && numCheck){
 			eval(attachFunction);
 			return;
 		}
-		var btnText = "Make Purchase";
+		var btnText = "确定购买";
 		if (numCheck && game.global.b < numCheck){
 			if (typeof kongregate === 'undefined') return;
-			tooltipText = "You can't afford this bonus. Would you like to visit the shop?";
+			tooltipText = "你支付不起这个。你要去商店么？";
 			attachFunction = "showPurchaseBones()";
-			btnText = "Visit Shop";
+			btnText = "前往商店";
 		}
 		else
 		tooltipText = textString;
@@ -311,8 +312,9 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		costText = "";
 	}
 	if (what == "New Achievements"){
-		tooltipText = "The universe has taken an interest in your achievements, and has begun tracking them. You already have some completed thanks to your previous adventures, would you like to see them?";
-		costText = "<div class='maxCenter'><div class='btn btn-success' onclick='toggleAchievementWindow(); cancelTooltip()'>Check Achievements</div> <div class='btn btn-danger' onclick='cancelTooltip()'>No, That Sounds Dumb</div></div>";
+		titleText = "新的成就";
+		tooltipText = "宇宙对你的成就感兴趣，并已开始追踪它们。 因为你以前的冒险，你已经完成了一些，你想看到他们吗？";
+		costText = "<div class='maxCenter'><div class='btn btn-success' onclick='toggleAchievementWindow(); cancelTooltip()'>查看成就</div> <div class='btn btn-danger' onclick='cancelTooltip()'>不，谢谢</div></div>";
 		game.global.lockTooltip = true;
 		elem.style.left = "33.75%";
 		elem.style.top = "25%";
@@ -741,8 +743,8 @@ function messageConfigHover(what, event){
 			title = "Exotic";
 			break;
 		case 'Loothelium':
-			text = "记录氦奖励。"
-			title = "氦";
+			text = "记录氦气奖励。"
+			title = "氦气";
 			break;
 		case 'Unlocksrepeated':
 			text = "记录每次可重复掉落的所有解锁，例如Speedfarming或Coordination。";
@@ -786,7 +788,7 @@ function unlockTooltip(){
 
 function getPsString(what, rawNum) {
 	if (what == "helium") return;
-	if (what == "氦") return;
+	if (what == "氦气") return;
 	var resOrder = ["food", "wood", "metal", "science", "gems", "fragments"];
 	var books = ["farming", "lumber", "miner", "science"];
 	var booksCN = ["农业", "伐木", "挖矿", "科研"]
@@ -1480,7 +1482,7 @@ function getLootBd(what) {
 			textString += "<tr><td class='bdTitle'>基础</td><td></td><td></td><td>" + prettify(amt) + "</td><td>" + prettify(currentCalc) + "</td></tr>";
 			break;
 		case "Helium":
-			whatCN = "氦";
+			whatCN = "氦气";
 			var level = scaleLootLevel(99);
 			level = Math.round((level - 1900) / 100);
 			level *= 1.35;			
@@ -2031,7 +2033,7 @@ function resetGame(keepPortal) {
 			game.global[heirItem] = heirloomStuff[heirItem];
 		}
 		if (game.global.totalPortals == 1) game.options.menu.extraMapBtns.enabled = 1;
-		if (game.global.totalPortals == 5) message("大量使用传送门创造了一个机会让Void渗入你的世界。 注意。", "Story", null, "voidMessage");
+		if (game.global.totalPortals == 5) message("大量使用传送门创造了一个让Void渗入你的世界机会。 请注意。", "Story", null, "voidMessage");
 		if (game.global.totalPortals >= 5) document.getElementById("heirloomBtnContainer").style.display = "block";
 		recalculateHeirloomBonuses();
 		if (lastPortal < voidMaxLevel) {
@@ -2904,7 +2906,7 @@ function displayPerksBtn(){
 	}
 	else {
 		btn.className = "btn btn-primary";
-		btn.innerHTML = "View Perks";
+		btn.innerHTML = "查看奖励";
 	}
 }
 
