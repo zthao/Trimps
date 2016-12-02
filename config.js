@@ -1115,7 +1115,7 @@ var toReturn = {
 
 	},
 
-	challenges: {
+	challenges: {//need nameCN
 		Daily: {
 			get description(){
 				return (isSaving) ? "" : getDailyChallenge(0);
@@ -1130,7 +1130,8 @@ var toReturn = {
 				abandonDaily();
 			},
 			fireAbandon: true,
-			unlockString: "到达区域100"
+			unlockString: "到达区域100",
+			nameCN: "日常"
 		},
 		Discipline: {
 			description: "Tweak the portal to bring you back to a universe where Trimps are less disciplined, in order to teach you how to be a better Trimp trainer. Your Trimps' minimum damage will be drastically lower, but their high end damage will be considerably higher. Completing The Dimension Of Anger will cause Trimp damage to return to normal.",
@@ -1138,7 +1139,8 @@ var toReturn = {
 				return (game.resources.helium.owned >= 30 || game.global.totalHeliumEarned >= 30);
 			},
 			unlocks: "Range",
-			unlockString: "have 30 total helium"
+			unlockString: "拥有30氦气",
+			nameCN: "纪律"
 		},
 		Metal: {
 			description: "Tweak the portal to bring you to alternate reality, where the concept of Miners does not exist, to force yourself to become frugal with equipment crafting strategies. If you complete The Dimension Of Anger without disabling the challenge, miners will re-unlock.",
@@ -1542,13 +1544,13 @@ var toReturn = {
 			display: function () {return false;}
 		},
 		highestLevel: {
-			title: "最高区域",
+			title: "最高到达区域",
 			valueTotal: function () {
 				return game.global.highestLevelCleared + 1;
 			}
 		},
 		totalPortals: {
-			title: "Total Portals Used",
+			title: "使用传送门",
 			display: function () {
 				return (game.global.totalPortals > 0);
 			},
@@ -1557,7 +1559,7 @@ var toReturn = {
 			}
 		},
 		totalHelium: {
-			title: "Total Helium Earned",
+			title: "获得氦气",
 			display: function () {
 				return (game.global.totalHeliumEarned > 0);
 			},

@@ -158,7 +158,7 @@ function save(exportThis, fromManual) {
 			message("已保存！", "Notices");
 		}
 		else {
-			message("由于某些原因，您的游戏没有被保存。请导出并备份您的存档！", "Notices");
+			message("由于某些原因，您的游戏没有被保存。请手动导出并备份您的存档！", "Notices");
 		}
 	}
 	catch(e){ 
@@ -166,7 +166,7 @@ function save(exportThis, fromManual) {
         message("抱歉，您的浏览器存储空间已损坏。 请清除您的储存空间，方法是前往[工具] - > [清除最近的记录] - > [Cookie]，然后将时间范围设为[所有]。 这将删除所有网站上损坏的浏览器存储。", "Notices");
 		}
 		else
-		message("由于某些原因，您的游戏没有被保存。请导出并备份您的存档！", "Notices"); 
+		message("由于某些原因，您的游戏没有被保存。请手动导出并备份您的存档！", "Notices"); 
 		}
 		
 	if (game.options.menu.usePlayFab.enabled == 1 && playFabId){
@@ -236,11 +236,11 @@ function load(saveString, autoLoad, fromPf) {
 			activateKongBonus(savegame.global.world);
 			return false;
 		}
-        message("我非常抱歉，但你以前的保存游戏（版本"+ savegame.global.version +"）不能在新版本中工作。 这应该是最后一次重置！", "Notices");
+        message("非常抱歉，但你以前的保存游戏（版本"+ savegame.global.version +"）不能在新版本中工作。 这应该是最后一次重置！", "Notices");
         return false;
     } 
 	else if (game.global.isBeta) {
-		message("注意：你使用beta / dev版本。 您将无法将保存从此版本导出到实时版本，并且此服务器可能会在没有警告的情况下关闭或更改。 谢谢您帮助测试！", "Notices");
+		message("注意：你正在使用beta/dev版本。 您将无法将保存从此版本导出到实时版本，并且此服务器可能会在没有警告的情况下关闭或更改。 谢谢您帮助测试！", "Notices");
 		savegame.global.isBeta = true;
 	}
 	savegame.global.version = game.global.version;
@@ -371,11 +371,11 @@ function load(saveString, autoLoad, fromPf) {
 	if (oldVersion < 2.3){
 		if (game.global.highestLevelCleared >= 80) game.global.prisonClear++;
 		if (game.global.world >= 70) {
-			message("欢迎来到2.3！ 由于你目前通过区域70，你已经自动解锁了新的挑战 - “Trapper”和新的工作 - “遗传学家”", "Notices");
+			message("欢迎来到2.3版本！ 由于你目前通过区域70，你已经自动解锁了新的挑战 - “Trapper”和新的工作 - “遗传学家”", "Notices");
 			unlockJob("Geneticist");
 		}
 		else if (game.global.highestLevelCleared >= 69){
-			message("欢迎来到2.3！ 由于你之前已经清除了至少70区，你解锁了新的挑战 - “陷阱”！", "Notices");
+			message("欢迎来到2.3版本！ 由于你之前已经到达了区域70，你解锁了新的挑战 - “Trapper”！", "Notices");
 		}
 	}
 	if (oldVersion < 2.7){
@@ -497,7 +497,7 @@ function load(saveString, autoLoad, fromPf) {
 			if (typeof savegame.talents.foreman2 !== 'undefined' && savegame.talents.foreman2.purchased) game.global.autoCraftModifier -= 3750;
 			game.global.essence += game.global.spentEssence;
 			game.global.spentEssence = 0;
-			message("由于当前Masteries的返工，您的所有你的黑暗精华已免费退还！ 不要忘记回购你的Masteries！", "Notices");
+			message("由于当前Masteries的返工，您的所有黑暗精华已免费退还！ 不要忘记重新购买你的精通(Masteries)！", "Notices");
 			updateTalentNumbers();
 		}
 		game.global.messages.Loot.magma = true;
@@ -633,10 +633,10 @@ function load(saveString, autoLoad, fromPf) {
 			nextWorld();
 		}
 		else if (game.global.world >= 60){
-			message("在第59区处有一个新的异常，但你过去不能到达它。 您将必须使用您的传送门来查看它带来的更改。 看起来你有机会接触到新的挑战！", "Notices");		
+			message("在区域59处有一个新的异常，但你过去不能到达那里。 你必须使用你的传送门来查看它带来的改变。 看起来你将有机会接触到新的挑战！", "Notices");		
 		}
 		else {
-			message("你的科学家在第59区结束时检测到异常。他们警告你，如果你打算接近它，要小心。", "Notices");
+			message("你的科学家在区域59结束时检测到异常。他们警告你：如果你打算接近那里，要小心。", "Notices");
 		}
 	}
 	document.getElementById("tab5Text").innerHTML = "+" + prettify(game.global.lastCustomAmt);
@@ -849,6 +849,7 @@ function displayChallenges() {
 		done = (done) ? "挑战完成" : "";
 		if (thisFail) done = "下一个挑战";
 		if (!name) name = what;
+		if (challenge.nameCN) name = challenge.nameCN;
 		challengeHTML += '<div class="noselect pointer challengeThing thing ' + done + '" id="challenge' + what + '" onclick="selectChallenge(\'' + what + '\')"><span class="thingName">' + name + '</span></div>';
 	}
 	challengesHere.innerHTML = challengeHTML;

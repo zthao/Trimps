@@ -53,10 +53,14 @@ Bone	骨头
 Exotic Imports	外来物种
 dimension	维度
 
-Perk
+Perk	奖励
+Masteries	精通
+Mastery		精通
 Siphonology
 
 challenge
+Daily	日常
+Discipline	纪律
 Balance	平衡
 Trapper
 Meditate

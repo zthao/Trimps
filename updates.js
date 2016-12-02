@@ -739,7 +739,7 @@ function messageConfigHover(what, event){
 			title = "活动";
 			break;
 		case 'Lootexotic':
-			text = "记录由Exotic Imports授予的奖励。";
+			text = "记录由外来物种(Exotic Imports)授予的奖励。";
 			title = "Exotic";
 			break;
 		case 'Loothelium':
