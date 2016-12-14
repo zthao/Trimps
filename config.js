@@ -1285,7 +1285,7 @@ var toReturn = {
 			unlockString: "到达区域45"
 		},
 		Decay: {
-			description: "Tweak the portal to bring you to an alternate reality, where added chaos will help you learn to create a peaceful place. You will gain 10x loot, 10x gathering (excluding helium), and 5x Trimp attack, but a stack of Decay will accumulate every second. Each stack of Decay reduces loot, gathering, and Trimp attack by 0.5% of the current amount. These stacks reset each time a Blimp is killed and cap at 999. Completing <b>Zone 55</b> with this challenge active will allow you to select the Gardens biome when creating maps, and all future Gardens maps created will gain +25% loot.",
+			description: "Tweak the portal to bring you to an alternate reality, where added chaos will help you learn to create a peaceful place. You will gain 10x loot (excluding helium), 10x gathering, and 5x Trimp attack, but a stack of Decay will accumulate every second. Each stack of Decay reduces loot, gathering, and Trimp attack by 0.5% of the current amount. These stacks reset each time a Blimp is killed and cap at 999. Completing <b>Zone 55</b> with this challenge active will allow you to select the Gardens biome when creating maps, and all future Gardens maps created will gain +25% loot.",
 			completed: false,
 			abandon: function () {
 				updateDecayStacks();
@@ -2400,7 +2400,9 @@ var toReturn = {
 		w178: "You're still not quite sure what that smell is. You feel slightly more powerful, and you fear that your enemies may feel the same way.",
 		w180: "After clearing out the previous zone, you decide to take a day hike to the top of another gigantic mountain to try to find more info about the smell. As you reach the top, your jaw drops. Clear as day, a healthy amount of purple goo is pouring into the atmosphere from the top of the spire. You can see the zones in front of you beginning to change. This really can't be good.",
 		w182: "Well, there's not really much doubt about it anymore. Some sort of intelligence is intentionally making life more difficult for you and your Trimps. You take this as a sign that you're pretty important, why else would something risk destroying an entire planet to stop you? Your parents would be so proud.",
-		w184: "The corruption seems to be more pronounced the closer you get to the Spire. Looks like there's 3 of em now.",
+		get w184 () { 
+				return "The corruption seems to be more pronounced the closer you get to the Spire. Looks like there's " + mutations.Corruption.cellCount() + " of em now."
+			},
 		w185: "You have trouble putting in to words exactly what the Corruption does to the creatures on this planet. They seem to be stripped of all natural abilities and given powers that you didn't know could exist in the primary dimension.",
 		w187: "None of these corrupted enemies seem to have eyes, so you decide to see if you can get away with flipping one off. As it reacts by roaring and stomping around in a rage, you realize that these things are powerful enough not to need eyes to observe the world. What <i>are</i> these?!",
 		w190: "You awaken from your sleep in a cold sweat to a frantic and terrified noise from the back of the cave where you were sleeping. With urgency, you run to the source of the noise to make sure your Trimps are okay. As you reach the back, you see a handful of Trimps trying to use a small and very angry Snimp as a musical instrument. You put some sand in your ears and go back to sleep.",
@@ -3098,7 +3100,11 @@ var toReturn = {
 					var reward = Math.floor(game.challenges.Electricity.heldHelium * 1.5);
 					if (game.global.challengeActive == "Electricity") message("你完成了挑战“Electricity”！ 作为奖励，你获得了 " + prettify(reward) + " 氦气，你可以重复这个挑战。", "Notices");
 					else if (game.global.challengeActive == "Mapocalypse") {
+<<<<<<< HEAD
 						message("你完成了挑战“Mapocalypse ”！ 你解锁了Perk“Siphonology”， 作为奖励，你获得了 " + prettify(game.challenges.Electricity.heldHelium) + " 氦气。", "Notices");
+=======
+						message("You have completed the Mapocalypse challenge! You have unlocked the 'Siphonology' Perk, and have been rewarded with " + prettify(reward) + " Helium.", "Notices");
+>>>>>>> refs/remotes/Trimps/master
 						if (game.portal.Siphonology.locked) addNewSetting('siphonologyMapLevel');
 						game.portal.Siphonology.locked = false;
 						game.challenges.Mapocalypse.abandon();
@@ -6407,4 +6413,4 @@ var toReturn = {
 };
 return toReturn;
 }
-var game = newGame();;
+var game = newGame();

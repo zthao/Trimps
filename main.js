@@ -1105,6 +1105,7 @@ function activateKongBonus(oldWorld){
 }
 
 //48 hours = 172800
+var savedOfflineText = "";
 function checkOfflineProgress(noTip){
 	if (!game.global.lastOnline) return;
 	var rightNow = new Date().getTime();
@@ -1234,6 +1235,7 @@ function checkOfflineProgress(noTip){
 	}
 	textString += "。";
 	if (!noTip) tooltip("Trustworthy Trimps", null, "update", textString);
+	else savedOfflineText = textString;
 }
 
 function respecPerks(){
@@ -3982,13 +3984,15 @@ var mutations = {
                     replacedCorruptions++;
             }
            
-            for(i = 0; i < currentArray.length; i++) {
-                if(currentArray[i] == "") {
-                    currentArray[i] = "Corruption";
-                    replacedCorruptions--;
+            if (replacedCorruptions > 0) {
+                for(i = 0; i < currentArray.length; i++) {
+                   if(currentArray[i] == "") {
+                        currentArray[i] = "Corruption";
+                        replacedCorruptions--;
                    
-                    if(replacedCorruptions <= 0)
-                        break;
+                        if(replacedCorruptions <= 0)
+                            break;
+                    }
                 }
             }
            return currentArray;
@@ -5448,6 +5452,10 @@ function startFight() {
 			if (typeof game.global.dailyChallenge.weakness !== 'undefined'){
 				game.global.dailyChallenge.weakness.stacks = 0;
 				updateDailyStacks('weakness');	
+			}
+			if (typeof game.global.dailyChallenge.rampage !== 'undefined'){
+				game.global.dailyChallenge.rampage.stacks = 0;
+				updateDailyStacks('rampage');
 			}
 		}
 		game.global.difs.attack = 0;
@@ -6960,14 +6968,14 @@ function fight(makeUp) {
 				}
 				updateDailyStacks('bloodthirst');
 			}
-			if (typeof game.global.dailyChallenge.rampage !== 'undefined'){
-				game.global.dailyChallenge.rampage.stacks = 0;
-				updateDailyStacks('rampage');
-			}
 		}
         var s = (game.resources.trimps.soldiers > 1) ? "s " : " ";
 		randomText = game.trimpDeathTexts[Math.floor(Math.random() * game.trimpDeathTexts.length)];
+<<<<<<< HEAD
         message(game.resources.trimps.soldiers + " 脆皮" + "已经" + randomText + "。", "Combat", null, null, 'trimp');
+=======
+        message(prettify(game.resources.trimps.soldiers) + " Trimp" + s + "just " + randomText + ".", "Combat", null, null, 'trimp');
+>>>>>>> refs/remotes/Trimps/master
 		if (game.global.spireActive && !game.global.mapsActive) deadInSpire();
         game.global.fighting = false;
         game.resources.trimps.soldiers = 0;
@@ -7202,7 +7210,7 @@ function fight(makeUp) {
 		game.global.soldierHealth = 0;
 		gotCrit = false;
 	};
-    if (trimpAttack > 0 && (game.global.challengeActive == "Slow" || ((((game.badGuys[cell.name].fast || cell.mutation == "Corrupted") && game.global.challengeActive != "Nom") || game.global.voidBuff == "doubleAttack") && game.global.challengeActive != "Coordinate"))) {
+    if (trimpAttack > 0 && (game.global.challengeActive == "Slow" || ((((game.badGuys[cell.name].fast || cell.mutation == "Corruption") && game.global.challengeActive != "Nom") || game.global.voidBuff == "doubleAttack") && game.global.challengeActive != "Coordinate"))) {
         game.global.soldierHealth -= attackAndBlock;
 		wasAttacked = true;
         if (game.global.soldierHealth > 0) {
@@ -8955,6 +8963,10 @@ function gameLoop(makeUp, now) {
 	if (loops % 10 == 0){
 		if (game.global.challengeActive == "Decay") updateDecayStacks(true);
 		if (game.global.autoUpgradesAvailable) autoUpgrades();
+		if (savedOfflineText && !game.global.lockTooltip) {
+			tooltip("Trustworthy Trimps", null, "update", savedOfflineText);
+			savedOfflineText = "";
+		}
 	}
 	if (mutations.Magma.active()) generatorTick();
 }
