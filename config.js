@@ -3100,11 +3100,7 @@ var toReturn = {
 					var reward = Math.floor(game.challenges.Electricity.heldHelium * 1.5);
 					if (game.global.challengeActive == "Electricity") message("你完成了挑战“Electricity”！ 作为奖励，你获得了 " + prettify(reward) + " 氦气，你可以重复这个挑战。", "Notices");
 					else if (game.global.challengeActive == "Mapocalypse") {
-<<<<<<< HEAD
 						message("你完成了挑战“Mapocalypse ”！ 你解锁了Perk“Siphonology”， 作为奖励，你获得了 " + prettify(game.challenges.Electricity.heldHelium) + " 氦气。", "Notices");
-=======
-						message("You have completed the Mapocalypse challenge! You have unlocked the 'Siphonology' Perk, and have been rewarded with " + prettify(reward) + " Helium.", "Notices");
->>>>>>> refs/remotes/Trimps/master
 						if (game.portal.Siphonology.locked) addNewSetting('siphonologyMapLevel');
 						game.portal.Siphonology.locked = false;
 						game.challenges.Mapocalypse.abandon();

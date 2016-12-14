@@ -6971,11 +6971,7 @@ function fight(makeUp) {
 		}
         var s = (game.resources.trimps.soldiers > 1) ? "s " : " ";
 		randomText = game.trimpDeathTexts[Math.floor(Math.random() * game.trimpDeathTexts.length)];
-<<<<<<< HEAD
         message(game.resources.trimps.soldiers + " 脆皮" + "已经" + randomText + "。", "Combat", null, null, 'trimp');
-=======
-        message(prettify(game.resources.trimps.soldiers) + " Trimp" + s + "just " + randomText + ".", "Combat", null, null, 'trimp');
->>>>>>> refs/remotes/Trimps/master
 		if (game.global.spireActive && !game.global.mapsActive) deadInSpire();
         game.global.fighting = false;
         game.resources.trimps.soldiers = 0;
